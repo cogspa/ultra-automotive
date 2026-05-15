@@ -39,15 +39,8 @@ export default function Footer() {
     >
       <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.08)"}}>
         <div className="col-span-12 md:col-span-4">
-          <div
-            className="font-display text-white"
-            style={{
-              fontSize: "clamp(34px, 5vw, 72px)",
-              lineHeight: 0.9,
-              letterSpacing: "-0.04em",
-            }}
-          >
-            ALL AI AUTOMOTIVE
+          <div>
+            <img src="/AAAlogo.png" alt="All AI Automotive Logo" className="h-auto w-64 mb-2" />
           </div>
           <p
             className="mt-6 max-w-[320px] text-[14px] font-normal"

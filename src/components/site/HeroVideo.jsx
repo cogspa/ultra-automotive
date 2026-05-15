@@ -166,6 +166,7 @@ export default function HeroVideo() {
           <div className="grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 h-full pt-28 md:pt-32 pb-16">
             <div className="col-span-12 md:col-span-7 lg:col-span-7 flex flex-col justify-end">
               <div className="max-w-[640px]">
+                <img src="/AAAlogo.png" alt="All AI Automotive Logo" className="h-10 w-auto mb-8" />
                 <div key={`eyebrow-${stepIndex}`} className="cue-state cue-active inline-flex items-center gap-3 mb-6">
                   <span className="font-mono-cap text-white/75 px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.16)" }}>
                     {cue.eyebrow}
