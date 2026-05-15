@@ -51,6 +51,34 @@ const QUICK_GUIDES = [
     href: "/wheel-hubs",
     tags: ["Suspension", "Drivetrain"],
   },
+  {
+    n: "08",
+    t: "Batteries",
+    d: "Testing, replacement, and power-management module resets.",
+    href: "/batteries",
+    tags: ["Electrical", "Power"],
+  },
+  {
+    n: "09",
+    t: "Tires",
+    d: "Inspection, rotation, TPMS, and tire replacement procedures.",
+    href: "/tires",
+    tags: ["Wheels", "Traction"],
+  },
+  {
+    n: "10",
+    t: "Transmission",
+    d: "Fluid service, diagnosis, and shift-quality troubleshooting.",
+    href: "/transmission",
+    tags: ["Drivetrain", "Fluid"],
+  },
+  {
+    n: "11",
+    t: "General Maintenance",
+    d: "Oil, filters, fluids, and routine service intervals.",
+    href: "/maintenance",
+    tags: ["Service", "Routine"],
+  },
 ];
 
 export default function Pillars() {
@@ -82,7 +110,7 @@ export default function Pillars() {
             className="mt-6 max-w-[640px] text-[15px] leading-relaxed font-normal"
             style={{ color: "rgba(10,10,10,0.62)" }}
           >
-            Seven quick guides for the most frequently replaced components. Detailed step-by-step instructions so you can focus on the fix.
+            Eleven quick guides for the most frequently serviced systems. Detailed step-by-step instructions so you can focus on the fix.
           </p>
         </div>
 

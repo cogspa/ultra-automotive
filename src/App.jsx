@@ -17,6 +17,10 @@ import CalipersPage from './pages/CalipersPage'
 import MasterCylindersPage from './pages/MasterCylindersPage'
 import StartersPage from './pages/StartersPage'
 import WheelHubsPage from './pages/WheelHubsPage'
+import BatteriesPage from './pages/BatteriesPage'
+import TiresPage from './pages/TiresPage'
+import TransmissionPage from './pages/TransmissionPage'
+import MaintenancePage from './pages/MaintenancePage'
 import SearchPage from './pages/SearchPage'
 
 function HomePage() {
@@ -52,16 +56,20 @@ function App() {
     <>
       <ScrollToTop />
       <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/alternators" element={<AlternatorsPage />} />
-      <Route path="/starters" element={<StartersPage />} />
-      <Route path="/calipers" element={<CalipersPage />} />
-      <Route path="/master-cylinders" element={<MasterCylindersPage />} />
-      <Route path="/brake-pads-rotors" element={<BrakePadsRotorsPage />} />
-      <Route path="/boosters" element={<BoostersPage />} />
-      <Route path="/wheel-hubs" element={<WheelHubsPage />} />
-      <Route path="/search" element={<SearchPage />} />
-    </Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/alternators" element={<AlternatorsPage />} />
+        <Route path="/starters" element={<StartersPage />} />
+        <Route path="/calipers" element={<CalipersPage />} />
+        <Route path="/master-cylinders" element={<MasterCylindersPage />} />
+        <Route path="/brake-pads-rotors" element={<BrakePadsRotorsPage />} />
+        <Route path="/boosters" element={<BoostersPage />} />
+        <Route path="/wheel-hubs" element={<WheelHubsPage />} />
+        <Route path="/batteries" element={<BatteriesPage />} />
+        <Route path="/tires" element={<TiresPage />} />
+        <Route path="/transmission" element={<TransmissionPage />} />
+        <Route path="/maintenance" element={<MaintenancePage />} />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
     </>
   )
 }

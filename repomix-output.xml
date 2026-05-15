@@ -52,19 +52,31 @@ src/
       Pillars.jsx
       Process.jsx
       QuickGuideNav.jsx
+      RecallSearch.jsx
+      RecallTicker.jsx
       Stats.jsx
       TopNav.jsx
+  data/
+    obd2-codes.json
+    recent-recalls.json
+    system-routes.js
+    tsb-knowledge-base.json
   pages/
     AlternatorsPage.jsx
     BoostersPage.jsx
     BrakePadsRotorsPage.jsx
     CalipersPage.jsx
     MasterCylindersPage.jsx
+    SearchPage.jsx
     StartersPage.jsx
     WheelHubsPage.jsx
   App.jsx
   index.css
   main.jsx
+tools/
+  extraction/
+    extract_tsb.py
+    README.md
 .gitignore
 convertPages.cjs
 convertPages.js
@@ -109,478 +121,6 @@ This section contains the contents of the repository's files.
     <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
   </symbol>
 </svg>
-</file>
-
-<file path="src/components/site/DarkContext.jsx">
-import React from "react";
-
-const RAIL_THIS_WEEK = [
-  { k: "Diagnostic Guides", v: "Symptom-based · 35+ available" },
-  { k: "Installation Guides", v: "Step-by-step procedures" },
-  { k: "Safety Recalls", v: "Live NHTSA database" },
-];
-
-const RAIL_FOLLOW = [
-  { k: "LinkedIn", v: "@allaiautomotive" },
-  { k: "Twitter / X", v: "@allaiautomotive" },
-  { k: "YouTube", v: "/allaiautomotive" },
-];
-
-export default function DarkContext() {
-  return (
-    <section
-      className="relative glow-bg grain"
-      data-testid="dark-context"
-      id="product"
-    >
-      <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 pt-28 md:pt-40 pb-32 md:pb-48">
-        <div className="col-span-12 md:col-span-2 md:pt-2">
-          <span className="font-mono-cap text-white/50">
-            Used by
-          </span>
-        </div>
-
-        <div className="col-span-12 md:col-span-8">
-          <h2
-            className="font-display text-white"
-            style={{
-              fontSize: "clamp(44px, 7.4vw, 112px)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Thousands of{" "}
-            <span className="italic-display" style={{ color: "#efe1d8" }}>
-              repair shops.
-            </span>
-          </h2>
-          <p className="mt-8 max-w-[520px] text-white/65 text-[15px] leading-relaxed font-normal">
-            Independent mechanics, dealerships, and DIYers trusting ALL AI AUTOMOTIVE across diagnostics, installations, and safety recalls. Quietly, daily.
-          </p>
-
-          <div className="mt-32 md:mt-44">
-            <span className="font-mono-cap text-white/50">The automotive moment</span>
-            <h3
-              className="mt-4 font-display text-white"
-              style={{
-                fontSize: "clamp(36px, 5.4vw, 80px)",
-                lineHeight: 1,
-                letterSpacing: "-0.025em",
-              }}
-            >
-              Built by mechanics for the shops that{" "}
-              <span className="italic-display" style={{ color: "#e5d2c6" }}>
-                actually fix
-              </span>{" "}
-              the cars.
-            </h3>
-            <p className="mt-7 max-w-[560px] text-white/65 text-[15px] leading-relaxed font-normal">
-              ALL AI AUTOMOTIVE started inside a small shop that loved the work and hated the fragmented data. Same team, two years later — building the knowledge base they couldn&rsquo;t find anywhere else.
-            </p>
-            <a
-              href="#search"
-              className="mt-7 inline-flex items-center gap-2 text-white/90 hover:text-white transition"
-            >
-              <span className="font-mono-cap">Start searching</span>
-              <span className="h-px w-12 bg-white/40" />
-            </a>
-          </div>
-        </div>
-
-        <aside
-          className="col-span-12 md:col-span-2 hidden md:flex flex-col gap-12 pt-2"
-        >
-          <RailGroup label="Available Now" items={RAIL_THIS_WEEK} />
-          <RailGroup label="Follow" items={RAIL_FOLLOW} />
-          <div>
-            <span className="font-mono-cap text-white/50">Contact</span>
-            <a
-              href="mailto:support@allaiautomotive.com"
-              className="mt-3 block text-[14px] text-white/85 hover:text-white"
-            >
-              support@allaiautomotive.com
-            </a>
-            <p className="mt-7 font-mono-cap text-white/40">
-              Est. 2024 — 2026
-            </p>
-          </div>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function RailGroup({ label, items }) {
-  return (
-    <div>
-      <span className="font-mono-cap text-white/50">{label}</span>
-      <ul className="mt-3 space-y-2">
-        {items.map((it) => (
-          <li
-            key={it.k}
-            className="flex flex-col"
-          >
-            <span className="text-[13.5px] text-white/85">{it.k}</span>
-            <span className="text-[12px] text-white/45">{it.v}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-</file>
-
-<file path="src/components/site/Footer.jsx">
-import React from "react";
-
-const COL = [
-  {
-    title: "Product",
-    links: [
-      ["Knowledge Hub", "#search"],
-      ["Quick Guides", "#guides"],
-      ["Recalls", "#recalls"],
-      ["TSBs", "#search"],
-    ],
-  },
-  {
-    title: "Shop",
-    links: [
-      ["About", "#about"],
-      ["Customers", "#customers"],
-      ["Pricing", "#pricing"],
-      ["Contact", "mailto:support@allaiautomotive.com"],
-    ],
-  },
-  {
-    title: "Follow",
-    links: [
-      ["LinkedIn", "https://linkedin.com"],
-      ["YouTube", "https://youtube.com"],
-      ["Twitter / X", "https://x.com"],
-      ["Instagram", "https://instagram.com"],
-    ],
-  },
-];
-
-export default function Footer() {
-  return (
-    <footer
-      className="relative grain"
-      style={{ background: "#070708" }}
-      data-testid="site-footer"
-    >
-      <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.08)"}}>
-        <div className="col-span-12 md:col-span-4">
-          <div
-            className="font-display text-white"
-            style={{
-              fontSize: "clamp(34px, 5vw, 72px)",
-              lineHeight: 0.9,
-              letterSpacing: "-0.04em",
-            }}
-          >
-            ALL AI AUTOMOTIVE
-          </div>
-          <p
-            className="mt-6 max-w-[320px] text-[14px] font-normal"
-            style={{ color: "rgba(255,255,255,0.55)" }}
-          >
-            The knowledge base for modern repair shops. Accurate, daily — New York · Detroit.
-          </p>
-        </div>
-
-        {COL.map((c) => (
-          <div key={c.title} className="col-span-6 md:col-span-2 mt-10 md:mt-2">
-            <span
-              className="font-mono-cap"
-              style={{ color: "rgba(255,255,255,0.55)" }}
-            >
-              {c.title}
-            </span>
-            <ul className="mt-4 space-y-2.5">
-              {c.links.map(([k, h]) => (
-                <li key={k}>
-                  <a
-                    href={h}
-                    className="text-[14px] hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.78)" }}
-                  >
-                    {k}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-
-        <div className="col-span-12 mt-14 pt-6 flex flex-wrap items-center justify-between gap-4 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-          <span
-            className="font-mono-cap"
-            style={{ color: "rgba(255,255,255,0.45)" }}
-          >
-            © ALL AI AUTOMOTIVE — Est. 2024, &nbsp;build 2.0
-          </span>
-          <span
-            className="font-mono-cap"
-            style={{ color: "rgba(255,255,255,0.45)" }}
-          >
-            Automotive data · powered by AI
-          </span>
-          <a
-            href="#top"
-            className="font-mono-cap"
-            style={{ color: "rgba(255,255,255,0.7)" }}
-          >
-            Back to top ↑
-          </a>
-        </div>
-      </div>
-    </footer>
-  );
-}
-</file>
-
-<file path="src/components/site/HeroVideo.jsx">
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { ArrowDown } from "lucide-react";
-
-const VIDEO_SRC_MP4 = "/media/headspin.mp4";
-const VIDEO_SRC_WEBM = "/media/headspin.webm";
-
-const CUE_POINTS = [
-  {
-    time: 0.05,
-    eyebrow: "01 — Identify",
-    titleLead: "Find the fix ",
-    titleAccent: "before",
-    titleTail: " you touch the wrench.",
-    sub: "ALL AI AUTOMOTIVE is the operating layer for shops and DIYers that move fast without losing the craft. Symptoms, diagnostics, and repairs in one quiet surface.",
-  },
-  {
-    time: 1.2,
-    eyebrow: "02 — Search",
-    titleLead: "Every diagnostic lands ",
-    titleAccent: "shaped",
-    titleTail: ".",
-    sub: "Inputs, symptoms and TSBs enter as living documents. Nothing important hides in a forum thread again.",
-  },
-  {
-    time: 2.4,
-    eyebrow: "03 — Execute",
-    titleLead: "Repairs stop ",
-    titleAccent: "fragmenting",
-    titleTail: ".",
-    sub: "One canvas for torque specs, required tools, and time-stamped installation steps — wired to the repair, not a parallel inbox.",
-  },
-  {
-    time: 3.6,
-    eyebrow: "04 — Maintain",
-    titleLead: "Cadence finds ",
-    titleAccent: "itself",
-    titleTail: ".",
-    sub: "Maintenance runs underneath the shop, not on top of the mechanics. Fewer status meetings, more shipped work.",
-  },
-  {
-    time: 4.8,
-    eyebrow: "05 — Ship",
-    titleLead: "Make repairs that ",
-    titleAccent: "matter",
-    titleTail: ", on time.",
-    sub: "Thousands of mechanics already shipping their best quarters with ALL AI AUTOMOTIVE.",
-  },
-];
-
-const lerp = (a, b, t) => a + (b - a) * t;
-
-export default function HeroVideo() {
-  const sectionRef = useRef(null);
-  const videoRef = useRef(null);
-  const targetTimeRef = useRef(CUE_POINTS[0].time);
-  const rafRef = useRef(null);
-
-  const [stepIndex, setStepIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const update = (e) => setReducedMotion(e.matches);
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = true;
-    let cancelled = false;
-
-    const prime = async () => {
-      try {
-        await v.play();
-        v.pause();
-        v.currentTime = CUE_POINTS[0].time;
-      } catch {
-        try { v.currentTime = CUE_POINTS[0].time; } catch {}
-      }
-      if (!cancelled) setVideoReady(true);
-    };
-
-    const onMeta = () => { if (!cancelled) prime(); };
-    const onError = () => { if (!cancelled) setVideoReady(false); };
-
-    if (v.readyState >= 1) { prime(); }
-    else {
-      v.addEventListener("loadedmetadata", onMeta, { once: true });
-      v.addEventListener("error", onError, { once: true });
-    }
-
-    return () => {
-      cancelled = true;
-      v.removeEventListener("loadedmetadata", onMeta);
-      v.removeEventListener("error", onError);
-    };
-  }, []);
-
-  const handleScroll = useCallback(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const rect = section.getBoundingClientRect();
-    const total = rect.height - window.innerHeight;
-    const passed = Math.min(Math.max(-rect.top, 0), total);
-    const p = total > 0 ? passed / total : 0;
-    setProgress(p);
-
-    const idx = Math.min(
-      CUE_POINTS.length - 1,
-      Math.max(0, Math.round(p * (CUE_POINTS.length - 1)))
-    );
-    setStepIndex(idx);
-    targetTimeRef.current = CUE_POINTS[idx].time;
-  }, []);
-
-  useEffect(() => {
-    const tick = () => {
-      const v = videoRef.current;
-      if (v && videoReady) {
-        const target = targetTimeRef.current;
-        const cur = v.currentTime;
-        const diff = target - cur;
-        if (reducedMotion) {
-          if (Math.abs(diff) > 0.01) v.currentTime = target;
-        } else if (Math.abs(diff) > 0.004) {
-          v.currentTime = lerp(cur, target, 0.16);
-        } else if (Math.abs(diff) > 0) {
-          v.currentTime = target;
-        }
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [reducedMotion, videoReady]);
-
-  useEffect(() => {
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, [handleScroll]);
-
-  const cue = CUE_POINTS[stepIndex];
-
-  return (
-    <section ref={sectionRef} id="top" className="hero-wrap">
-      <div className="hero-sticky">
-        <video ref={videoRef} className="hero-video" muted playsInline preload="auto" tabIndex={-1} aria-hidden="true">
-          <source src={VIDEO_SRC_WEBM} type="video/webm" />
-          <source src={VIDEO_SRC_MP4} type="video/mp4" />
-        </video>
-        <div className="hero-tint" />
-        <div className="hero-vignette" />
-
-        <div className="relative z-10 h-full w-full">
-          <div className="grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 h-full pt-28 md:pt-32 pb-16">
-            <div className="col-span-12 md:col-span-7 lg:col-span-7 flex flex-col justify-end">
-              <div className="max-w-[640px]">
-                <div key={`eyebrow-${stepIndex}`} className="cue-state cue-active inline-flex items-center gap-3 mb-6">
-                  <span className="font-mono-cap text-white/75 px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.16)" }}>
-                    {cue.eyebrow}
-                  </span>
-                  <span className="font-mono-cap text-white/40">Automotive · scroll-led</span>
-                </div>
-
-                <h1 key={`title-${stepIndex}`} className="cue-state cue-active font-display text-white" style={{ fontSize: "clamp(40px, 6.5vw, 92px)", lineHeight: 0.96, letterSpacing: "-0.025em" }}>
-                  {cue.titleLead}
-                  <span className="italic-display" style={{ color: "#f4d8c8" }}>{cue.titleAccent}</span>
-                  {cue.titleTail}
-                </h1>
-
-                <p key={`sub-${stepIndex}`} className="cue-state cue-active mt-6 max-w-[480px] text-white/70" style={{ fontSize: "clamp(15px, 1.05vw, 17px)", lineHeight: 1.55, fontWeight: 400 }}>
-                  {cue.sub}
-                </p>
-
-                <div className="mt-10 flex items-center gap-2.5">
-                  {CUE_POINTS.map((_, i) => (
-                    <span key={i} className={`cue-dot ${i === stepIndex ? "is-active" : ""}`} />
-                  ))}
-                  <span className="ml-3 font-mono-cap text-white/40">
-                    {String(stepIndex + 1).padStart(2, "0")} / 0{CUE_POINTS.length}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <aside className="col-span-12 md:col-span-5 lg:col-span-5 hidden md:flex justify-end">
-              <div className="self-end mb-2 w-full max-w-[340px]">
-                <div className="rounded-2xl p-5" style={{ background: "rgba(20, 16, 16, 0.55)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(18px)" }}>
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono-cap text-white/55">Knowledge Hub</span>
-                    <span className="flex items-center gap-2 font-mono-cap text-white/85">
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#ff8a4a", boxShadow: "0 0 12px #ff8a4a" }} />
-                      v2.0 live
-                    </span>
-                  </div>
-                  <div className="mt-4 space-y-3">
-                    {[
-                      ["Diagnostics", "Symptom-based repair guides"],
-                      ["Installations", "Step-by-step procedures"],
-                      ["Recalls", "Live NHTSA safety data"],
-                    ].map(([t, s], i) => (
-                      <div key={t} className="flex items-start gap-3">
-                        <span className="font-mono-cap text-white/35 mt-1">0{i + 1}</span>
-                        <div>
-                          <div className="text-[14px] text-white">{t}</div>
-                          <div className="text-[13px] text-white/55">{s}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-10 flex flex-col items-center gap-2 transition-opacity duration-500" style={{ opacity: progress < 0.04 ? 1 : 0 }}>
-            <span className="font-mono-cap text-white/55">Scroll · video-led</span>
-            <ArrowDown className="h-4 w-4 text-white/55 animate-bounce" />
-          </div>
-
-          <div className="hero-progress-track">
-            <div className="hero-progress-fill" style={{ transform: `scaleX(${progress})` }} />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 </file>
 
 <file path="src/components/site/Pillars.jsx">
@@ -738,128 +278,6 @@ export default function Pillars() {
 }
 </file>
 
-<file path="src/components/site/Process.jsx">
-import React from "react";
-
-const STEPS = [
-  {
-    n: "01",
-    label: "step 1 / 4",
-    t: "Identify",
-    d: "Enter symptoms or OBD-II codes into the Knowledge Hub to instantly surface the most likely causes and associated TSBs.",
-    tags: ["Symptoms", "Codes", "Search"],
-  },
-  {
-    n: "02",
-    label: "step 2 / 4",
-    t: "Diagnose",
-    d: "Review diagnostic flowcharts and testing procedures to pinpoint the exact component failure before replacing any parts.",
-    tags: ["Testing", "Flowcharts", "Pinpoint"],
-  },
-  {
-    n: "03",
-    label: "step 3 / 4",
-    t: "Execute",
-    d: "Follow step-by-step installation guides with factory torque specs and tool requirements to complete the repair safely.",
-    tags: ["Install", "Torque", "Tools"],
-  },
-  {
-    n: "04",
-    label: "step 4 / 4",
-    t: "Verify",
-    d: "Clear the codes, perform any required relearn procedures, and test drive the vehicle to verify the repair was successful.",
-    tags: ["Clear Codes", "Relearn", "Test Drive"],
-  },
-];
-
-export default function Process() {
-  return (
-    <section
-      id="process"
-      className="relative"
-      style={{ background: "var(--c-cream-2)", color: "var(--c-ink)" }}
-    >
-      <div className="grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-24 md:py-32 border-t" style={{ borderColor: "rgba(10,10,10,0.08)"}}>
-        <div className="col-span-12 md:col-span-4">
-          <span className="font-mono-cap" style={{ color: "rgba(10,10,10,0.55)" }}>
-            Process
-          </span>
-          <h2
-            className="mt-4 font-display"
-            style={{
-              fontSize: "clamp(40px, 5.2vw, 76px)",
-              lineHeight: 0.96,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            From symptom to{" "}
-            <span className="italic-display">fixed,</span> every day.
-          </h2>
-          <p
-            className="mt-5 text-[14px] font-mono-cap"
-            style={{ color: "rgba(10,10,10,0.55)" }}
-          >
-            Four steps · repair correctly
-          </p>
-        </div>
-
-        <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3">
-          {STEPS.map((s) => (
-            <article
-              key={s.n}
-              className="rounded-3xl p-7 md:p-8"
-              style={{
-                background: "var(--c-cream)",
-                border: "1px solid rgba(10,10,10,0.07)",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <span className="font-display text-[34px] md:text-[42px]" style={{ letterSpacing: "-0.02em" }}>
-                  {s.n}
-                </span>
-                <span className="font-mono-cap" style={{ color: "rgba(10,10,10,0.55)" }}>
-                  {s.label}
-                </span>
-              </div>
-              <h3
-                className="mt-5 font-display"
-                style={{
-                  fontSize: "clamp(24px, 2.4vw, 34px)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {s.t}
-              </h3>
-              <p
-                className="mt-4 text-[14.5px] leading-relaxed font-normal"
-                style={{ color: "rgba(10,10,10,0.62)" }}
-              >
-                {s.d}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {s.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="font-mono-cap px-2.5 py-1 rounded-full"
-                    style={{
-                      background: "rgba(10,10,10,0.05)",
-                      color: "rgba(10,10,10,0.7)",
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-</file>
-
 <file path="src/components/site/QuickGuideNav.jsx">
 import React from "react";
 import { ArrowLeft } from "lucide-react";
@@ -914,311 +332,2025 @@ export default function QuickGuideNav() {
 }
 </file>
 
-<file path="src/components/site/Stats.jsx">
-import React, { useEffect, useRef, useState } from "react";
+<file path="src/components/site/RecallSearch.jsx">
+import React, { useState } from "react";
+import { AlertCircle, Loader2, ArrowRight } from "lucide-react";
 
-const STATS = [
-  { n: 14000, suffix: "+", label: "vehicles covered across all makes and models" },
-  { n: 35, suffix: "", label: "diagnostic and installation guides available" },
-  { n: 2.5, suffix: "×", label: "faster diagnosis time on average" },
-  { n: 7, suffix: "", label: "major component categories covered" },
-];
+export default function RecallSearch() {
+  const [vin, setVin] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [vinData, setVinData] = useState(null);
+  const [recalls, setRecalls] = useState(null);
 
-function Counter({ value, suffix }) {
-  const [shown, setShown] = useState(0);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setShown(value);
+  const handleDecode = async (e) => {
+    e.preventDefault();
+    const normalized = vin.trim().toUpperCase();
+    if (normalized.length !== 17) {
+      setError("VIN must be exactly 17 characters.");
       return;
     }
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const start = performance.now();
-            const dur = 1600;
-            const tick = (now) => {
-              const t = Math.min(1, (now - start) / dur);
-              const eased = 1 - Math.pow(1 - t, 3);
-              setShown(value * eased);
-              if (t < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-            obs.disconnect();
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-    obs.observe(node);
-    return () => obs.disconnect();
-  }, [value]);
 
-  const isFloat = value % 1 !== 0;
-  const display = isFloat
-    ? shown.toFixed(1)
-    : Math.round(shown).toLocaleString();
-  return (
-    <span ref={ref} className="font-display tabular-nums" data-testid="stat-counter">
-      {display}
-      {suffix}
-    </span>
-  );
-}
+    setError("");
+    setLoading(true);
+    setVinData(null);
+    setRecalls(null);
 
-export default function Stats() {
+    try {
+      const vinRes = await fetch(
+        `https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/${normalized}?format=json`
+      );
+      const vinJson = await vinRes.json();
+      const decoded = vinJson?.Results?.[0];
+
+      if (!decoded || (decoded.ErrorCode && decoded.ErrorCode !== "0")) {
+        const errText = decoded?.ErrorText || "Unable to decode VIN.";
+        setError(errText.split(";")[0].trim());
+        setLoading(false);
+        return;
+      }
+
+      setVinData(decoded);
+
+      if (decoded.Make && decoded.Model && decoded.ModelYear) {
+        const recallsRes = await fetch(
+          `https://api.nhtsa.gov/recalls/recallsByVehicle?make=${encodeURIComponent(
+            decoded.Make
+          )}&model=${encodeURIComponent(decoded.Model)}&modelYear=${
+            decoded.ModelYear
+          }`
+        );
+        const recallsJson = await recallsRes.json();
+        setRecalls(recallsJson?.results || []);
+      } else {
+        setRecalls([]);
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <section
-      className="relative glow-bg grain"
-      data-testid="stats-section"
-    >
-      <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-28 md:py-40">
-        <div className="col-span-12 md:col-span-4">
-          <span className="font-mono-cap text-white/55">The scale</span>
-          <h2
-            className="mt-4 font-display text-white"
+    <section id="recalls" className="relative pt-24 pb-20 px-5 md:px-10 lg:px-14 border-t" style={{ background: "#060607", borderColor: "rgba(255,255,255,0.08)" }}>
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="font-mono-cap text-white/50">Safety First</span>
+        </div>
+        <h2 className="font-display text-[40px] md:text-[64px] leading-none tracking-tight mb-6">
+          Official NHTSA <br/><span className="italic-display" style={{ color: "var(--c-blush)" }}>Recall Check.</span>
+        </h2>
+        <p className="text-[15px] text-white/60 max-w-lg mb-10 leading-relaxed">
+          Verify any vehicle against the live National Highway Traffic Safety Administration database. Returns vehicle specs and comprehensive open recall data.
+        </p>
+
+        <form onSubmit={handleDecode} className="flex flex-col sm:flex-row gap-3 max-w-xl">
+          <input
+            type="text"
+            value={vin}
+            onChange={(e) => setVin(e.target.value)}
+            placeholder="ENTER 17-CHARACTER VIN"
+            maxLength={17}
+            className="flex-1 px-6 py-4 rounded-full text-[14px] outline-none focus:ring-1 focus:ring-white/20 transition-all text-white placeholder-white/30"
             style={{
-              fontSize: "clamp(40px, 5.2vw, 76px)",
-              lineHeight: 0.96,
-              letterSpacing: "-0.03em",
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              fontFamily: "var(--font-mono)",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-8 py-4 rounded-full text-[13px] font-mono-cap transition-colors disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-white/90"
+            style={{ background: "#fff", color: "#000" }}
+          >
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Check VIN"}
+            {!loading && <ArrowRight className="h-4 w-4" />}
+          </button>
+        </form>
+
+        <div className="mt-4 flex flex-wrap items-center gap-1.5">
+          <span className="font-mono-cap text-white/30 text-[10px] mr-1">Try:</span>
+          <button
+            type="button"
+            onClick={() => setVin("1FTFW1ET5DFC10312")}
+            className="font-mono-cap px-2 py-0.5 rounded-full transition-colors hover:bg-white/10"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              color: "rgba(255,255,255,0.6)",
             }}
           >
-            Thousands of vehicles covered,{" "}
-            <span className="italic-display" style={{ color: "#efe1d8" }}>
-              one complete knowledge base.
-            </span>
-          </h2>
+            Sample F-150 VIN
+          </button>
         </div>
 
-        <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-          {STATS.map((s, i) => (
-            <div
-              key={s.label}
-              className="rounded-2xl p-7 md:p-8 count-up"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.10)",
-                animationDelay: `${i * 80}ms`,
-              }}
-            >
-              <div
-                className="text-white"
-                style={{
-                  fontSize: "clamp(58px, 6vw, 96px)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.04em",
-                }}
-              >
-                <Counter value={s.n} suffix={s.suffix} />
+        {error && (
+          <div className="mt-6 flex items-start gap-2 text-[14px] text-red-400">
+            <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {vinData && (
+          <div className="mt-12 p-6 md:p-8 rounded-3xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-8 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+              <div>
+                <span className="font-mono-cap text-white/40 block mb-2">Vehicle Identified</span>
+                <h3 className="font-display text-3xl md:text-4xl text-white">
+                  {vinData.ModelYear} {vinData.Make} {vinData.Model}
+                </h3>
               </div>
-              <p className="mt-6 max-w-[300px] text-[14px] text-white/62 leading-snug font-normal">
-                {s.label}
-              </p>
+              <div className="flex gap-6">
+                <div className="flex flex-col">
+                  <span className="font-mono-cap text-white/40 text-[10px] mb-1">Engine</span>
+                  <span className="text-[14px] text-white/90">{vinData.EngineCylinders}-cyl {vinData.DisplacementL ? `${vinData.DisplacementL}L` : ""}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-mono-cap text-white/40 text-[10px] mb-1">Drive</span>
+                  <span className="text-[14px] text-white/90">{vinData.DriveType || "—"}</span>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
+
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <span className="font-mono-cap text-white/60">
+                  {recalls && recalls.length > 0 ? "Open Recall Campaigns" : "Verification complete"}
+                </span>
+                <span className="font-mono-cap text-white/40">via NHTSA</span>
+              </div>
+
+              {recalls && recalls.length === 0 && (
+                <div className="p-6 rounded-2xl flex items-center gap-4" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                  <div className="h-10 w-10 rounded-full flex items-center justify-center bg-green-500/10 text-green-400">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div>
+                    <div className="text-white text-[15px] font-medium">No open recalls found</div>
+                    <div className="text-white/50 text-[13px] mt-0.5">The NHTSA database reports no active safety campaigns for this VIN.</div>
+                  </div>
+                </div>
+              )}
+
+              {recalls && recalls.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {recalls.map((r, i) => (
+                    <div key={i} className="p-5 rounded-2xl flex flex-col" style={{ background: "rgba(220,53,69,0.06)", border: "1px solid rgba(220,53,69,0.15)" }}>
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <span className="font-mono-cap text-red-400 bg-red-500/10 px-2 py-1 rounded">
+                          {r.NHTSACampaignNumber || "Recall"}
+                        </span>
+                        <span className="font-mono-cap text-white/50 text-right truncate">
+                          {(r.Component || "—").split(":")[0]}
+                        </span>
+                      </div>
+                      <p className="text-[13px] leading-relaxed text-white/80">
+                        {r.Summary || "No summary provided by NHTSA."}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
 }
 </file>
 
-<file path="src/App.jsx">
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import TopNav from './components/site/TopNav'
-import HeroVideo from './components/site/HeroVideo'
-import Pillars from './components/site/Pillars'
-import Process from './components/site/Process'
-import DarkContext from './components/site/DarkContext'
-import Stats from './components/site/Stats'
-import Footer from './components/site/Footer'
+<file path="src/components/site/RecallTicker.jsx">
+import React from "react";
+import { ArrowRight } from "lucide-react";
+import RECENT_RECALLS from "../../data/recent-recalls.json";
 
-import AlternatorsPage from './pages/AlternatorsPage'
-import BoostersPage from './pages/BoostersPage'
-import BrakePadsRotorsPage from './pages/BrakePadsRotorsPage'
-import CalipersPage from './pages/CalipersPage'
-import MasterCylindersPage from './pages/MasterCylindersPage'
-import StartersPage from './pages/StartersPage'
-import WheelHubsPage from './pages/WheelHubsPage'
+export default function RecallTicker() {
+  // Duplicate items to ensure smooth infinite scrolling
+  const items = [...RECENT_RECALLS, ...RECENT_RECALLS, ...RECENT_RECALLS];
 
-function HomePage() {
+  return (
+    <div className="w-full border-t border-b flex items-center h-12 overflow-hidden" style={{ background: "#060607", borderColor: "rgba(255,255,255,0.08)" }}>
+      {/* Left static badge */}
+      <div className="flex-shrink-0 h-full px-4 md:px-6 flex items-center gap-2 border-r z-10" style={{ background: "#060607", borderColor: "rgba(255,255,255,0.08)" }}>
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        <span className="font-mono-cap text-white/80 text-[11px] md:text-[12px] tracking-wider">
+          LIVE RECALLS
+        </span>
+      </div>
+
+      {/* Scrolling Ticker */}
+      <div className="flex-1 overflow-hidden h-full flex items-center relative ticker-mask">
+        <div className="animate-ticker items-center gap-12 px-6">
+          {items.map((r, i) => (
+            <a 
+              key={`${r.id}-${i}`} 
+              href={r.link}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 whitespace-nowrap group transition-opacity hover:opacity-75"
+            >
+              <span className="font-mono-cap text-[#dc3545] text-[11px] px-1.5 py-0.5 rounded-sm" style={{ background: "rgba(220,53,69,0.15)" }}>
+                {r.id}
+              </span>
+              <span className="text-[13px] font-medium text-white/90 group-hover:underline">
+                {r.make} {r.model}
+              </span>
+              <span className="text-[13px] text-white/50">
+                — {r.issue}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Right static CTA */}
+      <a 
+        href="/#recalls"
+        className="flex-shrink-0 h-full px-4 md:px-6 flex items-center gap-2 border-l z-10 transition-colors group"
+        style={{ background: "#060607", borderColor: "rgba(255,255,255,0.08)" }}
+      >
+        <span className="font-mono-cap text-white/80 text-[11px] md:text-[12px] tracking-wider hidden sm:block">
+          CHECK VIN
+        </span>
+        <ArrowRight className="h-3 w-3 text-white/60 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+      </a>
+    </div>
+  );
+}
+</file>
+
+<file path="src/data/obd2-codes.json">
+[
+  {
+    "code": "P0300",
+    "title": "Random/Multiple Cylinder Misfire Detected",
+    "system": "ignition",
+    "severity": "moderate",
+    "components": ["spark plugs", "ignition coils", "fuel injectors"],
+    "guide": null
+  },
+  {
+    "code": "P0301",
+    "title": "Cylinder 1 Misfire Detected",
+    "system": "ignition",
+    "severity": "moderate",
+    "components": ["spark plug", "ignition coil", "fuel injector"],
+    "guide": null
+  },
+  {
+    "code": "P0302",
+    "title": "Cylinder 2 Misfire Detected",
+    "system": "ignition",
+    "severity": "moderate",
+    "components": ["spark plug", "ignition coil", "fuel injector"],
+    "guide": null
+  },
+  {
+    "code": "P0303",
+    "title": "Cylinder 3 Misfire Detected",
+    "system": "ignition",
+    "severity": "moderate",
+    "components": ["spark plug", "ignition coil", "fuel injector"],
+    "guide": null
+  },
+  {
+    "code": "P0304",
+    "title": "Cylinder 4 Misfire Detected",
+    "system": "ignition",
+    "severity": "moderate",
+    "components": ["spark plug", "ignition coil", "fuel injector"],
+    "guide": null
+  },
+  {
+    "code": "P0420",
+    "title": "Catalyst System Efficiency Below Threshold (Bank 1)",
+    "system": "emissions",
+    "severity": "moderate",
+    "components": ["catalytic converter", "O2 sensors"],
+    "guide": null
+  },
+  {
+    "code": "P0430",
+    "title": "Catalyst System Efficiency Below Threshold (Bank 2)",
+    "system": "emissions",
+    "severity": "moderate",
+    "components": ["catalytic converter", "O2 sensors"],
+    "guide": null
+  },
+  {
+    "code": "P0171",
+    "title": "System Too Lean (Bank 1)",
+    "system": "fuel",
+    "severity": "moderate",
+    "components": ["MAF sensor", "vacuum leak", "fuel injectors"],
+    "guide": null
+  },
+  {
+    "code": "P0174",
+    "title": "System Too Lean (Bank 2)",
+    "system": "fuel",
+    "severity": "moderate",
+    "components": ["MAF sensor", "vacuum leak", "fuel injectors"],
+    "guide": null
+  },
+  {
+    "code": "P0101",
+    "title": "Mass Air Flow Circuit Range/Performance",
+    "system": "fuel",
+    "severity": "moderate",
+    "components": ["MAF sensor", "air filter", "intake leak"],
+    "guide": null
+  },
+  {
+    "code": "P0113",
+    "title": "Intake Air Temperature Sensor Circuit High",
+    "system": "fuel",
+    "severity": "low",
+    "components": ["IAT sensor", "wiring"],
+    "guide": null
+  },
+  {
+    "code": "P0128",
+    "title": "Coolant Thermostat Below Regulating Temperature",
+    "system": "cooling",
+    "severity": "low",
+    "components": ["thermostat", "coolant temperature sensor"],
+    "guide": null
+  },
+  {
+    "code": "P0135",
+    "title": "O2 Sensor Heater Circuit (Bank 1, Sensor 1)",
+    "system": "emissions",
+    "severity": "low",
+    "components": ["O2 sensor", "heater circuit"],
+    "guide": null
+  },
+  {
+    "code": "P0401",
+    "title": "Exhaust Gas Recirculation Flow Insufficient",
+    "system": "emissions",
+    "severity": "moderate",
+    "components": ["EGR valve", "EGR passages", "vacuum solenoid"],
+    "guide": null
+  },
+  {
+    "code": "P0440",
+    "title": "Evaporative Emission Control System Malfunction",
+    "system": "emissions",
+    "severity": "low",
+    "components": ["gas cap", "EVAP canister", "purge valve"],
+    "guide": null
+  },
+  {
+    "code": "P0455",
+    "title": "Evaporative Emission System Leak Detected (Large)",
+    "system": "emissions",
+    "severity": "low",
+    "components": ["gas cap", "EVAP hoses"],
+    "guide": null
+  },
+  {
+    "code": "P0500",
+    "title": "Vehicle Speed Sensor Malfunction",
+    "system": "drivetrain",
+    "severity": "moderate",
+    "components": ["VSS", "wheel speed sensor", "wiring"],
+    "guide": null
+  },
+  {
+    "code": "P0562",
+    "title": "System Voltage Low",
+    "system": "charging",
+    "severity": "high",
+    "components": ["alternator", "battery", "wiring"],
+    "guide": "/alternators"
+  },
+  {
+    "code": "P0563",
+    "title": "System Voltage High",
+    "system": "charging",
+    "severity": "high",
+    "components": ["alternator", "voltage regulator"],
+    "guide": "/alternators"
+  },
+  {
+    "code": "P0615",
+    "title": "Starter Relay Circuit Malfunction",
+    "system": "starting",
+    "severity": "high",
+    "components": ["starter relay", "starter motor", "PCM"],
+    "guide": "/starters"
+  },
+  {
+    "code": "P0616",
+    "title": "Starter Relay Circuit Low",
+    "system": "starting",
+    "severity": "high",
+    "components": ["starter relay", "wiring"],
+    "guide": "/starters"
+  },
+  {
+    "code": "P0617",
+    "title": "Starter Relay Circuit High",
+    "system": "starting",
+    "severity": "moderate",
+    "components": ["starter relay", "wiring"],
+    "guide": "/starters"
+  },
+  {
+    "code": "P0620",
+    "title": "Generator Control Circuit Malfunction",
+    "system": "charging",
+    "severity": "high",
+    "components": ["alternator", "PCM", "wiring"],
+    "guide": "/alternators"
+  },
+  {
+    "code": "P0621",
+    "title": "Generator Lamp Control Circuit",
+    "system": "charging",
+    "severity": "moderate",
+    "components": ["alternator", "instrument cluster"],
+    "guide": "/alternators"
+  },
+  {
+    "code": "P0622",
+    "title": "Generator Field Control Circuit",
+    "system": "charging",
+    "severity": "moderate",
+    "components": ["alternator", "PCM"],
+    "guide": "/alternators"
+  },
+  {
+    "code": "P0700",
+    "title": "Transmission Control System Malfunction",
+    "system": "drivetrain",
+    "severity": "high",
+    "components": ["TCM", "transmission", "valve body"],
+    "guide": null
+  },
+  {
+    "code": "C0035",
+    "title": "Left Front Wheel Speed Sensor Circuit",
+    "system": "abs",
+    "severity": "high",
+    "components": ["wheel speed sensor", "wheel hub bearing", "wiring"],
+    "guide": "/wheel-hubs"
+  },
+  {
+    "code": "C0040",
+    "title": "Right Front Wheel Speed Sensor Circuit",
+    "system": "abs",
+    "severity": "high",
+    "components": ["wheel speed sensor", "wheel hub bearing", "wiring"],
+    "guide": "/wheel-hubs"
+  },
+  {
+    "code": "C0045",
+    "title": "Left Rear Wheel Speed Sensor Circuit",
+    "system": "abs",
+    "severity": "high",
+    "components": ["wheel speed sensor", "wheel hub bearing", "wiring"],
+    "guide": "/wheel-hubs"
+  },
+  {
+    "code": "C0050",
+    "title": "Right Rear Wheel Speed Sensor Circuit",
+    "system": "abs",
+    "severity": "high",
+    "components": ["wheel speed sensor", "wheel hub bearing", "wiring"],
+    "guide": "/wheel-hubs"
+  },
+  {
+    "code": "C0110",
+    "title": "ABS Pump Motor Circuit Malfunction",
+    "system": "abs",
+    "severity": "high",
+    "components": ["ABS pump motor", "ABS module"],
+    "guide": null
+  },
+  {
+    "code": "C0265",
+    "title": "EBCM Relay Circuit",
+    "system": "abs",
+    "severity": "high",
+    "components": ["EBCM", "ABS relay"],
+    "guide": null
+  },
+  {
+    "code": "C1201",
+    "title": "ABS System Malfunction",
+    "system": "abs",
+    "severity": "high",
+    "components": ["ABS module", "wheel speed sensors"],
+    "guide": null
+  },
+  {
+    "code": "C1214",
+    "title": "Brake System Indicator Circuit",
+    "system": "brakes",
+    "severity": "high",
+    "components": ["brake fluid level sensor", "master cylinder", "brake lines"],
+    "guide": "/master-cylinders"
+  },
+  {
+    "code": "U0073",
+    "title": "Control Module Communication Bus A Off",
+    "system": "network",
+    "severity": "high",
+    "components": ["CAN bus", "modules", "wiring"],
+    "guide": null
+  },
+  {
+    "code": "U0100",
+    "title": "Lost Communication With ECM/PCM",
+    "system": "network",
+    "severity": "high",
+    "components": ["ECM", "wiring", "CAN bus"],
+    "guide": null
+  },
+  {
+    "code": "U0121",
+    "title": "Lost Communication With ABS Module",
+    "system": "network",
+    "severity": "high",
+    "components": ["ABS module", "CAN bus"],
+    "guide": null
+  },
+  {
+    "code": "B1000",
+    "title": "Body Control Module Malfunction",
+    "system": "body",
+    "severity": "high",
+    "components": ["BCM"],
+    "guide": null
+  }
+]
+</file>
+
+<file path="src/data/recent-recalls.json">
+[
+  {
+    "id": "24V267000",
+    "make": "FORD",
+    "model": "BRONCO SPORT",
+    "issue": "Loss of Drive Power from Undetected Low Battery",
+    "link": "https://www.nhtsa.gov/recalls?nhtsaId=24V267000"
+  },
+  {
+    "id": "24V276000",
+    "make": "TESLA",
+    "model": "CYBERTRUCK",
+    "issue": "Accelerator Pedal Pad May Dislodge",
+    "link": "https://www.nhtsa.gov/recalls?nhtsaId=24V276000"
+  },
+  {
+    "id": "24V273000",
+    "make": "TOYOTA",
+    "model": "PRIUS",
+    "issue": "Rear Door May Open While Driving",
+    "link": "https://www.nhtsa.gov/recalls?nhtsaId=24V273000"
+  },
+  {
+    "id": "24V264000",
+    "make": "HONDA",
+    "model": "ACCORD",
+    "issue": "Loss of Steering Control from Manufacturing Defect",
+    "link": "https://www.nhtsa.gov/recalls?nhtsaId=24V264000"
+  },
+  {
+    "id": "24V253000",
+    "make": "PORSCHE",
+    "model": "TAYCAN",
+    "issue": "High Voltage Battery May Short Circuit",
+    "link": "https://www.nhtsa.gov/recalls?nhtsaId=24V253000"
+  },
+  {
+    "id": "24V280000",
+    "make": "JEEP",
+    "model": "GRAND CHEROKEE",
+    "issue": "Steering Column May Detach",
+    "link": "https://www.nhtsa.gov/recalls?nhtsaId=24V280000"
+  }
+]
+</file>
+
+<file path="src/data/system-routes.js">
+// Maps OBD systems to your existing Quick Guide routes.
+// Used by Process.jsx to surface the right repair guide based on a code.
+
+export const ALL_GUIDES = [
+  { path: "/alternators",      label: "Alternators",         system: "charging" },
+  { path: "/starters",         label: "Starters",            system: "starting" },
+  { path: "/calipers",         label: "Brake Calipers",      system: "brakes"   },
+  { path: "/master-cylinders", label: "Master Cylinders",    system: "brakes"   },
+  { path: "/brake-pads-rotors",label: "Brake Pads & Rotors", system: "brakes"   },
+  { path: "/boosters",         label: "Brake Boosters",      system: "brakes"   },
+  { path: "/wheel-hubs",       label: "Wheel Hubs",          system: "abs"      },
+];
+
+// Default guide per system (used as a fallback if a code has no `guide` set
+// but its `system` field matches one of these).
+export const SYSTEM_DEFAULT_GUIDE = {
+  charging: "/alternators",
+  starting: "/starters",
+  abs:      "/wheel-hubs",
+  brakes:   "/master-cylinders",
+};
+</file>
+
+<file path="src/data/tsb-knowledge-base.json">
+{
+  "schema_version": "1.0",
+  "source": "MPA Technical Bulletins",
+  "generated": "2026-05-05",
+  "entry_count": 35,
+  "entries": [
+    {
+      "id": "TBA0028",
+      "source_file": "TBA0028.pdf",
+      "revision_date": "2013-05-31",
+      "type": "appearance_only",
+      "product_category": "alternator",
+      "title": "Alternator appearance variants — Hitachi vs Mitsubishi (spade terminal)",
+      "summary": "Replacement alternator may visually differ from the original. Hitachi version has a dummy spade terminal; Mitsubishi version has no spade terminal. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Hitachi (dummy spade terminal)", "Mitsubishi (no spade terminal)"],
+      "related_bulletins": [],
+      "tags": ["alternator", "appearance", "hitachi", "mitsubishi", "spade-terminal"],
+      "confidence": "high",
+      "notes": "The dummy/no-spade terminal distinction is functionally important for harness compatibility."
+    },
+    {
+      "id": "TBA0132",
+      "source_file": "TBA0132.pdf",
+      "revision_date": "2010-01-28",
+      "type": "appearance_only",
+      "product_category": "alternator",
+      "title": "Alternator appearance variants — Bosch vs Valeo",
+      "summary": "Replacement alternator may visually differ from the original. Bosch and Valeo versions both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Bosch", "Valeo"],
+      "related_bulletins": [],
+      "tags": ["alternator", "appearance", "bosch", "valeo"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0003",
+      "source_file": "TBS0003.pdf",
+      "revision_date": "2005-02-08",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Hitachi vs Mitsubishi",
+      "summary": "Replacement starter may visually differ from the original. Hitachi and Mitsubishi versions both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Hitachi", "Mitsubishi"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance", "hitachi", "mitsubishi"],
+      "confidence": "high",
+      "notes": "Bilingual (English/French/Spanish)."
+    },
+    {
+      "id": "TBS0017",
+      "source_file": "TBS0017.pdf",
+      "revision_date": "2005-02-08",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Hitachi 80mm/90mm cases vs Mitsubishi",
+      "summary": "Replacement starter may differ from the original. Hitachi versions come in 80mm and 90mm case sizes; a Mitsubishi version also exists. All meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Hitachi 80mm case", "Hitachi 90mm case", "Mitsubishi"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance", "hitachi", "mitsubishi", "case-size"],
+      "confidence": "high",
+      "notes": "Case size variation is dimensional — verify fit before installation."
+    },
+    {
+      "id": "TBS0028",
+      "source_file": "TBS0028.pdf",
+      "revision_date": "2005-02-08",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Valeo vs AC Delco (support bracket note)",
+      "summary": "Replacement starter may differ from the original. Valeo and AC Delco versions both meet OE specifications. Some AC Delco versions use a support bracket on the back of the starter; shorter versions do not require this bracket.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Valeo", "AC Delco (with support bracket)", "AC Delco (short, no bracket)"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance", "valeo", "ac-delco", "support-bracket"],
+      "confidence": "high",
+      "notes": "Bracket presence varies by AC Delco version."
+    },
+    {
+      "id": "TBS0050",
+      "source_file": "TBS0050.pdf",
+      "revision_date": "2005-02-08",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0054",
+      "source_file": "TBS0054.pdf",
+      "revision_date": "2009-11-06",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Nissan no-crank — inhibitor relay / starter relay failure",
+      "summary": "Nissan starting system malfunctions are often misdiagnosed as starter failures. The inhibitor relay (more common failure) or starter relay can produce starter symptoms. Replacing the relay typically resolves the issue.",
+      "vehicles": {
+        "make": "Nissan",
+        "models": [],
+        "years": [],
+        "applies_to": "Multiple Nissan vehicles equipped with inhibitor and/or starter relay"
+      },
+      "symptoms": [
+        "Starter just clicks",
+        "No start / no click",
+        "Solenoid stays engaged",
+        "Starter continues running when key is off"
+      ],
+      "dtcs": [],
+      "cause": "Inhibitor relay or starter relay failure, not the starter itself. Both relays prevent the vehicle from starting under certain conditions. Inhibitor relay is the more common failure point.",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Replace inhibitor relay",
+          "part_number": "25230-89981",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "26-31",
+          "location": "Right inner fender panel toward front of engine compartment (large blue relay if OE)"
+        },
+        {
+          "priority": 2,
+          "action": "Replace starter relay (if Fix #1 did not resolve)",
+          "part_number": "25230-C9962",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "25-30",
+          "location": null
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": [],
+      "related_bulletins": ["TBS0060", "TBS0077", "TBS0089", "TBS0114"],
+      "tags": ["nissan", "starter", "no-crank", "no-start", "inhibitor-relay", "starter-relay", "diagnostic"],
+      "confidence": "high",
+      "notes": "Visual indicator: OE inhibitor relay is large and blue, with markings 25230-89981, 443A, 12V. Located on right inner fender panel."
+    },
+    {
+      "id": "TBS0056",
+      "source_file": "TBS0056.pdf",
+      "revision_date": "2005-05-11",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Delco starter shim / no-shim installation",
+      "summary": "Delco originally used both shim and no-shim starter designs. The replacement starter housing has been pre-measured at the factory; if a shim is required, it is included in the box. Always remove any shim from the failed starter and use only the shim that comes with the replacement (or none if none is included).",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "Do NOT reuse the shim from the old starter.",
+        "Use ONLY the shim included with the replacement (2mm if included).",
+        "If no shim is included, install the starter without a shim."
+      ],
+      "different_versions": ["Shim design (2mm shim included)", "No-shim design"],
+      "related_bulletins": ["TBS0117"],
+      "tags": ["starter", "delco", "shim", "installation-tip"],
+      "confidence": "high",
+      "notes": "Shim thickness: 2mm when included. Bulletin covers multiple part numbers; starter appearance may vary from photos."
+    },
+    {
+      "id": "TBS0058",
+      "source_file": "TBS0058.pdf",
+      "revision_date": "2005-12-28",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Early vs Late version",
+      "summary": "Vehicle manufacturer used multiple starter sources for this application. The early and late versions look noticeably different (especially in connector and harness style) but both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Early Version", "Late Version"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance", "early-late"],
+      "confidence": "high",
+      "notes": "Connector/harness style differs between early and late versions."
+    },
+    {
+      "id": "TBS0060",
+      "source_file": "TBS0060.pdf",
+      "revision_date": "2009-11-06",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Nissan no-crank — inhibitor relay / starter relay failure (duplicate of TBS0054)",
+      "summary": "Same diagnostic content as TBS0054. Nissan starting system malfunctions are often caused by inhibitor or starter relay failure, not the starter.",
+      "vehicles": {
+        "make": "Nissan",
+        "models": [],
+        "years": [],
+        "applies_to": "Multiple Nissan vehicles equipped with inhibitor and/or starter relay"
+      },
+      "symptoms": [
+        "Starter just clicks",
+        "No start / no click",
+        "Solenoid stays engaged",
+        "Starter continues running when key is off"
+      ],
+      "dtcs": [],
+      "cause": "Inhibitor relay or starter relay failure. Inhibitor relay is the more common failure.",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Replace inhibitor relay",
+          "part_number": "25230-89981",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "26-31",
+          "location": "Right inner fender panel toward front of engine compartment (large blue relay if OE)"
+        },
+        {
+          "priority": 2,
+          "action": "Replace starter relay (if Fix #1 did not resolve)",
+          "part_number": "25230-C9962",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "25-30",
+          "location": null
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": [],
+      "related_bulletins": ["TBS0054", "TBS0077", "TBS0089", "TBS0114"],
+      "tags": ["nissan", "starter", "no-crank", "no-start", "inhibitor-relay", "starter-relay", "diagnostic", "duplicate"],
+      "confidence": "high",
+      "notes": "Content identical to TBS0054, 0077, 0089, 0114. Candidate for de-duplication into a canonical entry."
+    },
+    {
+      "id": "TBS0066",
+      "source_file": "TBS0066.pdf",
+      "revision_date": "2007-01-25",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Drive-end armature bushing replacement (VW)",
+      "summary": "The starter armature is supported by a bushing in the transmission case. A worn bushing can cause symptoms ranging from a slow labored start to a solenoid 'click' with no crank. The bushing must be replaced when installing a new starter on these applications, or warranty is voided.",
+      "vehicles": {
+        "make": "Volkswagen",
+        "models": [],
+        "years": [],
+        "applies_to": "Applications where starter armature is supported by transmission-case bushing (likely VW based on visual context)"
+      },
+      "symptoms": [
+        "Slow labored start",
+        "Solenoid click with no crank"
+      ],
+      "dtcs": [],
+      "cause": "Worn drive-end armature bushing in the transmission case",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Replace drive-end armature bushing in transmission case before installing replacement starter",
+          "part_number": null,
+          "manufacturer": null,
+          "estimated_cost_usd": null,
+          "location": "Transmission case"
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": ["bushing extractor", "slide hammer"],
+      "warnings": [
+        "MUST replace starter shaft bushing before installing replacement starter — failure to do so voids warranty.",
+        "Replacement bushing is temporarily attached to the starter mounting ear for shipping."
+      ],
+      "different_versions": ["Bosch", "Nippondenso"],
+      "related_bulletins": [],
+      "tags": ["starter", "vw", "volkswagen", "bushing", "installation-tip", "warranty"],
+      "confidence": "high",
+      "notes": "Bushing extractor and slide hammer can be rented from equipment rental outlets."
+    },
+    {
+      "id": "TBS0071",
+      "source_file": "TBS0071.pdf",
+      "revision_date": "2007-02-05",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Heat shield transfer from failed starter to replacement",
+      "summary": "Some vehicle applications were originally equipped with a heat shield on the starter solenoid. If the failed starter had a heat shield, it must be transferred to the replacement starter. Many vehicles do not require a heat shield.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "SAVE THE HEAT SHIELD from the failed starter — it must be installed on the replacement."
+      ],
+      "different_versions": [],
+      "related_bulletins": [],
+      "tags": ["starter", "heat-shield", "installation-tip", "core-return"],
+      "confidence": "high",
+      "notes": "Heat shield wraps around the starter solenoid."
+    },
+    {
+      "id": "TBS0073",
+      "source_file": "TBS0073.pdf",
+      "revision_date": "2009-03-19",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Ford S-terminal harness corrosion — no-crank fix with new harness end",
+      "summary": "Ford has determined that corrosion in the last 4 inches of the vehicle's S-terminal (ignition) lead can cause a 'no crank' condition. Replacement starters ship with a new vehicle harness end already installed. Cut, strip, and crimp the new connector onto the existing harness 6 inches behind the old connector.",
+      "vehicles": {
+        "make": "Ford",
+        "models": [],
+        "years": [],
+        "applies_to": "Ford applications with S-terminal (ignition) starter harness"
+      },
+      "symptoms": [
+        "No crank condition"
+      ],
+      "dtcs": [],
+      "cause": "Corrosion in the last 4 inches of the S-terminal (ignition) lead on the vehicle harness",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Cut S-terminal harness 6 inches behind connector, strip 3/8\" of insulation, crimp new connector, shrink-tube the splice with heat gun",
+          "part_number": null,
+          "manufacturer": "Ford",
+          "estimated_cost_usd": null,
+          "location": "S-terminal lead, 6 inches from connector"
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": ["wire cutter/stripper", "crimping tool", "heat gun"],
+      "warnings": [
+        "Disconnect negative (-) battery cable before starting harness replacement or starter installation."
+      ],
+      "different_versions": [],
+      "related_bulletins": ["TBS0131"],
+      "tags": ["ford", "starter", "no-crank", "harness", "corrosion", "s-terminal", "installation-tip"],
+      "confidence": "high",
+      "notes": "Hair dryer can substitute for heat gun when shrinking the tubing."
+    },
+    {
+      "id": "TBS0077",
+      "source_file": "TBS0077.pdf",
+      "revision_date": "2009-11-06",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Nissan no-crank — inhibitor relay / starter relay failure (duplicate of TBS0054)",
+      "summary": "Same diagnostic content as TBS0054. Nissan starting system malfunctions are often caused by inhibitor or starter relay failure, not the starter.",
+      "vehicles": {
+        "make": "Nissan",
+        "models": [],
+        "years": [],
+        "applies_to": "Multiple Nissan vehicles equipped with inhibitor and/or starter relay"
+      },
+      "symptoms": [
+        "Starter just clicks",
+        "No start / no click",
+        "Solenoid stays engaged",
+        "Starter continues running when key is off"
+      ],
+      "dtcs": [],
+      "cause": "Inhibitor relay or starter relay failure. Inhibitor relay is the more common failure.",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Replace inhibitor relay",
+          "part_number": "25230-89981",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "25-31",
+          "location": "Right inner fender panel toward front of engine compartment (large blue relay if OE)"
+        },
+        {
+          "priority": 2,
+          "action": "Replace starter relay (if Fix #1 did not resolve)",
+          "part_number": "25230-C9962",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "25-30",
+          "location": null
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": [],
+      "related_bulletins": ["TBS0054", "TBS0060", "TBS0089", "TBS0114"],
+      "tags": ["nissan", "starter", "no-crank", "no-start", "inhibitor-relay", "starter-relay", "diagnostic", "duplicate"],
+      "confidence": "high",
+      "notes": "Content identical to TBS0054, 0060, 0089, 0114."
+    },
+    {
+      "id": "TBS0082",
+      "source_file": "TBS0082.pdf",
+      "revision_date": "2007-08-31",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Wiring harness bracket transfer + through-bolt torque",
+      "summary": "The wiring harness bracket from the failed starter should be transferred to the replacement to secure the harness. When re-installing the bracket, the through-bolt also secures the starter case — torque it correctly to avoid case damage.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [
+        {
+          "fastener": "Through bolt",
+          "value": "66-76 in-lbs",
+          "value_nm": "7.5-8.6 N·m"
+        }
+      ],
+      "tools_required": ["torque wrench (in-lb range)"],
+      "warnings": [
+        "Through bolt secures the starter case as well as the bracket — incorrect torque can damage the case.",
+        "Bracket style may vary."
+      ],
+      "different_versions": [],
+      "related_bulletins": [],
+      "tags": ["starter", "torque-spec", "through-bolt", "bracket", "installation-tip"],
+      "confidence": "high",
+      "notes": "Bracket transfer is optional but recommended for harness security."
+    },
+    {
+      "id": "TBS0089",
+      "source_file": "TBS0089.pdf",
+      "revision_date": "2009-11-06",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Nissan no-crank — inhibitor relay / starter relay failure (duplicate of TBS0054)",
+      "summary": "Same diagnostic content as TBS0054.",
+      "vehicles": {
+        "make": "Nissan",
+        "models": [],
+        "years": [],
+        "applies_to": "Multiple Nissan vehicles equipped with inhibitor and/or starter relay"
+      },
+      "symptoms": [
+        "Starter just clicks",
+        "No start / no click",
+        "Solenoid stays engaged",
+        "Starter continues running when key is off"
+      ],
+      "dtcs": [],
+      "cause": "Inhibitor relay or starter relay failure. Inhibitor relay is the more common failure.",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Replace inhibitor relay",
+          "part_number": "25230-89981",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "26-31",
+          "location": "Right inner fender panel toward front of engine compartment (large blue relay if OE)"
+        },
+        {
+          "priority": 2,
+          "action": "Replace starter relay (if Fix #1 did not resolve)",
+          "part_number": "25230-C9962",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "25-30",
+          "location": null
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": [],
+      "related_bulletins": ["TBS0054", "TBS0060", "TBS0077", "TBS0114"],
+      "tags": ["nissan", "starter", "no-crank", "no-start", "inhibitor-relay", "starter-relay", "diagnostic", "duplicate"],
+      "confidence": "high",
+      "notes": "Content identical to TBS0054, 0060, 0077, 0114."
+    },
+    {
+      "id": "TBS0091",
+      "source_file": "TBS0091.pdf",
+      "revision_date": "2008-03-13",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "R terminal vs S terminal — connect to correct spade or vehicle won't start",
+      "summary": "The R terminal relays 12V from one source to another while the ignition key is in start position; not all vehicles use this feature. The S terminal is how the starter receives its start signal. Connecting the vehicle's S harness to the wrong spade terminal will prevent the vehicle from starting.",
+      "vehicles": null,
+      "symptoms": [
+        "Vehicle will not start (after replacement starter installation)"
+      ],
+      "dtcs": [],
+      "cause": "Vehicle S harness connected to the wrong spade terminal on the replacement starter",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Verify S harness is connected to S terminal (not R terminal). Disregard R terminal if vehicle is not equipped to use it.",
+          "part_number": null,
+          "manufacturer": null,
+          "estimated_cost_usd": null,
+          "location": "Starter solenoid spade terminals"
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "If the vehicle S harness is installed to the wrong spade terminal, the vehicle will NOT start."
+      ],
+      "different_versions": ["Bosch", "Lucas"],
+      "related_bulletins": [],
+      "tags": ["starter", "no-start", "r-terminal", "s-terminal", "installation-tip", "wiring"],
+      "confidence": "high",
+      "notes": "Common installer error — easy fix once identified."
+    },
+    {
+      "id": "TBS0092",
+      "source_file": "TBS0092.pdf",
+      "revision_date": "2008-04-24",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Harness adapter transfer from old starter to replacement",
+      "summary": "Before returning the failed starter as a core, remove the harness adapter (if equipped) and install it on the replacement starter. Trilingual bulletin (English/French/Spanish).",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "Remove harness adapter from old starter before returning as core — install on replacement."
+      ],
+      "different_versions": [],
+      "related_bulletins": [],
+      "tags": ["starter", "harness-adapter", "installation-tip", "core-return"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0101",
+      "source_file": "TBS0101.pdf",
+      "revision_date": "2008-06-24",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Versions I, II, III, IV",
+      "summary": "Four starter versions exist for this application. All meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II", "Version III", "Version IV"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": "High-variant application — verify fit before installation."
+    },
+    {
+      "id": "TBS0103",
+      "source_file": "TBS0103.pdf",
+      "revision_date": "2008-10-07",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Ford enhanced HD starter replacement — terminal A/B wiring change",
+      "summary": "This enhanced HD starter replaces early-style Ford starters with a remote-mounted solenoid. The new design is more compact, more dependable, and produces more torque with less amp draw. Installation requires re-routing the starter cable from terminal B to terminal A and adding the included wire harness to terminal B.",
+      "vehicles": {
+        "make": "Ford",
+        "models": [],
+        "years": [],
+        "applies_to": "Early-style Ford starters with remote-mounted solenoid"
+      },
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "Move starter cable from terminal B to terminal A.",
+        "Install included wire harness to terminal B.",
+        "Re-secure attaching nuts on terminals A and B.",
+        "All other connections remain the same."
+      ],
+      "different_versions": [],
+      "related_bulletins": [],
+      "tags": ["ford", "starter", "heavy-duty", "remote-solenoid", "installation-tip", "wiring"],
+      "confidence": "high",
+      "notes": "Benefits: more dependable, more compact, more torque with less amp draw."
+    },
+    {
+      "id": "TBS0104",
+      "source_file": "TBS0104.pdf",
+      "revision_date": "2008-12-16",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Bosch vs Delco",
+      "summary": "Replacement starter may differ from the original. Bosch and Delco versions both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Bosch", "Delco"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance", "bosch", "delco"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0112",
+      "source_file": "TBS0112.pdf",
+      "revision_date": "2009-07-09",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "GM crankshaft position sensor failure causing starter/flywheel damage (DTC P0338)",
+      "summary": "Hard start symptoms and starter failure on GM applications may be caused by crankshaft position sensor failure, not the starter. A failing CKP sensor allows up to 50 extra degrees of spark advance during cranking, creating high cylinder pressure and 'kickback' that can damage the starter housing, flywheel/flexplate, and engine block at the starter boss. Replacing the starter without fixing the root cause will result in repeat damage.",
+      "vehicles": {
+        "make": "GM",
+        "models": [],
+        "years": [],
+        "applies_to": "GM applications with crankshaft position sensor — see GM TSB 00-06-04-014"
+      },
+      "symptoms": [
+        "Backfire during cranking or start-up",
+        "'Kickback' during cranking or startup",
+        "No start",
+        "Slow or difficult start/crank",
+        "Grinding or unusual noises during cranking or start-up",
+        "Cracked or broken engine block at the starter boss",
+        "Broken starter drive housing 'nose cone'",
+        "Broken starter ring gear on flywheel or flexplate",
+        "Service Engine Soon lamp illuminated"
+      ],
+      "dtcs": ["P0338"],
+      "cause": "Crankshaft position sensor failure causing up to 50 extra degrees of spark advance during cranking, leading to kickback that damages starter, flywheel/flexplate, and engine block",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Inspect for DTC P0338. If present, replace crankshaft position sensor and inspect for damage at starter boss, drive housing, and flywheel ring gear.",
+          "part_number": "10456607",
+          "manufacturer": "GM",
+          "estimated_cost_usd": null,
+          "location": null
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": ["scan tool"],
+      "warnings": [
+        "Failure to replace a failed crankshaft position sensor will result in repeated damage to the starter or flywheel.",
+        "Mild flywheel wear is normal; missing, broken, or chipped teeth are NOT normal."
+      ],
+      "different_versions": [],
+      "related_bulletins": ["GM TSB 00-06-04-014"],
+      "tags": ["gm", "starter", "crankshaft-position-sensor", "ckp", "p0338", "kickback", "diagnostic", "flywheel-damage"],
+      "confidence": "high",
+      "notes": "DTC P0338 = Crankshaft Position Sensor 'A' Circuit High Input. Cross-reference GM TSB 00-06-04-014."
+    },
+    {
+      "id": "TBS0114",
+      "source_file": "TBS0114.pdf",
+      "revision_date": "2009-11-06",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Nissan no-crank — inhibitor relay / starter relay failure (duplicate of TBS0054)",
+      "summary": "Same diagnostic content as TBS0054.",
+      "vehicles": {
+        "make": "Nissan",
+        "models": [],
+        "years": [],
+        "applies_to": "Multiple Nissan vehicles equipped with inhibitor and/or starter relay"
+      },
+      "symptoms": [
+        "Starter just clicks",
+        "No start / no click",
+        "Solenoid stays engaged",
+        "Starter continues running when key is off"
+      ],
+      "dtcs": [],
+      "cause": "Inhibitor relay or starter relay failure. Inhibitor relay is the more common failure.",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Replace inhibitor relay",
+          "part_number": "25230-89981",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "26-31",
+          "location": "Right inner fender panel toward front of engine compartment (large blue relay if OE)"
+        },
+        {
+          "priority": 2,
+          "action": "Replace starter relay (if Fix #1 did not resolve)",
+          "part_number": "25230-C9962",
+          "manufacturer": "Nissan",
+          "estimated_cost_usd": "25-30",
+          "location": null
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": [],
+      "related_bulletins": ["TBS0054", "TBS0060", "TBS0077", "TBS0089"],
+      "tags": ["nissan", "starter", "no-crank", "no-start", "inhibitor-relay", "starter-relay", "diagnostic", "duplicate"],
+      "confidence": "high",
+      "notes": "Content identical to TBS0054, 0060, 0077, 0089."
+    },
+    {
+      "id": "TBS0117",
+      "source_file": "TBS0117.pdf",
+      "revision_date": "2009-09-16",
+      "type": "installation_tip",
+      "product_category": "starter",
+      "title": "Starter shimming procedure — 1/8 inch drill bit gap test",
+      "summary": "Always start by re-using existing shims from the old starter. If engagement is noisy, use a 1/8 inch drill bit to measure the gap between the top of a flywheel tooth and the starter armature shaft (through the inspection cover). Snug fit = correctly shimmed. Loose = remove a shim. Too tight or won't fit = add a shim.",
+      "vehicles": null,
+      "symptoms": [
+        "Noisy starter engagement after replacement"
+      ],
+      "dtcs": [],
+      "cause": "Incorrect shim thickness causing wrong starter-to-flywheel clearance",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Measure gap with 1/8\" drill bit through inspection cover; adjust shims based on fit (snug=correct, loose=remove shim, tight=add shim).",
+          "part_number": null,
+          "manufacturer": null,
+          "estimated_cost_usd": null,
+          "location": "Through starter inspection cover"
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": ["1/8\" drill bit (used as feeler gauge)"],
+      "warnings": [
+        "If starter cannot be correctly shimmed or remains noisy after correct shimming, contact MPA Technical Service at 800-228-9672."
+      ],
+      "different_versions": [],
+      "related_bulletins": ["TBS0056"],
+      "tags": ["starter", "shim", "installation-tip", "noise", "clearance"],
+      "confidence": "high",
+      "notes": "1/8\" drill bit serves as a quick gauge for correct flywheel/armature clearance."
+    },
+    {
+      "id": "TBS0119",
+      "source_file": "TBS0119.pdf",
+      "revision_date": "2009-10-07",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0121",
+      "source_file": "TBS0121.pdf",
+      "revision_date": "2009-12-29",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0125",
+      "source_file": "TBS0125.pdf",
+      "revision_date": "2010-05-26",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Nissan cold-start no-crank — IPDM (Intelligent Power Distribution Module) failure",
+      "summary": "Specific Nissan no-crank condition that occurs only after the vehicle has not been started for several hours in cold weather (below 10°F / 12°C), then driven briefly (5-10 minutes), then turned off briefly (5-10 minutes). If all three conditions match, the IPDM (Intelligent Power Distribution Module) likely needs replacement. Includes part numbers for 11 Nissan models.",
+      "vehicles": {
+        "make": "Nissan",
+        "models": [
+          {"model": "Altima (L31)", "years": [2002, 2003, 2004, 2005, 2006]},
+          {"model": "Murano (Z50)", "years": [2003, 2004, 2005, 2006]},
+          {"model": "Maxima (A34)", "years": [2004, 2005, 2006]},
+          {"model": "Quest (V42)", "years": [2004, 2005, 2006]},
+          {"model": "350Z (Z33)", "years": [2003, 2004, 2005, 2006]},
+          {"model": "Titan (A60)", "years": [2004, 2005, 2006]},
+          {"model": "Armada (TA60)", "years": [2004, 2005, 2006]},
+          {"model": "Pathfinder (R51)", "years": [2005, 2006]},
+          {"model": "Xterra (N50)", "years": [2005, 2006]},
+          {"model": "Frontier (D40)", "years": [2005, 2006]}
+        ],
+        "applies_to": "Listed Nissan models, 2002-2006"
+      },
+      "symptoms": [
+        "Starter no crank ONLY when ALL of the following conditions occur: vehicle not started for several hours, outside temperature below 10°F (12°C), vehicle driven briefly (5-10 min), engine off briefly (5-10 min), then no-crank"
+      ],
+      "dtcs": [],
+      "cause": "IPDM (Intelligent Power Distribution Module) failure under specific cold-start cycling conditions",
+      "fixes": [
+        {"priority": 1, "action": "Replace IPDM — Altima (L31) 2005-2006", "part_number": "284B7-8J02A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Altima (L31) 2004", "part_number": "284B7-AQ01B", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Altima (L31) 2003", "part_number": "284B7-AL51B", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Altima (L31) 2002", "part_number": "284B7-AL51A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Murano (Z50) 2004-2006", "part_number": "284B7-CA01A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Murano (Z50) 2003", "part_number": "284B7-CA01B", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Maxima (A34) 2004-2006", "part_number": "284B7-7Y02A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Quest (V42) 2004-2006", "part_number": "284B7-CK02A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — 350Z (Z33) 2005-2006", "part_number": "284B7-CD01A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — 350Z (Z33) 2004", "part_number": "284B7-AQ01B", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — 350Z (Z33) 2003", "part_number": "284B7-AL51B", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Titan (A60) 2004-2006", "part_number": "284B7-ZC00A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Armada (TA60) 2004-2006", "part_number": "284B7-ZC00A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Pathfinder (R51) 2005-2006", "part_number": "284B7-ZC00A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Xterra (N50) 2005-2006", "part_number": "284B7-ZC00A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null},
+        {"priority": 1, "action": "Replace IPDM — Frontier (D40) 2005-2006", "part_number": "284B7-ZC00A", "manufacturer": "Nissan", "estimated_cost_usd": null, "location": null}
+      ],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "Bulletin only applies if ALL listed cold-cycling conditions are met. Other no-crank causes should still be diagnosed normally."
+      ],
+      "different_versions": [],
+      "related_bulletins": [],
+      "tags": ["nissan", "ipdm", "cold-start", "no-crank", "diagnostic", "altima", "murano", "maxima", "quest", "350z", "titan", "armada", "pathfinder", "xterra", "frontier"],
+      "confidence": "high",
+      "notes": "IPDM = Intelligent Power Distribution Module. Refer to vehicle service manual for replacement instructions and IPDM location. Available through Nissan dealerships."
+    },
+    {
+      "id": "TBS0128",
+      "source_file": "TBS0128.pdf",
+      "revision_date": "2011-08-25",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — 8-tooth and 11-tooth versions",
+      "summary": "Three starter versions exist for this application: one 8-tooth pinion and two 11-tooth pinion variants. All meet OE specifications. CRITICAL: pinion tooth count must match the flywheel ring gear.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [
+        "Verify pinion tooth count matches the application before installation."
+      ],
+      "different_versions": ["Version I (8 teeth)", "Version II (11 teeth)", "Version III (11 teeth)"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance", "pinion-teeth", "tooth-count"],
+      "confidence": "high",
+      "notes": "Tooth count is functionally critical, not just cosmetic — verify against application data."
+    },
+    {
+      "id": "TBS0129",
+      "source_file": "TBS0129.pdf",
+      "revision_date": "2011-06-08",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0131",
+      "source_file": "TBS0131.pdf",
+      "revision_date": "2011-10-12",
+      "type": "diagnostic",
+      "product_category": "starter",
+      "title": "Ford S-terminal harness corrosion — no-crank fix (similar to TBS0073)",
+      "summary": "Ford has determined that corrosion in the last 4 inches of the vehicle's S-terminal (ignition) lead can cause a 'no crank' condition. Replacement starters ship with a new vehicle harness end already installed. Cut, strip, and crimp the new connector onto the existing harness.",
+      "vehicles": {
+        "make": "Ford",
+        "models": [],
+        "years": [],
+        "applies_to": "Ford applications with S-terminal (ignition) starter harness"
+      },
+      "symptoms": [
+        "No crank condition"
+      ],
+      "dtcs": [],
+      "cause": "Corrosion in the last 4 inches of the S-terminal (ignition) lead on the vehicle harness",
+      "fixes": [
+        {
+          "priority": 1,
+          "action": "Cut S-terminal harness 6 inches behind connector, strip 3/8\" of insulation, crimp new connector onto stripped wire.",
+          "part_number": null,
+          "manufacturer": "Ford",
+          "estimated_cost_usd": null,
+          "location": "S-terminal lead, 6 inches from connector"
+        }
+      ],
+      "torque_specs": [],
+      "tools_required": ["wire cutter/stripper", "crimping tool"],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": ["TBS0073"],
+      "tags": ["ford", "starter", "no-crank", "harness", "corrosion", "s-terminal", "installation-tip"],
+      "confidence": "high",
+      "notes": "Updated version of TBS0073 with two starter appearance variants shown."
+    },
+    {
+      "id": "TBS0133",
+      "source_file": "TBS0133.pdf",
+      "revision_date": "2012-05-31",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0134",
+      "source_file": "TBS0134.pdf",
+      "revision_date": "2012-05-31",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Versions I, II, III",
+      "summary": "Three starter versions exist for this application. All meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II", "Version III"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0136",
+      "source_file": "TBS0136.pdf",
+      "revision_date": "2012-11-09",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0138",
+      "source_file": "TBS0138.pdf",
+      "revision_date": "2013-02-19",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Versions I, II, III",
+      "summary": "Three starter versions exist for this application. All meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II", "Version III"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    },
+    {
+      "id": "TBS0140",
+      "source_file": "TBS0140.pdf",
+      "revision_date": "2013-09-24",
+      "type": "appearance_only",
+      "product_category": "starter",
+      "title": "Starter appearance variants — Version I vs Version II",
+      "summary": "Two starter versions exist for this application. Both meet OE specifications.",
+      "vehicles": null,
+      "symptoms": [],
+      "dtcs": [],
+      "cause": null,
+      "fixes": [],
+      "torque_specs": [],
+      "tools_required": [],
+      "warnings": [],
+      "different_versions": ["Version I", "Version II"],
+      "related_bulletins": [],
+      "tags": ["starter", "appearance"],
+      "confidence": "high",
+      "notes": null
+    }
+  ]
+}
+</file>
+
+<file path="src/pages/SearchPage.jsx">
+import React, { useState, useMemo } from "react";
+import Fuse from "fuse.js";
+import { Search, AlertCircle } from "lucide-react";
+import TopNav from "../components/site/TopNav";
+import Footer from "../components/site/Footer";
+import KB from "../data/tsb-knowledge-base.json";
+
+// Matches OBD-II / mfr DTC format (P0338, C0035, U0100, B1000)
+const DTC_REGEX = /^[PCBU]\d{4}$/i;
+
+// Fuse.js configured for symptom + summary fuzzy search
+const fuse = new Fuse(KB.entries, {
+  keys: [
+    { name: "title",         weight: 2.0 },
+    { name: "summary",       weight: 1.5 },
+    { name: "symptoms",      weight: 1.5 },
+    { name: "cause",         weight: 1.0 },
+    { name: "tags",          weight: 1.0 },
+    { name: "vehicles.make", weight: 0.8 },
+  ],
+  threshold: 0.4,
+  ignoreLocation: true,
+  minMatchCharLength: 3,
+});
+
+const TYPE_ORDER = {
+  diagnostic: 0,
+  installation_tip: 1,
+  warning: 2,
+  appearance_only: 3,
+};
+
+const TYPE_COLOR = {
+  diagnostic:       "#ff8a4a",
+  installation_tip: "#9be4d4",
+  warning:          "#ff5d5d",
+  appearance_only:  "rgba(255,255,255,0.4)",
+};
+
+const TYPE_LABEL = {
+  diagnostic:       "Diagnostic",
+  installation_tip: "Installation tip",
+  warning:          "Warning",
+  appearance_only:  "Appearance variant",
+};
+
+export default function SearchPage() {
+  const [query, setQuery]           = useState("");
+  const [makeFilter, setMakeFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
+
+  // Build unique makes list for the filter dropdown
+  const makes = useMemo(() => {
+    const set = new Set();
+    KB.entries.forEach((e) => {
+      if (e.vehicles?.make) set.add(e.vehicles.make);
+    });
+    return [...set].sort();
+  }, []);
+
+  const results = useMemo(() => {
+    const q = query.trim();
+    let matches = KB.entries;
+
+    if (q) {
+      if (DTC_REGEX.test(q)) {
+        // Exact DTC match
+        const code = q.toUpperCase();
+        matches = KB.entries.filter((e) => (e.dtcs || []).includes(code));
+      } else {
+        // Fuzzy text search
+        matches = fuse.search(q).map((r) => r.item);
+      }
+    }
+
+    if (makeFilter !== "all") {
+      matches = matches.filter((e) => e.vehicles?.make === makeFilter);
+    }
+    if (typeFilter !== "all") {
+      matches = matches.filter((e) => e.type === typeFilter);
+    }
+
+    // Diagnostic results first, appearance-only last
+    return [...matches].sort(
+      (a, b) => (TYPE_ORDER[a.type] ?? 9) - (TYPE_ORDER[b.type] ?? 9)
+    );
+  }, [query, makeFilter, typeFilter]);
+
   return (
     <div className="min-h-screen bg-black font-sans text-white overflow-x-hidden selection:bg-[#ff8a4a]/30 selection:text-white">
       <TopNav />
-      <main>
-        <HeroVideo />
-        <Pillars />
-        <Process />
-        <DarkContext />
-        <Stats />
+      <main
+        id="search"
+        className="pt-32 pb-24 px-5 md:px-10 lg:px-14 max-w-[1400px] mx-auto"
+      >
+        {/* Header */}
+        <div className="mb-12">
+          <span className="font-mono-cap text-white/50">Knowledge Hub</span>
+          <h1
+            className="mt-4 font-display text-white"
+            style={{
+              fontSize: "clamp(40px, 5vw, 76px)",
+              lineHeight: 0.96,
+              letterSpacing: "-0.03em",
+            }}
+          >
+            Search the{" "}
+            <span className="italic-display" style={{ color: "#efe1d8" }}>
+              diagnostic
+            </span>{" "}
+            database
+          </h1>
+          <p className="mt-5 max-w-[640px] text-[15px] text-white/65 leading-relaxed">
+            Search by OBD-II code (e.g. P0338) or describe a symptom. Results
+            draw from MPA Technical Bulletins and the internal knowledge base.
+          </p>
+        </div>
+
+        {/* Search input */}
+        <div className="mb-6">
+          <div className="relative">
+            <Search className="h-5 w-5 absolute left-5 top-1/2 -translate-y-1/2 text-white/40" />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Try: P0338, starter clicks no crank, Nissan cold start..."
+              className="w-full pl-14 pr-5 py-4 rounded-full text-[15px] outline-none focus:ring-2 focus:ring-white/20 transition"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.10)",
+              }}
+              autoFocus
+            />
+          </div>
+        </div>
+
+        {/* Filters + result count */}
+        <div className="mb-8 flex flex-wrap items-center gap-3">
+          <FilterSelect label="Make" value={makeFilter} onChange={setMakeFilter}>
+            <option value="all">All makes</option>
+            {makes.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </FilterSelect>
+          <FilterSelect label="Type" value={typeFilter} onChange={setTypeFilter}>
+            <option value="all">All types</option>
+            <option value="diagnostic">Diagnostic</option>
+            <option value="installation_tip">Installation tips</option>
+            <option value="appearance_only">Appearance variants</option>
+          </FilterSelect>
+          <span className="ml-auto font-mono-cap text-white/55">
+            {results.length} result{results.length === 1 ? "" : "s"}
+          </span>
+        </div>
+
+        {/* Results */}
+        {results.length === 0 ? (
+          <div
+            className="rounded-3xl p-10 text-center"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <AlertCircle className="h-6 w-6 mx-auto mb-3 text-white/40" />
+            <p className="text-white/60 text-[14px]">
+              No results. Try a different query or clear the filters.
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-3">
+            {results.map((entry) => (
+              <ResultCard key={entry.id} entry={entry} />
+            ))}
+          </div>
+        )}
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-function App() {
+function FilterSelect({ label, value, onChange, children }) {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/alternators" element={<AlternatorsPage />} />
-      <Route path="/starters" element={<StartersPage />} />
-      <Route path="/calipers" element={<CalipersPage />} />
-      <Route path="/master-cylinders" element={<MasterCylindersPage />} />
-      <Route path="/brake-pads-rotors" element={<BrakePadsRotorsPage />} />
-      <Route path="/boosters" element={<BoostersPage />} />
-      <Route path="/wheel-hubs" element={<WheelHubsPage />} />
-    </Routes>
-  )
+    <label className="flex items-center gap-2">
+      <span className="font-mono-cap text-white/45">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="px-3 py-2 rounded-full text-[13px] outline-none cursor-pointer transition"
+        style={{
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.10)",
+          color: "white",
+        }}
+      >
+        {children}
+      </select>
+    </label>
+  );
 }
 
-export default App
-</file>
+function ResultCard({ entry }) {
+  const color  = TYPE_COLOR[entry.type] || "rgba(255,255,255,0.4)";
+  const label  = TYPE_LABEL[entry.type] || entry.type;
+  const fix    = entry.fixes?.[0];
+  const symptoms = entry.symptoms || [];
 
-<file path="src/index.css">
-@import "tailwindcss";
+  return (
+    <article
+      className="rounded-3xl p-6 md:p-7 transition hover:bg-white/[0.02]"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      {/* Type + DTC + bulletin id */}
+      <div className="mb-3 flex flex-wrap items-center gap-3">
+        <span className="font-mono-cap" style={{ color }}>
+          {label}
+        </span>
+        {entry.dtcs?.length > 0 && (
+          <span
+            className="font-mono-cap px-2 py-0.5 rounded-full"
+            style={{ background: "rgba(255,138,74,0.15)", color: "#ff8a4a" }}
+          >
+            {entry.dtcs.join(", ")}
+          </span>
+        )}
+        <span className="ml-auto font-mono-cap text-white/35">{entry.id}</span>
+      </div>
 
-@theme {
-  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: "DM Sans", -apple-system, sans-serif;
-  --font-mono: "DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-}
+      {/* Title + summary */}
+      <h3
+        className="font-display text-[20px] md:text-[22px] mb-2"
+        style={{ letterSpacing: "-0.01em" }}
+      >
+        {entry.title}
+      </h3>
+      <p className="text-[14px] text-white/65 leading-relaxed">
+        {entry.summary}
+      </p>
 
-@layer base {
-  :root {
-    --c-ink: #0a0a0a;
-    --c-ink-2: #141414;
-    --c-cream: #FDFBF7;
-    --c-cream-2: #F3EFE9;
-    --c-cream-3: #efe1d8;
-    --c-blush: #e2b4b4;
-    --bg: #000000;
-  }
-}
+      {/* Vehicles */}
+      {entry.vehicles?.make && (
+        <div className="mt-3 text-[13px] text-white/55">
+          <span className="font-mono-cap text-white/40 mr-2">Vehicles:</span>
+          {entry.vehicles.make}
+          {entry.vehicles.applies_to ? ` — ${entry.vehicles.applies_to}` : ""}
+        </div>
+      )}
 
-body {
-  background-color: var(--bg);
-  color: var(--c-cream);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
+      {/* Symptoms */}
+      {symptoms.length > 0 && (
+        <div className="mt-3">
+          <span className="font-mono-cap text-white/40">Symptoms:</span>
+          <ul className="mt-1.5 space-y-1">
+            {symptoms.slice(0, 3).map((s) => (
+              <li key={s} className="text-[13px] text-white/65">
+                • {s}
+              </li>
+            ))}
+            {symptoms.length > 3 && (
+              <li className="text-[12px] text-white/40">
+                + {symptoms.length - 3} more
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
 
-.font-display {
-  font-family: var(--font-display);
-  font-weight: 500;
-}
-
-.italic-display {
-  font-style: italic;
-  font-weight: 400;
-}
-
-.font-mono-cap {
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 11px;
-}
-
-.glow-bg {
-  background: radial-gradient(100% 100% at 50% 0%, rgba(20, 20, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
-}
-
-.grain {
-  position: relative;
-}
-
-.grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Hero specific */
-.hero-wrap {
-  position: relative;
-  height: 200vh;
-}
-.hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-.hero-tint {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 1;
-}
-.hero-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%);
-  z-index: 2;
-}
-.cue-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  transition: all 0.3s ease;
-}
-.cue-dot.is-active {
-  background: white;
-  transform: scale(1.5);
-}
-
-.hero-progress-track {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: rgba(255,255,255,0.1);
-}
-.hero-progress-fill {
-  height: 100%;
-  background: white;
-  transform-origin: 0 50%;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 99px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.2s;
-}
-.pill-light {
-  background: white;
-  color: #0a0a0a;
-}
-.pill-light:hover {
-  background: var(--c-cream-2);
+      {/* Top fix */}
+      {fix && (
+        <div
+          className="rounded-2xl p-3 mt-4"
+          style={{
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <span className="font-mono-cap text-white/40">Top fix:</span>
+          <p className="mt-1 text-[13.5px] text-white/85">{fix.action}</p>
+          {fix.part_number && (
+            <p className="mt-1 text-[12px] font-mono-cap text-white/55">
+              {fix.manufacturer} P/N {fix.part_number}
+              {fix.estimated_cost_usd && ` · $${fix.estimated_cost_usd}`}
+            </p>
+          )}
+        </div>
+      )}
+    </article>
+  );
 }
 </file>
 
@@ -1236,6 +2368,473 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>,
 )
+</file>
+
+<file path="tools/extraction/extract_tsb.py">
+#!/usr/bin/env python3
+"""
+TSB Extraction Pipeline
+=======================
+
+Extracts structured knowledge base entries from MPA Technical Bulletin PDFs.
+
+The PDFs are scanned (image-only, no text layer), so we rasterize each page
+and send the images to Claude with vision. Claude returns structured JSON
+matching the schema defined in tsb-knowledge-base.json.
+
+USAGE
+-----
+    export ANTHROPIC_API_KEY="sk-ant-..."
+    python extract_tsb.py --input ./pdfs --output ./data/tsb-knowledge-base.json
+
+    # Optional: process only PDFs not already in the existing JSON
+    python extract_tsb.py --input ./pdfs --output ./data/tsb-knowledge-base.json --skip-existing
+
+    # Optional: limit to N PDFs for testing
+    python extract_tsb.py --input ./pdfs --output ./data/tsb-knowledge-base.json --limit 5
+
+REQUIREMENTS
+------------
+    pip install anthropic pdf2image pillow
+    apt-get install poppler-utils      # provides pdftoppm for pdf2image
+
+COST ESTIMATE
+-------------
+    ~$0.02-0.05 per bulletin via Claude API (claude-sonnet-4-5).
+    35 bulletins ≈ $1-2 total. 500 bulletins ≈ $15-25.
+"""
+
+import argparse
+import base64
+import io
+import json
+import os
+import sys
+import time
+from pathlib import Path
+from typing import Any
+
+from anthropic import Anthropic
+from pdf2image import convert_from_path
+
+# ---------------------------------------------------------------------------
+# Schema definition — passed to Claude so it knows what shape to return.
+# Keep this in sync with tsb-knowledge-base.json.
+# ---------------------------------------------------------------------------
+
+ENTRY_SCHEMA = {
+    "type": "object",
+    "required": ["id", "source_file", "type", "product_category", "title", "summary"],
+    "properties": {
+        "id":               {"type": "string",  "description": "Bulletin ID, e.g. 'TBS0054'"},
+        "source_file":      {"type": "string",  "description": "Original PDF filename"},
+        "revision_date":    {"type": ["string", "null"], "description": "ISO date YYYY-MM-DD"},
+        "type":             {"type": "string", "enum": ["diagnostic", "installation_tip", "appearance_only", "warning"]},
+        "product_category": {"type": "string", "enum": ["starter", "alternator", "other"]},
+        "title":            {"type": "string", "description": "Short descriptive title in your own words"},
+        "summary":          {"type": "string", "description": "1-3 sentence paraphrased summary. DO NOT copy the bulletin text verbatim."},
+        "vehicles": {
+            "type": ["object", "null"],
+            "properties": {
+                "make":   {"type": ["string", "null"]},
+                "models": {"type": "array", "items": {"type": ["string", "object"]}},
+                "years":  {"type": "array", "items": {"type": "integer"}},
+                "applies_to": {"type": ["string", "null"]},
+            }
+        },
+        "symptoms":          {"type": "array", "items": {"type": "string"}},
+        "dtcs":              {"type": "array", "items": {"type": "string"}, "description": "OBD-II / mfr DTCs like P0338"},
+        "cause":             {"type": ["string", "null"]},
+        "fixes": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "priority":          {"type": "integer"},
+                    "action":            {"type": "string"},
+                    "part_number":       {"type": ["string", "null"]},
+                    "manufacturer":      {"type": ["string", "null"]},
+                    "estimated_cost_usd":{"type": ["string", "null"]},
+                    "location":          {"type": ["string", "null"]},
+                }
+            }
+        },
+        "torque_specs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "fastener": {"type": "string"},
+                    "value":    {"type": "string"},
+                    "value_nm": {"type": ["string", "null"]},
+                }
+            }
+        },
+        "tools_required":    {"type": "array", "items": {"type": "string"}},
+        "warnings":          {"type": "array", "items": {"type": "string"}},
+        "different_versions":{"type": "array", "items": {"type": "string"}, "description": "Supplier/version names like 'Hitachi', 'Bosch', 'Version I'"},
+        "related_bulletins": {"type": "array", "items": {"type": "string"}},
+        "tags":              {"type": "array", "items": {"type": "string"}, "description": "lowercase, hyphenated"},
+        "confidence":        {"type": "string", "enum": ["high", "medium", "low"]},
+        "notes":             {"type": ["string", "null"], "description": "Anything noteworthy that doesn't fit other fields"},
+    }
+}
+
+EXTRACTION_PROMPT = """You are extracting structured data from a Motorcar Parts of America (MPA) Technical Bulletin.
+The bulletin pages are provided as images.
+
+Extract the bulletin into the provided JSON schema. CRITICAL RULES:
+
+1. PARAPHRASE all narrative text in your own words. Do NOT copy bulletin sentences verbatim.
+   Facts (part numbers, torque specs, vehicle years, DTCs, costs) are fine to record verbatim
+   since facts are not copyrightable.
+
+2. CLASSIFY the bulletin type accurately:
+   - "diagnostic"        — has SYMPTOM / CAUSE / FIX structure
+   - "installation_tip"  — installation procedure, torque, transfer of parts, etc.
+   - "appearance_only"   — only shows that replacement part may look different from OE
+   - "warning"           — primarily a caution/warning notice
+
+3. Set confidence:
+   - "high"   — all text legible, content fits cleanly into schema
+   - "medium" — some ambiguity in the bulletin or partial info
+   - "low"    — text hard to read, or content doesn't fit well
+
+4. Tags should be lowercase, hyphenated. Always include product_category and any vehicle make.
+   For diagnostic bulletins also tag the primary symptom (e.g. "no-crank").
+
+5. If the bulletin appears identical to a known MPA bulletin (e.g. multiple Nissan
+   inhibitor-relay bulletins), tag it "duplicate" and note the similarity.
+
+Return ONLY the JSON object — no markdown fences, no preamble, no explanation."""
+
+
+def pdf_to_images(pdf_path: Path, dpi: int = 110) -> list:
+    """Rasterize all pages of a PDF to PIL images."""
+    return convert_from_path(str(pdf_path), dpi=dpi)
+
+
+def image_to_b64(img) -> str:
+    """Encode a PIL image as base64 JPEG."""
+    buf = io.BytesIO()
+    img.convert("RGB").save(buf, format="JPEG", quality=85)
+    return base64.standard_b64encode(buf.getvalue()).decode("ascii")
+
+
+def extract_bulletin(client: Anthropic, pdf_path: Path, model: str) -> dict[str, Any]:
+    """Send PDF pages to Claude and parse the structured JSON response."""
+    images = pdf_to_images(pdf_path)
+
+    # Build a multi-image content block
+    content: list[dict[str, Any]] = []
+    for img in images:
+        content.append({
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": "image/jpeg",
+                "data": image_to_b64(img),
+            },
+        })
+
+    content.append({
+        "type": "text",
+        "text": (
+            f"PDF filename: {pdf_path.name}\n\n"
+            f"JSON schema (return data matching this shape):\n"
+            f"{json.dumps(ENTRY_SCHEMA, indent=2)}\n\n"
+            f"{EXTRACTION_PROMPT}"
+        ),
+    })
+
+    response = client.messages.create(
+        model=model,
+        max_tokens=4096,
+        messages=[{"role": "user", "content": content}],
+    )
+
+    # Extract JSON from the response — Claude should return raw JSON,
+    # but strip markdown fences defensively.
+    raw = response.content[0].text.strip()
+    if raw.startswith("```"):
+        raw = raw.split("```", 2)[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+        raw = raw.strip().rstrip("`").strip()
+
+    try:
+        entry = json.loads(raw)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Claude returned invalid JSON for {pdf_path.name}: {e}\nRaw: {raw[:500]}")
+
+    # Force source_file to match the actual filename — never trust the LLM here
+    entry["source_file"] = pdf_path.name
+    if "id" not in entry or not entry["id"]:
+        entry["id"] = pdf_path.stem
+
+    return entry
+
+
+def load_existing(output_path: Path) -> dict[str, Any]:
+    """Load existing knowledge base or return a fresh skeleton."""
+    if output_path.exists():
+        with open(output_path) as f:
+            return json.load(f)
+    return {
+        "schema_version": "1.0",
+        "source": "MPA Technical Bulletins",
+        "generated": time.strftime("%Y-%m-%d"),
+        "entry_count": 0,
+        "entries": [],
+    }
+
+
+def save_kb(kb: dict[str, Any], output_path: Path) -> None:
+    kb["entry_count"] = len(kb["entries"])
+    kb["generated"] = time.strftime("%Y-%m-%d")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w") as f:
+        json.dump(kb, f, indent=2)
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--input",  required=True, help="Folder of TSB PDFs")
+    p.add_argument("--output", required=True, help="Path to output JSON file")
+    p.add_argument("--model",  default="claude-sonnet-4-5", help="Claude model to use")
+    p.add_argument("--limit",  type=int, default=None, help="Process only first N PDFs (for testing)")
+    p.add_argument("--skip-existing", action="store_true", help="Skip PDFs already in the knowledge base")
+    p.add_argument("--sleep",  type=float, default=0.0, help="Seconds to sleep between API calls (rate limiting)")
+    args = p.parse_args()
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: Set ANTHROPIC_API_KEY environment variable.", file=sys.stderr)
+        return 1
+
+    input_dir  = Path(args.input)
+    output_path = Path(args.output)
+
+    if not input_dir.is_dir():
+        print(f"ERROR: Input directory not found: {input_dir}", file=sys.stderr)
+        return 1
+
+    pdfs = sorted(input_dir.glob("*.pdf"))
+    if not pdfs:
+        print(f"ERROR: No PDFs found in {input_dir}", file=sys.stderr)
+        return 1
+
+    kb = load_existing(output_path)
+    existing_ids = {e["id"] for e in kb["entries"]}
+
+    if args.skip_existing:
+        pdfs = [p for p in pdfs if p.stem not in existing_ids]
+        print(f"Skipping {len(existing_ids)} already-extracted bulletins.")
+
+    if args.limit:
+        pdfs = pdfs[:args.limit]
+
+    print(f"Processing {len(pdfs)} PDF(s) using {args.model}...")
+    client = Anthropic(api_key=api_key)
+
+    success = 0
+    failed: list[tuple[str, str]] = []
+
+    for i, pdf in enumerate(pdfs, 1):
+        print(f"[{i}/{len(pdfs)}] {pdf.name}...", end=" ", flush=True)
+        try:
+            entry = extract_bulletin(client, pdf, args.model)
+            # Replace existing entry with same id, otherwise append
+            kb["entries"] = [e for e in kb["entries"] if e["id"] != entry["id"]]
+            kb["entries"].append(entry)
+            # Save after every successful extraction so we don't lose work on crash
+            save_kb(kb, output_path)
+            print(f"✓ {entry['type']:<18} confidence={entry.get('confidence', '?')}")
+            success += 1
+        except Exception as e:
+            print(f"✗ {e}")
+            failed.append((pdf.name, str(e)))
+
+        if args.sleep > 0:
+            time.sleep(args.sleep)
+
+    # Sort entries by id for stable output
+    kb["entries"].sort(key=lambda e: e["id"])
+    save_kb(kb, output_path)
+
+    print(f"\nDone. {success}/{len(pdfs)} succeeded.")
+    if failed:
+        print(f"\nFailed:")
+        for name, err in failed:
+            print(f"  {name}: {err}")
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+</file>
+
+<file path="tools/extraction/README.md">
+# TSB Extraction Pipeline
+
+Turns scanned MPA Technical Bulletin PDFs into structured JSON for the All AI Automotive knowledge base.
+
+## What's in this folder
+
+```
+extraction-pipeline/
+├── data/
+│   └── tsb-knowledge-base.json    # 35 bulletins already extracted, ready to use
+├── scripts/
+│   └── extract_tsb.py             # Production extraction script for new PDFs
+└── README.md                      # This file
+```
+
+## Quick start (using existing data)
+
+The 35 bulletins from your initial upload are already extracted in `data/tsb-knowledge-base.json`. Drop that file into your React app at `src/data/tsb-knowledge-base.json` and you can search it immediately. No script needed.
+
+## Extracting new bulletins
+
+When you get more PDFs:
+
+```bash
+# 1. Install dependencies (one-time)
+pip install anthropic pdf2image pillow
+# Linux: also install poppler-utils for pdf2image
+sudo apt-get install poppler-utils
+# macOS:
+brew install poppler
+
+# 2. Set your API key (one-time per shell)
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# 3. Run extraction
+python scripts/extract_tsb.py \
+    --input ./new-pdfs \
+    --output ./data/tsb-knowledge-base.json \
+    --skip-existing
+```
+
+The script will append new entries to the existing JSON, skipping any bulletin already in the file. It saves after every successful extraction so a crash doesn't lose work.
+
+### Useful flags
+
+| Flag | Purpose |
+|---|---|
+| `--limit 5` | Process only first 5 PDFs (for testing) |
+| `--skip-existing` | Skip PDFs already in the knowledge base |
+| `--model claude-sonnet-4-5` | Override default Claude model |
+| `--sleep 0.5` | Pause between API calls (if you hit rate limits) |
+
+## Cost expectations
+
+Per bulletin, with current Claude Sonnet pricing: roughly **2–5 cents**. So:
+- 35 bulletins ≈ $1
+- 500 bulletins ≈ $15–25
+- 5,000 bulletins ≈ $150–250
+
+Most of the cost is image input (each PDF is 1–2 pages of base64 JPEG). If cost matters at scale, switch to `claude-haiku-4-5` for roughly 5× cheaper extraction with slightly lower fidelity.
+
+## The schema
+
+Every entry in the JSON has this shape (see `data/tsb-knowledge-base.json` for real examples):
+
+```jsonc
+{
+  "id": "TBS0054",                    // Bulletin number (filename stem)
+  "source_file": "TBS0054.pdf",
+  "revision_date": "2009-11-06",
+  "type": "diagnostic",               // diagnostic | installation_tip | appearance_only | warning
+  "product_category": "starter",      // starter | alternator | other
+  "title": "Short paraphrased title",
+  "summary": "1-3 sentence paraphrased summary in our own words",
+  "vehicles": {
+    "make": "Nissan",
+    "models": ["Altima", "..."],      // can be strings OR objects with year ranges
+    "years": [2002, 2003, 2004],
+    "applies_to": "free-text applicability note"
+  },
+  "symptoms": ["Starter just clicks", "..."],
+  "dtcs": ["P0338"],                  // OBD-II / mfr DTCs
+  "cause": "...",
+  "fixes": [
+    {
+      "priority": 1,
+      "action": "Replace inhibitor relay",
+      "part_number": "25230-89981",
+      "manufacturer": "Nissan",
+      "estimated_cost_usd": "26-31",
+      "location": "Right inner fender panel"
+    }
+  ],
+  "torque_specs": [
+    { "fastener": "Through bolt", "value": "66-76 in-lbs", "value_nm": "7.5-8.6 N·m" }
+  ],
+  "tools_required": ["wire stripper", "..."],
+  "warnings": ["Disconnect negative battery cable first"],
+  "different_versions": ["Hitachi", "Mitsubishi"],
+  "related_bulletins": ["TBS0060", "TBS0077"],
+  "tags": ["nissan", "starter", "no-crank", "inhibitor-relay"],
+  "confidence": "high",               // high | medium | low
+  "notes": "Anything that doesn't fit other fields"
+}
+```
+
+## Wiring it into the search UI
+
+Once `tsb-knowledge-base.json` lives at `src/data/`, the Knowledge Hub search button can:
+
+1. **DTC match** — if the query matches `/^[PCBU]\d{4}$/`, filter `entries` where `dtcs` contains that code.
+2. **Symptom search** — fuzzy-match the query against `symptoms`, `summary`, and `cause` fields. [Fuse.js](https://www.fusejs.io/) handles this well in the browser, no backend needed.
+3. **Vehicle filter** — dropdown driven by unique values from `vehicles.make` / `vehicles.models`.
+4. **Result card** — show `title`, `summary`, top fix's part number, and a link to the source PDF.
+
+For the current 35-entry corpus, in-browser Fuse.js search returns instantly. When the corpus crosses ~1,000 entries, migrate to Supabase + pgvector for embedding-based semantic search (see the earlier scoping conversation).
+
+## Quality notes from the initial 35
+
+A few things worth knowing before you build the search UI:
+
+**Five Nissan bulletins are duplicates.** TBS0054, 0060, 0077, 0089, 0114 all describe the same inhibitor-relay diagnostic. They're tagged `"duplicate"` and cross-linked via `related_bulletins`. Decide whether the search UI deduplicates by tag or shows them all.
+
+**Most bulletins (18 of 35) are appearance-only** — they only confirm that the replacement part may look different. These have empty `symptoms`, `dtcs`, `cause`, and `fixes` arrays. They're still useful as part lookup data ("this is what your replacement starter should look like") but they should rank below diagnostic bulletins in search results.
+
+**Only one bulletin contains a DTC** (TBS0112, P0338). Real-world TSB corpora have far more DTC coverage; that comes when you ingest TSBs from larger sources, OEM portals, or NHTSA complaints.
+
+**Vehicle data is sparse.** MPA bulletins describe parts more than vehicles. The vehicle data in TBS0125 (the Nissan IPDM table) is the exception. As the corpus grows beyond MPA bulletins, vehicle coverage will improve dramatically.
+
+## Editing entries by hand
+
+The JSON is human-editable — open it in any editor, fix typos, refine summaries, add missing vehicle data. The script's `--skip-existing` flag ensures your edits survive future extraction runs, since it won't re-process bulletins already in the file.
+
+When you want the script to **re-extract** a bulletin (e.g. after improving the prompt), delete that entry's object from the JSON and re-run with `--skip-existing`.
+
+## Adapting to non-MPA sources
+
+The schema is deliberately source-agnostic. To add a different TSB source (Ford OASIS, GM Service Information, NHTSA recall letters):
+
+1. Copy `extract_tsb.py` to e.g. `extract_ford.py`.
+2. Update the `EXTRACTION_PROMPT` to describe the new format.
+3. Set `"source"` in the JSON to identify origin.
+4. Run against the new PDF folder.
+
+Same schema, same JSON file (or a sibling JSON), same search UI on top.
+
+## Schema versioning
+
+The JSON has `"schema_version": "1.0"` at the root. If you change the schema (add fields, rename fields), bump the version and write a one-time migration script. The search UI should check the schema version and refuse to run against an unknown one.
+
+## Troubleshooting
+
+**`pdf2image` errors about poppler** → install `poppler-utils` (Linux) or `poppler` via Homebrew (macOS). On Windows, download poppler binaries and add them to PATH.
+
+**Claude returns markdown-fenced JSON** → the script handles this defensively, but if you see "invalid JSON" errors, check that the model is current. Older models sometimes wrap JSON in ```json fences; the script strips these but extreme cases (lots of preamble text) may leak through.
+
+**Rate limits** → use `--sleep 1.0` to pace requests. Anthropic's Tier 1 rate limits are generous enough for a few hundred bulletins; if you're processing thousands, request a tier upgrade.
+
+**Low-confidence entries** → after a batch, query the JSON for `"confidence": "low"` entries and review them by hand against the source PDFs. The schema flags these for you specifically so you don't have to manually skim every entry.
 </file>
 
 <file path="convertPages.cjs">
@@ -1644,91 +3243,384 @@ export default defineConfig({
 })
 </file>
 
-<file path="src/components/site/TopNav.jsx">
-import React, { useEffect, useState } from "react";
-import { Plus, ArrowRight } from "lucide-react";
+<file path="src/components/site/DarkContext.jsx">
+import React from "react";
+import { Link } from "react-router-dom";
 
-const NAV = [
-  { label: "Quick Guides", href: "/#guides" },
-  { label: "Knowledge Hub", href: "/#process" },
-  { label: "Recalls", href: "/#recalls" },
+const RAIL_THIS_WEEK = [
+  { k: "Diagnostic Guides", v: "Symptom-based · 35+ available" },
+  { k: "Installation Guides", v: "Step-by-step procedures" },
+  { k: "Safety Recalls", v: "Live NHTSA database" },
 ];
 
-export default function TopNav() {
-  const [scrolled, setScrolled] = useState(false);
+const RAIL_FOLLOW = [
+  { k: "LinkedIn", v: "@allaiautomotive" },
+  { k: "Twitter / X", v: "@allaiautomotive" },
+  { k: "YouTube", v: "/allaiautomotive" },
+];
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+export default function DarkContext() {
   return (
-    <header
-      data-testid="top-nav"
-      className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
+    <section
+      className="relative glow-bg grain"
+      data-testid="dark-context"
+      id="product"
     >
-      <div className="flex items-start justify-between gap-3 px-5 md:px-8 pt-5 md:pt-6">
-        <a
-          href="/"
-          data-testid="brand-mark"
-          className="pointer-events-auto flex items-center gap-2.5 group"
-        >
-          <span
-            className="flex items-center justify-center h-8 w-8 rounded-full text-white"
+      <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 pt-28 md:pt-40 pb-32 md:pb-48">
+        <div className="col-span-12 md:col-span-2 md:pt-2">
+          <span className="font-mono-cap text-white/50">
+            Built for
+          </span>
+        </div>
+
+        <div className="col-span-12 md:col-span-8">
+          <h2
+            className="font-display text-white"
             style={{
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.18)",
-              backdropFilter: "blur(10px)",
+              fontSize: "clamp(44px, 7.4vw, 112px)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
             }}
           >
-            <Plus
-              strokeWidth={1.5}
-              className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90"
-            />
-          </span>
-          <span className="hidden sm:flex flex-col leading-tight">
-            <span className="text-[15px] font-display tracking-tight text-white">
-              ALL AI AUTOMOTIVE
+            The shops doing the{" "}
+            <span className="italic-display" style={{ color: "#efe1d8" }}>
+              actual work.
             </span>
-            <span className="font-mono-cap text-white/55">
-              Diagnostic · operating system
-            </span>
-          </span>
-        </a>
+          </h2>
+          <p className="mt-8 max-w-[520px] text-white/65 text-[15px] leading-relaxed font-normal">
+            Independent mechanics, dealership techs, and DIYers navigating an industry where two-thirds of drivers don't trust their mechanic — and the mechanics often don't trust the data they're handed either. ALL AI AUTOMOTIVE is a knowledge layer for both sides: accurate, sourced, daily.
+          </p>
 
-        <nav
-          className={`pointer-events-auto hidden md:flex items-center gap-1.5 rounded-full px-2 py-1.5 transition-all duration-300`}
-          style={{
-            background: "rgba(8,8,9,0.72)",
-            border: "1px solid rgba(255,255,255,0.10)",
-            backdropFilter: "blur(14px)",
-          }}
-          data-testid="primary-nav"
-        >
-          {NAV.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="px-3.5 py-1.5 rounded-full text-[13px] text-white/85 hover:text-white hover:bg-white/[0.06] transition"
+          <div className="mt-32 md:mt-44">
+            <span className="font-mono-cap text-white/50">The approach</span>
+            <h3
+              className="mt-4 font-display text-white"
+              style={{
+                fontSize: "clamp(36px, 5.4vw, 80px)",
+                lineHeight: 1,
+                letterSpacing: "-0.025em",
+              }}
             >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+              An honest knowledge layer for{" "}
+              <span className="italic-display" style={{ color: "#e5d2c6" }}>
+                vehicle repair.
+              </span>
+            </h3>
+            <p className="mt-7 max-w-[560px] text-white/65 text-[15px] leading-relaxed font-normal">
+              Every entry in our knowledge base traces back to a verifiable source — OEM technical bulletins, NHTSA recall and complaint data, service procedures, industry-standard diagnostic flowcharts. Where the data is uncertain, we say so. Where sources conflict, we surface both. The goal isn't to replace the mechanic. It's to make sure they — and their customers — are working from the same set of facts.
+            </p>
+            <Link
+              to="/search"
+              className="mt-7 inline-flex items-center gap-2 text-white/90 hover:text-white transition"
+            >
+              <span className="font-mono-cap">Start searching</span>
+              <span className="h-px w-12 bg-white/40" />
+            </Link>
+          </div>
+        </div>
 
-        <a
-          href="#search"
-          className="pointer-events-auto pill pill-light"
+        <aside
+          className="col-span-12 md:col-span-2 hidden md:flex flex-col gap-12 pt-2"
         >
-          Start Search
-          <span className="flex items-center justify-center h-5 w-5 rounded-full bg-[#0a0a0a] text-white">
-            <ArrowRight className="h-3 w-3" strokeWidth={2.2} />
-          </span>
-        </a>
+          <RailGroup label="Available Now" items={RAIL_THIS_WEEK} />
+          <RailGroup label="Follow" items={RAIL_FOLLOW} />
+          <div>
+            <span className="font-mono-cap text-white/50">Contact</span>
+            <a
+              href="mailto:support@allaiautomotive.com"
+              className="mt-3 block text-[14px] text-white/85 hover:text-white"
+            >
+              support@allaiautomotive.com
+            </a>
+            <p className="mt-7 font-mono-cap text-white/40">
+              Est. 2024 — 2026
+            </p>
+          </div>
+        </aside>
       </div>
-    </header>
+    </section>
+  );
+}
+
+function RailGroup({ label, items }) {
+  return (
+    <div>
+      <span className="font-mono-cap text-white/50">{label}</span>
+      <ul className="mt-3 space-y-2">
+        {items.map((it) => (
+          <li
+            key={it.k}
+            className="flex flex-col"
+          >
+            <span className="text-[13.5px] text-white/85">{it.k}</span>
+            <span className="text-[12px] text-white/45">{it.v}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/site/Footer.jsx">
+import React from "react";
+
+const COL = [
+  {
+    title: "Product",
+    links: [
+      ["Knowledge Hub", "#search"],
+      ["Quick Guides", "#guides"],
+      ["Recalls", "#recalls"],
+      ["TSBs", "#search"],
+    ],
+  },
+  {
+    title: "Shop",
+    links: [
+      ["About", "#about"],
+      ["Customers", "#customers"],
+      ["Pricing", "#pricing"],
+      ["Contact", "mailto:support@allaiautomotive.com"],
+    ],
+  },
+  {
+    title: "Follow",
+    links: [
+      ["LinkedIn", "https://linkedin.com"],
+      ["YouTube", "https://youtube.com"],
+      ["Twitter / X", "https://x.com"],
+      ["Instagram", "https://instagram.com"],
+    ],
+  },
+];
+
+export default function Footer() {
+  return (
+    <footer
+      className="relative grain"
+      style={{ background: "#070708" }}
+      data-testid="site-footer"
+    >
+      <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-20 md:py-24 border-t" style={{ borderColor: "rgba(255,255,255,0.08)"}}>
+        <div className="col-span-12 md:col-span-4">
+          <div
+            className="font-display text-white"
+            style={{
+              fontSize: "clamp(34px, 5vw, 72px)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+            }}
+          >
+            ALL AI AUTOMOTIVE
+          </div>
+          <p
+            className="mt-6 max-w-[320px] text-[14px] font-normal"
+            style={{ color: "rgba(255,255,255,0.55)" }}
+          >
+            The knowledge base for modern repair shops. Accurate, daily — Los Angeles · Detroit.
+          </p>
+        </div>
+
+        {COL.map((c) => (
+          <div key={c.title} className="col-span-6 md:col-span-2 mt-10 md:mt-2">
+            <span
+              className="font-mono-cap"
+              style={{ color: "rgba(255,255,255,0.55)" }}
+            >
+              {c.title}
+            </span>
+            <ul className="mt-4 space-y-2.5">
+              {c.links.map(([k, h]) => (
+                <li key={k}>
+                  <a
+                    href={h}
+                    className="text-[14px] hover:text-white"
+                    style={{ color: "rgba(255,255,255,0.78)" }}
+                  >
+                    {k}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <div className="col-span-12 mt-14 pt-6 flex flex-wrap items-center justify-between gap-4 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+          <span
+            className="font-mono-cap"
+            style={{ color: "rgba(255,255,255,0.45)" }}
+          >
+            © ALL AI AUTOMOTIVE — Est. 2024, &nbsp;build 2.0
+          </span>
+          <span
+            className="font-mono-cap"
+            style={{ color: "rgba(255,255,255,0.45)" }}
+          >
+            Automotive data · powered by AI
+          </span>
+          <a
+            href="#top"
+            className="font-mono-cap"
+            style={{ color: "rgba(255,255,255,0.7)" }}
+          >
+            Back to top ↑
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+</file>
+
+<file path="src/components/site/Stats.jsx">
+import React, { useEffect, useRef, useState } from "react";
+
+// Each stat is sourced. The `animate` flag controls whether the Counter
+// counts up (numeric stats) or just renders the value as text (e.g. "9 in 10").
+const STATS = [
+  {
+    value: 66,
+    suffix: "%",
+    animate: true,
+    label: "of U.S. drivers don't trust auto repair shops in general",
+    source: "AAA — 2016, corroborated by 2021 & 2023 follow-up surveys",
+  },
+  {
+    value: "9 in 10",
+    animate: false,
+    label: "Americans say they've been — or may have been — overcharged for a repair",
+    source: "Jerry consumer survey, 2023",
+  },
+  {
+    value: 285,
+    suffix: "M",
+    animate: true,
+    label: "vehicles on U.S. roads, with an average age of over 12 years",
+    source: "U.S. DOT / S&P Global Mobility, 2023",
+  },
+  {
+    value: 23,
+    suffix: "%",
+    animate: true,
+    label: "rise in repair costs in 2023 — four times the rate of general inflation",
+    source: "U.S. Bureau of Labor Statistics, CPI Motor Vehicle Maintenance",
+  },
+];
+
+function Counter({ value, suffix, animate }) {
+  const [shown, setShown] = useState(animate ? 0 : value);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!animate) return;
+    const node = ref.current;
+    if (!node) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setShown(value);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const start = performance.now();
+            const dur = 1600;
+            const tick = (now) => {
+              const t = Math.min(1, (now - start) / dur);
+              const eased = 1 - Math.pow(1 - t, 3);
+              setShown(value * eased);
+              if (t < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(node);
+    return () => obs.disconnect();
+  }, [value, animate]);
+
+  if (!animate) {
+    return (
+      <span ref={ref} className="font-display" data-testid="stat-counter">
+        {value}
+      </span>
+    );
+  }
+
+  const isFloat = value % 1 !== 0;
+  const display = isFloat ? shown.toFixed(1) : Math.round(shown).toLocaleString();
+  return (
+    <span ref={ref} className="font-display tabular-nums" data-testid="stat-counter">
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+export default function Stats() {
+  return (
+    <section
+      className="relative glow-bg grain"
+      data-testid="stats-section"
+    >
+      <div className="relative z-[2] grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-28 md:py-40">
+        <div className="col-span-12 md:col-span-4">
+          <span className="font-mono-cap text-white/55">The mission</span>
+          <h2
+            className="mt-4 font-display text-white"
+            style={{
+              fontSize: "clamp(40px, 5.2vw, 76px)",
+              lineHeight: 0.96,
+              letterSpacing: "-0.03em",
+            }}
+          >
+            Auto repair runs on guesswork.{" "}
+            <span className="italic-display" style={{ color: "#efe1d8" }}>
+              We're building the missing source of truth.
+            </span>
+          </h2>
+          <p className="mt-6 max-w-[420px] text-[14.5px] leading-relaxed font-normal text-white/65">
+            Most drivers don't trust their mechanic. The next most common source of repair information is friends and family — people who know no more than the drivers themselves. ALL AI AUTOMOTIVE is the third option: independent, AI-powered guidance backed by technical bulletins, OE service data, and live recall information.
+          </p>
+        </div>
+
+        <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          {STATS.map((s, i) => (
+            <div
+              key={s.label}
+              className="rounded-2xl p-7 md:p-8 count-up flex flex-col"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.10)",
+                animationDelay: `${i * 80}ms`,
+              }}
+            >
+              <div
+                className="text-white"
+                style={{
+                  fontSize: "clamp(58px, 6vw, 96px)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                <Counter value={s.value} suffix={s.suffix} animate={s.animate} />
+              </div>
+              <p className="mt-6 max-w-[340px] text-[14px] text-white/70 leading-snug font-normal">
+                {s.label}
+              </p>
+              <p className="mt-auto pt-6 font-mono-cap text-white/35 text-[10px]">
+                Source · {s.source}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 </file>
@@ -2997,6 +4889,137 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify
+</file>
+
+<file path="README.md">
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+</file>
+
+<file path="src/components/site/TopNav.jsx">
+import React, { useEffect, useState } from "react";
+import { Plus, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const NAV = [
+  { label: "Quick Guides", href: "/#guides" },
+  { label: "Knowledge Hub", href: "/#process" },
+  { label: "Recalls", href: "/#recalls" },
+];
+
+export default function TopNav() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      data-testid="top-nav"
+      className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
+    >
+      <div className="flex items-start justify-between gap-3 px-5 md:px-8 pt-5 md:pt-6">
+        <a
+          href="/"
+          data-testid="brand-mark"
+          className="pointer-events-auto flex items-center gap-2.5 group"
+        >
+          <span
+            className="flex items-center justify-center h-8 w-8 rounded-full text-white"
+            style={{
+              background: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.18)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            <Plus
+              strokeWidth={1.5}
+              className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90"
+            />
+          </span>
+          <span className="hidden sm:flex flex-col leading-tight">
+            <span className="text-[15px] font-display tracking-tight text-white">
+              ALL AI AUTOMOTIVE
+            </span>
+            <span className="font-mono-cap text-white/55">
+              Diagnostic · operating system
+            </span>
+          </span>
+        </a>
+
+        <nav
+          className={`pointer-events-auto hidden md:flex items-center gap-1.5 rounded-full px-2 py-1.5 transition-all duration-300`}
+          style={{
+            background: "rgba(8,8,9,0.72)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            backdropFilter: "blur(14px)",
+          }}
+          data-testid="primary-nav"
+        >
+          {NAV.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="px-3.5 py-1.5 rounded-full text-[13px] text-white/85 hover:text-white hover:bg-white/[0.06] transition"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <Link
+          to="/search"
+          className="pointer-events-auto pill pill-light"
+        >
+          Start Search
+          <span className="flex items-center justify-center h-5 w-5 rounded-full bg-[#0a0a0a] text-white">
+            <ArrowRight className="h-3 w-3" strokeWidth={2.2} />
+          </span>
+        </Link>
+      </div>
+    </header>
+  );
+}
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALL AI AUTOMOTIVE</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
 </file>
 
 <file path="package.json">
@@ -3014,6 +5037,7 @@ dist-ssr
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
     "autoprefixer": "^10.5.0",
+    "fuse.js": "^7.3.0",
     "lucide-react": "^1.14.0",
     "postcss": "^8.5.14",
     "react": "^19.2.5",
@@ -3036,42 +5060,1190 @@ dist-ssr
 }
 </file>
 
-<file path="README.md">
-# React + Vite
+<file path="src/components/site/HeroVideo.jsx">
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { ArrowDown } from "lucide-react";
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+const VIDEO_SRC_MP4 = "/headspin.mp4?v=2";
+const VIDEO_SRC_WEBM = "/headspin.webm";
 
-Currently, two official plugins are available:
+const CUE_POINTS = [
+  {
+    time: 0.05,
+    eyebrow: "01 — Identify",
+    titleLead: "Find the fix ",
+    titleAccent: "before",
+    titleTail: " you touch the wrench.",
+    sub: "ALL AI AUTOMOTIVE is the operating layer for shops and DIYers that move fast without losing the craft. Symptoms, diagnostics, and repairs in one quiet surface.",
+  },
+  {
+    time: 1.2,
+    eyebrow: "02 — Search",
+    titleLead: "Every diagnostic lands ",
+    titleAccent: "shaped",
+    titleTail: ".",
+    sub: "Inputs, symptoms and TSBs enter as living documents. Nothing important hides in a forum thread again.",
+  },
+  {
+    time: 2.4,
+    eyebrow: "03 — Execute",
+    titleLead: "Repairs stop ",
+    titleAccent: "fragmenting",
+    titleTail: ".",
+    sub: "One canvas for torque specs, required tools, and time-stamped installation steps — wired to the repair, not a parallel inbox.",
+  },
+  {
+    time: 3.6,
+    eyebrow: "04 — Maintain",
+    titleLead: "Cadence finds ",
+    titleAccent: "itself",
+    titleTail: ".",
+    sub: "Maintenance runs underneath the shop, not on top of the mechanics. Fewer status meetings, more shipped work.",
+  },
+  {
+    time: 4.8,
+    eyebrow: "05 — Ship",
+    titleLead: "Make repairs that ",
+    titleAccent: "matter",
+    titleTail: ", on time.",
+    sub: "For the drivers who want a clear answer, the mechanics who want the right fix, and the DIYers learning their way through. One source of truth — available now.",
+  },
+];
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+const lerp = (a, b, t) => a + (b - a) * t;
 
-## React Compiler
+export default function HeroVideo() {
+  const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+  const targetTimeRef = useRef(CUE_POINTS[0].time);
+  const rafRef = useRef(null);
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  const [stepIndex, setStepIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
 
-## Expanding the ESLint configuration
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const update = (e) => setReducedMotion(e.matches);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    let cancelled = false;
+
+    const prime = async () => {
+      try {
+        await v.play();
+        v.pause();
+        v.currentTime = CUE_POINTS[0].time;
+      } catch {
+        try { v.currentTime = CUE_POINTS[0].time; } catch {}
+      }
+      if (!cancelled) setVideoReady(true);
+    };
+
+    const onMeta = () => { if (!cancelled) prime(); };
+    const onError = () => { if (!cancelled) setVideoReady(false); };
+
+    if (v.readyState >= 1) { prime(); }
+    else {
+      v.addEventListener("loadedmetadata", onMeta, { once: true });
+      v.addEventListener("error", onError, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      v.removeEventListener("loadedmetadata", onMeta);
+      v.removeEventListener("error", onError);
+    };
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const rect = section.getBoundingClientRect();
+    const total = rect.height - window.innerHeight;
+    const passed = Math.min(Math.max(-rect.top, 0), total);
+    const p = total > 0 ? passed / total : 0;
+    setProgress(p);
+
+    const idx = Math.min(
+      CUE_POINTS.length - 1,
+      Math.max(0, Math.round(p * (CUE_POINTS.length - 1)))
+    );
+    setStepIndex(idx);
+    targetTimeRef.current = CUE_POINTS[idx].time;
+  }, []);
+
+  useEffect(() => {
+    const tick = () => {
+      const v = videoRef.current;
+      if (v && videoReady) {
+        const target = targetTimeRef.current;
+        const cur = v.currentTime;
+        const diff = target - cur;
+        if (reducedMotion) {
+          if (Math.abs(diff) > 0.01) v.currentTime = target;
+        } else if (Math.abs(diff) > 0.004) {
+          v.currentTime = lerp(cur, target, 0.16);
+        } else if (Math.abs(diff) > 0) {
+          v.currentTime = target;
+        }
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [reducedMotion, videoReady]);
+
+  useEffect(() => {
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [handleScroll]);
+
+  const cue = CUE_POINTS[stepIndex];
+
+  return (
+    <section ref={sectionRef} id="top" className="hero-wrap">
+      <div className="hero-sticky">
+        <video ref={videoRef} className="hero-video" muted playsInline preload="auto" tabIndex={-1} aria-hidden="true">
+          <source src={VIDEO_SRC_WEBM} type="video/webm" />
+          <source src={VIDEO_SRC_MP4} type="video/mp4" />
+        </video>
+        <div className="hero-tint" />
+        <div className="hero-vignette" />
+
+        <div className="relative z-10 h-full w-full">
+          <div className="grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 h-full pt-28 md:pt-32 pb-16">
+            <div className="col-span-12 md:col-span-7 lg:col-span-7 flex flex-col justify-end">
+              <div className="max-w-[640px]">
+                <div key={`eyebrow-${stepIndex}`} className="cue-state cue-active inline-flex items-center gap-3 mb-6">
+                  <span className="font-mono-cap text-white/75 px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.16)" }}>
+                    {cue.eyebrow}
+                  </span>
+                  <span className="font-mono-cap text-white/40">Automotive · scroll-led</span>
+                </div>
+
+                <h1 key={`title-${stepIndex}`} className="cue-state cue-active font-display text-white" style={{ fontSize: "clamp(40px, 6.5vw, 92px)", lineHeight: 0.96, letterSpacing: "-0.025em" }}>
+                  {cue.titleLead}
+                  <span className="italic-display" style={{ color: "#f4d8c8" }}>{cue.titleAccent}</span>
+                  {cue.titleTail}
+                </h1>
+
+                <p key={`sub-${stepIndex}`} className="cue-state cue-active mt-6 max-w-[480px] text-white/70" style={{ fontSize: "clamp(15px, 1.05vw, 17px)", lineHeight: 1.55, fontWeight: 400 }}>
+                  {cue.sub}
+                </p>
+
+                <div className="mt-10 flex items-center gap-2.5">
+                  {CUE_POINTS.map((_, i) => (
+                    <span key={i} className={`cue-dot ${i === stepIndex ? "is-active" : ""}`} />
+                  ))}
+                  <span className="ml-3 font-mono-cap text-white/40">
+                    {String(stepIndex + 1).padStart(2, "0")} / 0{CUE_POINTS.length}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <aside className="col-span-12 md:col-span-5 lg:col-span-5 hidden md:flex flex-col justify-between items-end">
+              {/* TOP: persistent mission anchor */}
+              <div className="w-full max-w-[340px] mt-2">
+                <div className="rounded-2xl p-5" style={{ background: "rgba(20, 16, 16, 0.55)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(18px)" }}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono-cap text-white/55">The mission</span>
+                    <span className="font-mono-cap text-white/40">Sourced · daily</span>
+                  </div>
+                  <p className="mt-4 text-[16px] text-white leading-snug" style={{ letterSpacing: "-0.005em" }}>
+                    Two-thirds of drivers don't trust their mechanic. We're building the source of truth that fixes both sides of the counter.
+                  </p>
+                  <div className="mt-4 pt-4 flex items-center gap-3" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                    <span className="font-mono-cap text-white/40">For</span>
+                    <span className="font-mono-cap text-white/80">Drivers · Mechanics · DIYers</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* BOTTOM: existing knowledge hub card */}
+              <div className="w-full max-w-[340px] mb-2">
+                <div className="rounded-2xl p-5" style={{ background: "rgba(20, 16, 16, 0.55)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(18px)" }}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono-cap text-white/55">Knowledge Hub</span>
+                    <span className="flex items-center gap-2 font-mono-cap text-white/85">
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#ff8a4a", boxShadow: "0 0 12px #ff8a4a" }} />
+                      v2.0 live
+                    </span>
+                  </div>
+                  <div className="mt-4 space-y-3">
+                    {[
+                      ["Diagnostics", "Symptom-based repair guides"],
+                      ["Installations", "Step-by-step procedures"],
+                      ["Recalls", "Live NHTSA safety data"],
+                    ].map(([t, s], i) => (
+                      <div key={t} className="flex items-start gap-3">
+                        <span className="font-mono-cap text-white/35 mt-1">0{i + 1}</span>
+                        <div>
+                          <div className="text-[14px] text-white">{t}</div>
+                          <div className="text-[13px] text-white/55">{s}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-10 flex flex-col items-center gap-2 transition-opacity duration-500" style={{ opacity: progress < 0.04 ? 1 : 0 }}>
+            <span className="font-mono-cap text-white/55">Scroll · video-led</span>
+            <ArrowDown className="h-4 w-4 text-white/55 animate-bounce" />
+          </div>
+
+          <div className="hero-progress-track">
+            <div className="hero-progress-fill" style={{ transform: `scaleX(${progress})` }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 </file>
 
-<file path="index.html">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ALL AI AUTOMOTIVE</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
+<file path="src/components/site/Process.jsx">
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  AlertCircle,
+  CheckCircle2,
+  Loader2,
+} from "lucide-react";
+import OBD_CODES from "../../data/obd2-codes.json";
+import { ALL_GUIDES, SYSTEM_DEFAULT_GUIDE } from "../../data/system-routes";
+
+const SEVERITY_STYLES = {
+  high:     { bg: "rgba(220,53,69,0.10)",  color: "#a02635",        label: "High" },
+  moderate: { bg: "rgba(255,138,74,0.14)", color: "#9a4715",        label: "Moderate" },
+  low:      { bg: "rgba(10,10,10,0.06)",   color: "rgba(10,10,10,0.65)", label: "Low" },
+};
+
+export default function Process() {
+  // Shared state across the four cards.
+  const [obdResult, setObdResult] = useState(null);
+  const [vinData, setVinData] = useState(null);
+  const [recalls, setRecalls] = useState(null);
+
+  return (
+    <section
+      id="process"
+      className="relative"
+      style={{ background: "var(--c-cream-2)", color: "var(--c-ink)" }}
+    >
+      <div
+        className="grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-24 md:py-32 border-t"
+        style={{ borderColor: "rgba(10,10,10,0.08)" }}
+      >
+        <div className="col-span-12 md:col-span-4">
+          <span
+            className="font-mono-cap"
+            style={{ color: "rgba(10,10,10,0.55)" }}
+          >
+            Process · Live diagnostic
+          </span>
+          <h2
+            className="mt-4 font-display"
+            style={{
+              fontSize: "clamp(40px, 5.2vw, 76px)",
+              lineHeight: 0.96,
+              letterSpacing: "-0.03em",
+            }}
+          >
+            From symptom to{" "}
+            <span className="italic-display">fixed,</span> every day.
+          </h2>
+          <p
+            className="mt-5 max-w-[420px] text-[14.5px] leading-relaxed font-normal"
+            style={{ color: "rgba(10,10,10,0.62)" }}
+          >
+            Enter a code, decode a VIN, surface the right repair guide,
+            then verify open recalls. Powered by the live NHTSA database.
+          </p>
+          <p
+            className="mt-6 text-[14px] font-mono-cap"
+            style={{ color: "rgba(10,10,10,0.55)" }}
+          >
+            Four steps · no signup
+          </p>
+        </div>
+
+        <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <IdentifyCard onResult={setObdResult} result={obdResult} />
+          <DiagnoseCard
+            onVinResult={setVinData}
+            onRecalls={setRecalls}
+            vinData={vinData}
+            recalls={recalls}
+          />
+          <ExecuteCard obdResult={obdResult} />
+          <VerifyCard recalls={recalls} vinData={vinData} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  CARD 01 — IDENTIFY (OBD-II code lookup against local JSON dataset)        */
+/* -------------------------------------------------------------------------- */
+
+function IdentifyCard({ onResult, result }) {
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLookup = (e) => {
+    e.preventDefault();
+    const normalized = code.trim().toUpperCase();
+    if (!normalized) {
+      setError("Enter a code (e.g. P0420)");
+      return;
+    }
+    const match = OBD_CODES.find((c) => c.code === normalized);
+    if (!match) {
+      setError(`No data for ${normalized}. Try P0562, P0615, C0035.`);
+      onResult(null);
+      return;
+    }
+    setError("");
+    onResult(match);
+  };
+
+  const handleExample = (sample) => {
+    setCode(sample);
+    setError("");
+    const match = OBD_CODES.find((c) => c.code === sample);
+    if (match) onResult(match);
+  };
+
+  return (
+    <Card>
+      <CardHead n="01" label="step 1 / 4" title="Identify" />
+      <p
+        className="mt-4 text-[14px] leading-relaxed"
+        style={{ color: "rgba(10,10,10,0.62)" }}
+      >
+        Enter an OBD-II code to see likely causes and the system involved.
+      </p>
+
+      <form onSubmit={handleLookup} className="mt-5 flex gap-2">
+        <input
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          placeholder="P0420, C0035, U0100…"
+          maxLength={5}
+          className="flex-1 px-4 py-3 rounded-full text-[14px] outline-none focus:ring-2 focus:ring-black/20 transition"
+          style={{
+            background: "rgba(10,10,10,0.04)",
+            border: "1px solid rgba(10,10,10,0.10)",
+            fontFamily: "var(--font-mono)",
+            letterSpacing: "0.05em",
+            textTransform: "uppercase",
+          }}
+        />
+        <button
+          type="submit"
+          className="px-5 py-3 rounded-full text-[12px] font-mono-cap transition-colors hover:bg-black/85"
+          style={{ background: "#0a0a0a", color: "#fff" }}
+        >
+          Look up
+        </button>
+      </form>
+
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        <span
+          className="font-mono-cap mr-1"
+          style={{ color: "rgba(10,10,10,0.45)" }}
+        >
+          Try:
+        </span>
+        {["P0562", "P0615", "C0035"].map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => handleExample(s)}
+            className="font-mono-cap px-2 py-0.5 rounded-full transition-colors hover:bg-black/10"
+            style={{
+              background: "rgba(10,10,10,0.05)",
+              color: "rgba(10,10,10,0.7)",
+            }}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+
+      {error && (
+        <div
+          className="mt-4 flex items-start gap-2 text-[13px]"
+          style={{ color: "#a02635" }}
+        >
+          <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
+
+      {result && (
+        <div
+          className="mt-5 rounded-2xl p-4"
+          style={{
+            background: "rgba(10,10,10,0.04)",
+            border: "1px solid rgba(10,10,10,0.06)",
+          }}
+        >
+          <div className="flex items-center justify-between gap-2">
+            <span
+              className="font-display text-[20px]"
+              style={{ letterSpacing: "-0.01em" }}
+            >
+              {result.code}
+            </span>
+            <SeverityPill severity={result.severity} />
+          </div>
+          <p
+            className="mt-2 text-[13.5px] leading-snug"
+            style={{ color: "rgba(10,10,10,0.78)" }}
+          >
+            {result.title}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <span
+              className="font-mono-cap mr-1"
+              style={{ color: "rgba(10,10,10,0.45)" }}
+            >
+              {result.system}
+            </span>
+            {result.components.slice(0, 3).map((c) => (
+              <span
+                key={c}
+                className="font-mono-cap px-2 py-0.5 rounded-full"
+                style={{
+                  background: "rgba(10,10,10,0.06)",
+                  color: "rgba(10,10,10,0.7)",
+                }}
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  CARD 02 — DIAGNOSE (NHTSA vPIC VIN decode + recalls)                      */
+/* -------------------------------------------------------------------------- */
+
+function DiagnoseCard({ onVinResult, onRecalls, vinData, recalls }) {
+  const [vin, setVin] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleDecode = async (e) => {
+    e.preventDefault();
+    const normalized = vin.trim().toUpperCase();
+    if (normalized.length !== 17) {
+      setError("VIN must be exactly 17 characters.");
+      return;
+    }
+
+    setError("");
+    setLoading(true);
+    onVinResult(null);
+    onRecalls(null);
+
+    try {
+      // NHTSA vPIC: VIN decode (free, public, CORS-enabled)
+      const vinRes = await fetch(
+        `https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/${normalized}?format=json`
+      );
+      const vinJson = await vinRes.json();
+      const decoded = vinJson?.Results?.[0];
+
+      if (!decoded || (decoded.ErrorCode && decoded.ErrorCode !== "0")) {
+        const errText = decoded?.ErrorText || "Unable to decode VIN.";
+        setError(errText.split(";")[0].trim());
+        setLoading(false);
+        return;
+      }
+
+      onVinResult(decoded);
+
+      // NHTSA recalls by vehicle (free, public)
+      if (decoded.Make && decoded.Model && decoded.ModelYear) {
+        const recallsRes = await fetch(
+          `https://api.nhtsa.gov/recalls/recallsByVehicle?make=${encodeURIComponent(
+            decoded.Make
+          )}&model=${encodeURIComponent(decoded.Model)}&modelYear=${
+            decoded.ModelYear
+          }`
+        );
+        const recallsJson = await recallsRes.json();
+        onRecalls(recallsJson?.results || []);
+      } else {
+        onRecalls([]);
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Card>
+      <CardHead n="02" label="step 2 / 4" title="Diagnose" />
+      <p
+        className="mt-4 text-[14px] leading-relaxed"
+        style={{ color: "rgba(10,10,10,0.62)" }}
+      >
+        Decode any VIN against NHTSA's live database. Returns vehicle specs and
+        open recalls.
+      </p>
+
+      <form onSubmit={handleDecode} className="mt-5 flex gap-2">
+        <input
+          type="text"
+          value={vin}
+          onChange={(e) => setVin(e.target.value)}
+          placeholder="17-character VIN"
+          maxLength={17}
+          className="flex-1 px-4 py-3 rounded-full text-[14px] outline-none focus:ring-2 focus:ring-black/20 transition"
+          style={{
+            background: "rgba(10,10,10,0.04)",
+            border: "1px solid rgba(10,10,10,0.10)",
+            fontFamily: "var(--font-mono)",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+          }}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="px-5 py-3 rounded-full text-[12px] font-mono-cap transition-colors hover:bg-black/85 disabled:opacity-50 flex items-center justify-center min-w-[80px]"
+          style={{ background: "#0a0a0a", color: "#fff" }}
+        >
+          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Decode"}
+        </button>
+      </form>
+
+      <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        <span
+          className="font-mono-cap mr-1"
+          style={{ color: "rgba(10,10,10,0.45)" }}
+        >
+          Try:
+        </span>
+        <button
+          type="button"
+          onClick={() => setVin("1FTFW1ET5DFC10312")}
+          className="font-mono-cap px-2 py-0.5 rounded-full transition-colors hover:bg-black/10"
+          style={{
+            background: "rgba(10,10,10,0.05)",
+            color: "rgba(10,10,10,0.7)",
+          }}
+        >
+          Sample F-150 VIN
+        </button>
+      </div>
+
+      {error && (
+        <div
+          className="mt-4 flex items-start gap-2 text-[13px]"
+          style={{ color: "#a02635" }}
+        >
+          <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
+
+      {vinData && (
+        <div
+          className="mt-5 rounded-2xl p-4"
+          style={{
+            background: "rgba(10,10,10,0.04)",
+            border: "1px solid rgba(10,10,10,0.06)",
+          }}
+        >
+          <div
+            className="font-display text-[20px]"
+            style={{ letterSpacing: "-0.01em" }}
+          >
+            {vinData.ModelYear} {vinData.Make} {vinData.Model}
+          </div>
+          <div
+            className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-[13px]"
+            style={{ color: "rgba(10,10,10,0.78)" }}
+          >
+            {vinData.EngineCylinders && (
+              <Spec
+                k="Engine"
+                v={`${vinData.EngineCylinders}-cyl${
+                  vinData.DisplacementL ? `, ${vinData.DisplacementL}L` : ""
+                }`}
+              />
+            )}
+            {vinData.DriveType && <Spec k="Drivetrain" v={vinData.DriveType} />}
+            {vinData.BodyClass && <Spec k="Body" v={vinData.BodyClass} />}
+            {vinData.PlantCountry && (
+              <Spec k="Plant" v={vinData.PlantCountry} />
+            )}
+          </div>
+          {recalls && (
+            <div
+              className="mt-3 pt-3 border-t flex items-center justify-between"
+              style={{ borderColor: "rgba(10,10,10,0.08)" }}
+            >
+              <span
+                className="font-mono-cap"
+                style={{
+                  color: recalls.length > 0 ? "#a02635" : "rgba(10,10,10,0.55)",
+                }}
+              >
+                {recalls.length > 0
+                  ? `${recalls.length} open recall${
+                      recalls.length === 1 ? "" : "s"
+                    }`
+                  : "No open recalls"}
+              </span>
+              <span
+                className="font-mono-cap"
+                style={{ color: "rgba(10,10,10,0.4)" }}
+              >
+                via NHTSA
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+function Spec({ k, v }) {
+  return (
+    <div className="flex flex-col">
+      <span
+        className="font-mono-cap"
+        style={{
+          color: "rgba(10,10,10,0.45)",
+          fontSize: "10px",
+        }}
+      >
+        {k}
+      </span>
+      <span className="text-[13px]">{v}</span>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  CARD 03 — EXECUTE (route to existing Quick Guides based on code)          */
+/* -------------------------------------------------------------------------- */
+
+function ExecuteCard({ obdResult }) {
+  // First try the explicit `guide` field on the code; fall back to the
+  // system-default mapping if the code matches a known system.
+  const targetPath =
+    obdResult?.guide ||
+    (obdResult?.system ? SYSTEM_DEFAULT_GUIDE[obdResult.system] : null);
+
+  const matchingGuide = targetPath
+    ? ALL_GUIDES.find((g) => g.path === targetPath)
+    : null;
+
+  return (
+    <Card>
+      <CardHead n="03" label="step 3 / 4" title="Execute" />
+      <p
+        className="mt-4 text-[14px] leading-relaxed"
+        style={{ color: "rgba(10,10,10,0.62)" }}
+      >
+        {matchingGuide
+          ? "Recommended guide for this code. Step-by-step torque specs, tools, and OE procedures."
+          : "Run a code in step 1 to surface the matching repair guide. Or browse all guides below."}
+      </p>
+
+      {matchingGuide ? (
+        <Link
+          to={matchingGuide.path}
+          className="mt-5 block rounded-2xl p-5 transition-all hover:-translate-y-0.5 hover:shadow-md group"
+          style={{
+            background: "var(--c-cream)",
+            border: "1px solid rgba(10,10,10,0.10)",
+          }}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <span
+                className="font-mono-cap"
+                style={{ color: "rgba(10,10,10,0.5)" }}
+              >
+                Recommended
+              </span>
+              <div
+                className="mt-2 font-display text-[22px]"
+                style={{ letterSpacing: "-0.01em" }}
+              >
+                {matchingGuide.label}
+              </div>
+              <p
+                className="mt-2 text-[13px]"
+                style={{ color: "rgba(10,10,10,0.6)" }}
+              >
+                For {obdResult.code} · {obdResult.system}
+              </p>
+            </div>
+            <ArrowRight className="h-5 w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Link>
+      ) : (
+        <div className="mt-5 flex flex-wrap gap-1.5">
+          {ALL_GUIDES.map((g) => (
+            <Link
+              key={g.path}
+              to={g.path}
+              className="px-3 py-1.5 rounded-full text-[12.5px] transition-colors hover:bg-black/10"
+              style={{
+                background: "rgba(10,10,10,0.06)",
+                color: "rgba(10,10,10,0.78)",
+              }}
+            >
+              {g.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  CARD 04 — VERIFY (NHTSA recalls list + post-repair checklist)             */
+/* -------------------------------------------------------------------------- */
+
+function VerifyCard({ recalls, vinData }) {
+  const hasRecalls = recalls && recalls.length > 0;
+
+  return (
+    <Card>
+      <CardHead n="04" label="step 4 / 4" title="Verify" />
+      <p
+        className="mt-4 text-[14px] leading-relaxed"
+        style={{ color: "rgba(10,10,10,0.62)" }}
+      >
+        After the repair, clear codes and check for any open NHTSA recall
+        campaigns on the vehicle.
+      </p>
+
+      {hasRecalls ? (
+        <div className="mt-5 space-y-2 max-h-[260px] overflow-y-auto pr-1">
+          {recalls.slice(0, 4).map((r, i) => (
+            <div
+              key={r.NHTSACampaignNumber || i}
+              className="rounded-xl p-3"
+              style={{
+                background: "rgba(220,53,69,0.06)",
+                border: "1px solid rgba(220,53,69,0.15)",
+              }}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span
+                  className="font-mono-cap"
+                  style={{ color: "#a02635" }}
+                >
+                  {r.NHTSACampaignNumber || "Recall"}
+                </span>
+                <span
+                  className="font-mono-cap truncate"
+                  style={{ color: "rgba(10,10,10,0.5)", maxWidth: "60%" }}
+                >
+                  {(r.Component || "—").split(":")[0]}
+                </span>
+              </div>
+              <p
+                className="mt-1.5 text-[12.5px] leading-snug"
+                style={{ color: "rgba(10,10,10,0.72)" }}
+              >
+                {(r.Summary || "").slice(0, 140)}
+                {r.Summary && r.Summary.length > 140 ? "…" : ""}
+              </p>
+            </div>
+          ))}
+          {recalls.length > 4 && (
+            <p
+              className="text-[12px] text-center pt-1"
+              style={{ color: "rgba(10,10,10,0.5)" }}
+            >
+              + {recalls.length - 4} more recall
+              {recalls.length - 4 === 1 ? "" : "s"}
+            </p>
+          )}
+        </div>
+      ) : (
+        <div
+          className="mt-5 rounded-2xl p-4"
+          style={{
+            background: "rgba(10,10,10,0.04)",
+            border: "1px solid rgba(10,10,10,0.06)",
+          }}
+        >
+          <span
+            className="font-mono-cap"
+            style={{ color: "rgba(10,10,10,0.5)" }}
+          >
+            Verification checklist
+          </span>
+          <ul className="mt-3 space-y-2">
+            {[
+              "Reconnect battery & verify no DTCs",
+              "Test drive across speed range",
+              "Confirm no warning lights illuminated",
+              "Run final scan to clear pending codes",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-2 text-[13.5px]"
+                style={{ color: "rgba(10,10,10,0.72)" }}
+              >
+                <CheckCircle2
+                  className="h-4 w-4 mt-0.5 flex-shrink-0"
+                  style={{ color: "rgba(10,10,10,0.4)" }}
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          {vinData && recalls && recalls.length === 0 && (
+            <p
+              className="mt-3 text-[12px]"
+              style={{ color: "rgba(10,10,10,0.55)" }}
+            >
+              ✓ NHTSA reports no open recalls for this vehicle.
+            </p>
+          )}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Shared building blocks                                                    */
+/* -------------------------------------------------------------------------- */
+
+function Card({ id, children }) {
+  return (
+    <article
+      id={id}
+      className="rounded-3xl p-7 md:p-8"
+      style={{
+        background: "var(--c-cream)",
+        border: "1px solid rgba(10,10,10,0.07)",
+      }}
+    >
+      {children}
+    </article>
+  );
+}
+
+function CardHead({ n, label, title }) {
+  return (
+    <>
+      <div className="flex items-center gap-3">
+        <span
+          className="font-display text-[34px] md:text-[42px]"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          {n}
+        </span>
+        <span
+          className="font-mono-cap"
+          style={{ color: "rgba(10,10,10,0.55)" }}
+        >
+          {label}
+        </span>
+      </div>
+      <h3
+        className="mt-5 font-display"
+        style={{
+          fontSize: "clamp(24px, 2.4vw, 34px)",
+          lineHeight: 1,
+          letterSpacing: "-0.02em",
+        }}
+      >
+        {title}
+      </h3>
+    </>
+  );
+}
+
+function SeverityPill({ severity }) {
+  const s = SEVERITY_STYLES[severity] || SEVERITY_STYLES.low;
+  return (
+    <span
+      className="font-mono-cap px-2 py-0.5 rounded-full"
+      style={{ background: s.bg, color: s.color }}
+    >
+      {s.label}
+    </span>
+  );
+}
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "DM Sans", -apple-system, sans-serif;
+  --font-mono: "DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+@layer base {
+  :root {
+    --c-ink: #0a0a0a;
+    --c-ink-2: #141414;
+    --c-cream: #FDFBF7;
+    --c-cream-2: #F3EFE9;
+    --c-cream-3: #efe1d8;
+    --c-blush: #e2b4b4;
+    --bg: #000000;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--c-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.italic-display {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.font-mono-cap {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+}
+
+.glow-bg {
+  background: radial-gradient(100% 100% at 50% 0%, rgba(20, 20, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hero specific */
+.hero-wrap {
+  position: relative;
+  height: 400vh;
+}
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-tint {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%);
+  z-index: 2;
+}
+.cue-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+.cue-dot.is-active {
+  background: white;
+  transform: scale(1.5);
+}
+
+.hero-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+}
+.hero-progress-fill {
+  height: 100%;
+  background: white;
+  transform-origin: 0 50%;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+.pill-light {
+  background: white;
+  color: #0a0a0a;
+}
+.pill-light:hover {
+  background: var(--c-cream-2);
+}
+
+/* Ticker specific */
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.3333%, 0, 0); }
+}
+.animate-ticker {
+  animation: ticker 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+.ticker-mask {
+  mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
+}
+</file>
+
+<file path="src/App.jsx">
+import React, { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import TopNav from './components/site/TopNav'
+import HeroVideo from './components/site/HeroVideo'
+import Pillars from './components/site/Pillars'
+import Process from './components/site/Process'
+import DarkContext from './components/site/DarkContext'
+import Stats from './components/site/Stats'
+import Footer from './components/site/Footer'
+import RecallSearch from './components/site/RecallSearch'
+import RecallTicker from './components/site/RecallTicker'
+
+import AlternatorsPage from './pages/AlternatorsPage'
+import BoostersPage from './pages/BoostersPage'
+import BrakePadsRotorsPage from './pages/BrakePadsRotorsPage'
+import CalipersPage from './pages/CalipersPage'
+import MasterCylindersPage from './pages/MasterCylindersPage'
+import StartersPage from './pages/StartersPage'
+import WheelHubsPage from './pages/WheelHubsPage'
+import SearchPage from './pages/SearchPage'
+
+function HomePage() {
+  return (
+    <div className="min-h-screen bg-black font-sans text-white selection:bg-[#ff8a4a]/30 selection:text-white">
+      <TopNav />
+      <main>
+        <HeroVideo />
+        <Pillars />
+        <Process />
+        <DarkContext />
+        <Stats />
+        <RecallSearch />
+        <RecallTicker />
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function App() {
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/alternators" element={<AlternatorsPage />} />
+      <Route path="/starters" element={<StartersPage />} />
+      <Route path="/calipers" element={<CalipersPage />} />
+      <Route path="/master-cylinders" element={<MasterCylindersPage />} />
+      <Route path="/brake-pads-rotors" element={<BrakePadsRotorsPage />} />
+      <Route path="/boosters" element={<BoostersPage />} />
+      <Route path="/wheel-hubs" element={<WheelHubsPage />} />
+      <Route path="/search" element={<SearchPage />} />
+    </Routes>
+    </>
+  )
+}
+
+export default App
 </file>
 
 </files>
