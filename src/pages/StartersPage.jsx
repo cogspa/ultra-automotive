@@ -2,6 +2,18 @@ import React from "react";
 import TopNav from "../components/site/TopNav";
 import QuickGuideNav from "../components/site/QuickGuideNav";
 import Footer from "../components/site/Footer";
+import {
+  GuideCard,
+  GuideHeading,
+  GuideLead,
+  GuideBody,
+  GuideStep,
+  GuideBullets,
+  GuideBullet,
+  GuideCallout,
+  GuideMeta,
+  K,
+} from "../components/site/GuideElements";
 
 export default function StartersPage() {
   return (
@@ -9,161 +21,198 @@ export default function StartersPage() {
       <TopNav />
       <main className="pt-32 pb-24 px-5 md:px-10 lg:px-14 max-w-[1400px] mx-auto">
         <QuickGuideNav />
-        <div className="mb-12">
+
+        <div className="mb-8">
           <span className="font-mono-cap text-white/50">Quick Guide</span>
           <h1 className="mt-4 font-display text-white" style={{ fontSize: "clamp(40px, 5vw, 76px)", lineHeight: 0.96, letterSpacing: "-0.03em" }}>
             Starters <span className="italic-display" style={{ color: "#efe1d8" }}>Guide</span>
           </h1>
+          <p className="mt-4 max-w-[640px] text-[15px] text-white/60 leading-relaxed">
+            Diagnose a no-crank or slow-crank correctly, then replace the starter without damaging the new unit or the flywheel ring gear.
+          </p>
         </div>
-        
+
+        <GuideMeta items={[
+          { label: "Difficulty", value: "Intermediate" },
+          { label: "Time", value: "1 – 2 hours" },
+          { label: "Tools", value: "Sockets, torque wrench, multimeter" },
+          { label: "Common DTCs", value: "P0615 – P0617 family" },
+        ]} />
+
         <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
 
+          <GuideCard tone="cream" eyebrow="01 · Overview">
+            <GuideHeading>What the starter actually does</GuideHeading>
+            <GuideLead>
+              The starter spins the engine fast enough to draw fuel and fire — typically <K>200 – 300 rpm</K>. When it fails, the complaint is usually a click, a slow grind, or nothing at all when the key is turned.
+            </GuideLead>
+            <GuideBody>
+              <p>
+                Most "bad starter" complaints are actually <K>battery</K>, <K>cable</K>, <K>ignition switch</K>, or <K>starter relay</K> faults. Replacing a starter without ruling those out is the leading cause of comebacks.
+              </p>
+              <p>
+                Modern engines with stop-start systems use heavy-duty starters rated for far higher cycle counts. Substituting a conventional starter on a stop-start vehicle is a dead-end fix.
+              </p>
+            </GuideBody>
+            <GuideCallout variant="critical">
+              Always disconnect the <K>negative battery cable</K> first. The starter's B+ terminal is hot to chassis at all times — a dropped wrench will arc-weld itself to the engine.
+            </GuideCallout>
+          </GuideCard>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-cream-2)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Starter Installation Overview</h3>
-                <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">
-                  Proper installation of a starter motor is crucial for reliable vehicle starting and 
-                  prevention of premature failures. This guide provides step-by-step instructions for 
-                  correctly diagnosing starter issues and ensuring proper installation of a replacement unit.
-                </p>
-                <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">
-                  The starter motor is responsible for cranking the engine during the starting process. 
-                  A failing starter can cause no-start conditions, intermittent starting, or unusual noises 
-                  during cranking. Following these best practices will help ensure a successful installation 
-                  and prevent early component failure.
-                </p>
-        </div>
-        </div>
-      
+          <GuideCard tone="blush" eyebrow="02 · Preparation">
+            <GuideHeading>Rule out the easy stuff first</GuideHeading>
+            <GuideLead>
+              80% of no-crank complaints fix themselves with a battery charge or a cable cleaning. Eliminate those before touching the starter.
+            </GuideLead>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-blush)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Vehicle Preparation</h3>
-                
-                <div className="space-y-4">
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Refer to vehicle service information for any special testing, removal, or installation procedures</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for any related technical service bulletins</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Refer to any warning tags or technical bulletins included in the box with the replacement part</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify that battery state of charge is a minimum of 12.45 volts</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Charge battery as needed</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Perform load test on battery to determine state of health</div></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Visually inspect battery cables for corrosion</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Perform voltage drop tests on positive/negative cables</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Replace cables as needed</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Check for fluid leaks that may have caused the current failure</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Engine oil, coolant, etc.</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Repair or replace source of the fluid leak</li>
-                  </ul></div>
-                </div>
-        </div>
-        </div>
-      
+            <GuideStep number="01" title="Confirm battery state of charge"
+              summary="A weak battery looks identical to a failing starter from the driver's seat.">
+              <GuideBullets>
+                <GuideBullet>Resting voltage at <K>12.45 V</K> minimum before further testing</GuideBullet>
+                <GuideBullet>Conductance-test the battery — below <K>80% of rated CCA</K> means replace it first</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-cream-2)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Starter Diagnosis Steps</h3>
-                
-                <div className="space-y-4">
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Turn the ignition on but do not start the engine and observe the instrument cluster for warning lights</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Are there any anti-theft, security lights or messages displayed?</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Connect scan tool and scan all modules for related diagnostic trouble codes (DTC)</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Follow service information to correct associated DTC</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Proceed if it is determined that the starter has failed and needs replacement</div></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Obtain all vehicle info to ensure correct part application</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Make, year, model, engine, equipment/option packages, etc.</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Evaluate the vehicle's starting system</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Battery condition and state of charge</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Battery cables and connections</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for corroded battery terminals</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect starter relay and ignition switch function</li>
-                  </ul></div>
-                </div>
-        </div>
-        </div>
-      
+            <GuideStep number="02" title="Voltage-drop test the cables"
+              summary="Cranking pulls 150 – 250 A. Even small resistance becomes massive voltage drop.">
+              <GuideBullets>
+                <GuideBullet>Positive cable: under <K>0.5 V</K> drop during crank</GuideBullet>
+                <GuideBullet>Negative / ground: under <K>0.2 V</K> drop during crank</GuideBullet>
+                <GuideBullet>Clean both terminals to bright metal and re-test before condemning the starter</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-blush)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Starter Installation Steps</h3>
-                
-                <div className="space-y-4">
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Disconnect negative battery cable</div></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Disconnect all cables from starter before unbolting starter from vehicle</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Do not allow starter to hang from any attached cables</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Inspect the old starter for broken/cracked nose housing, milled pinion, and mounting hole irregularities, and repair the source of the problem</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Backfire on startup, broken or missing teeth on the flywheel and worn-out mounting bolts/hardware</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Ensure starter mounting surface is clean and free from debris, oil, grease, corrosion, paint, etc.</div></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Transfer any mounting hardware, brackets, braces, spacers, sensors, switches, heat shields from original starter to replacement if applicable</div></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Ensure starter is fully seated before tightening mounting bolts</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Torque starter mounting bolts to proper specifications</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Compare replacement starter to original unit</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify same mounting configuration</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check pinion gear engagement and rotation</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Ensure electrical connector compatibility</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Inspect flywheel/flexplate ring gear for damage</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Look for worn or broken teeth</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for proper alignment</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Properly torque all mounting bolts & electrical connections</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Follow manufacturer specifications</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Ensure proper routing of wires to avoid heat damage</li>
-                  </ul></div>
-                </div>
-        </div>
-        </div>
-      
+            <GuideStep number="03" title="Check for fluid contamination"
+              summary="Oil, coolant, or power-steering fluid on the starter shortens its life and voids warranty.">
+              <GuideBullets>
+                <GuideBullet>Repair the source of any leak before installing a replacement</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+          </GuideCard>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-cream-2)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Starter Verification</h3>
-                
-                <div className="space-y-4">
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">After installation, test cranking performance</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Reconnect battery</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for proper engagement with ring gear</li>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify starter draws correct amperage</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify proper operation of starting system</div><ul>
-                    <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Turn key to crank position and listen for unusual noise</li>
-                  </ul></div>
-                  
-                  <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Road test vehicle – verify correct function and operation</div></div>
-                </div>
-        </div>
-        </div>
-      
+          <GuideCard tone="cream" eyebrow="03 · Diagnosis">
+            <GuideHeading>Decode the symptom</GuideHeading>
+            <GuideLead>
+              The way the starter fails tells you where to look. One click is not the same as no click is not the same as a slow grind.
+            </GuideLead>
+
+            <GuideStep number="01" title="Check for security and immobilizer faults"
+              summary="A blinking anti-theft light KOEO is the entire diagnosis on many vehicles.">
+              <GuideBullets>
+                <GuideBullet>Active immobilizer fault — engine won't crank or won't start after cranking</GuideBullet>
+                <GuideBullet>Re-program key or repair PATS / immobilizer before testing the starter</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="02" title="Scan all modules for DTCs"
+              summary="Starter-related codes set in PCM and BCM — scan both.">
+              <GuideBullets>
+                <GuideBullet><K>P0615</K> — starter relay circuit malfunction</GuideBullet>
+                <GuideBullet><K>P0616 / P0617</K> — starter relay circuit low / high</GuideBullet>
+                <GuideBullet><K>P0335 / P0338</K> — crankshaft position sensor codes that cause a no-start that looks like a starter problem</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="03" title="Interpret the symptom"
+              summary="Each pattern points to a different root cause.">
+              <GuideBullets>
+                <GuideBullet><K>One loud click, no crank</K> — solenoid pulls in but starter motor won't turn (worn brushes / armature)</GuideBullet>
+                <GuideBullet><K>Rapid clicking</K> — low battery or high resistance, not the starter</GuideBullet>
+                <GuideBullet><K>Slow grind</K> — low cranking voltage, dragging armature, or low battery</GuideBullet>
+                <GuideBullet><K>Nothing at all</K> — ignition switch, neutral safety / clutch switch, fuse, or relay</GuideBullet>
+                <GuideBullet><K>High-pitched whine after crank</K> — starter drive failed to disengage</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideCallout variant="tip">
+              Voltage at the starter <K>S terminal</K> during crank should be <K>10 V minimum</K>. Less than that, the problem is upstream — relay, switch, or wiring — not the starter.
+            </GuideCallout>
+          </GuideCard>
+
+          <GuideCard tone="blush" eyebrow="04 · Installation">
+            <GuideHeading>Replace without damaging the new unit</GuideHeading>
+            <GuideLead>
+              Most installation failures come from skipped torque specs, wrong shims, or a starter that hangs from its harness. Slow down on these.
+            </GuideLead>
+
+            <GuideStep number="01" title="Disconnect the negative battery cable"
+              summary="Non-negotiable. Verify with a meter — voltage to chassis should drop to zero." />
+
+            <GuideStep number="02" title="Disconnect all electrical first, then unbolt"
+              summary="A starter hanging by its harness damages the connector and the new unit.">
+              <GuideBullets>
+                <GuideBullet>Photograph harness routing before disconnect</GuideBullet>
+                <GuideBullet>Remove B+ and S-terminal connections</GuideBullet>
+                <GuideBullet>Support the starter by hand before removing the last mounting bolt</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="03" title="Inspect the old starter and the flywheel"
+              summary="A failed starter often comes with a damaged ring gear — replacing one without checking the other guarantees a comeback.">
+              <GuideBullets>
+                <GuideBullet>Look for chipped or missing teeth on the starter drive (pinion)</GuideBullet>
+                <GuideBullet>Rotate the engine by hand and inspect every ring-gear tooth through the inspection cover</GuideBullet>
+                <GuideBullet>Cracked or worn-out mounting holes — verify the new starter's mounting surface seats flat</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="04" title="Clean the mounting surface"
+              summary="Grease, paint, or corrosion at the bell housing creates poor ground and lateral misalignment.">
+              <GuideBullets>
+                <GuideBullet>Wire-brush the starter pad on the bell housing to bare metal</GuideBullet>
+                <GuideBullet>Transfer shims if used by OE — pinion engagement depth is critical</GuideBullet>
+                <GuideBullet>Transfer heat shields, brackets, and harness clips to the new unit</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="05" title="Install and torque to spec"
+              summary="Even torque across mounting bolts prevents binding and ensures correct pinion engagement.">
+              <GuideBullets>
+                <GuideBullet>Mounting bolts to OE spec — typically <K>30 – 50 ft-lb</K></GuideBullet>
+                <GuideBullet>B+ nut to OE spec — typically <K>10 – 15 ft-lb</K></GuideBullet>
+                <GuideBullet>S-terminal connector clicks fully home and is properly routed</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideCallout variant="critical">
+              On engines with <K>crankshaft position sensor</K> proximity issues, a missing or wrong-thickness shim can cause repeat no-starts and false CKP codes. Always transfer or replace shims to OE spec.
+            </GuideCallout>
+          </GuideCard>
+
+          <GuideCard tone="cream" eyebrow="05 · Verification">
+            <GuideHeading>Confirm engagement and disengagement</GuideHeading>
+            <GuideLead>
+              A starter that cranks once may still bind, drag, or whine. Three checks before the customer drives away.
+            </GuideLead>
+
+            <GuideStep number="01" title="Reconnect and test cranking"
+              summary="Listen and watch the meter.">
+              <GuideBullets>
+                <GuideBullet>Smooth, quick crank with no grinding or screeching</GuideBullet>
+                <GuideBullet>Voltage at the battery during crank — above <K>10 V</K></GuideBullet>
+                <GuideBullet>Starter disengages cleanly the instant the engine fires</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="02" title="Clear and verify DTCs">
+              <GuideBullets>
+                <GuideBullet>Clear any codes set during disconnect</GuideBullet>
+                <GuideBullet>Verify no starter, crank-sensor, or charging codes return after a full drive cycle</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep number="03" title="Road test the vehicle"
+              summary="Several hot and cold starts surface intermittent issues.">
+              <GuideBullets>
+                <GuideBullet>Cold start, hot start, restart after a short trip</GuideBullet>
+                <GuideBullet>No unusual noise during or after crank</GuideBullet>
+                <GuideBullet>Final battery voltage after shutdown — should hold above <K>12.5 V</K></GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+          </GuideCard>
 
         </div>
-      
-</main>
+      </main>
       <Footer />
     </div>
   );

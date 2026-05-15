@@ -2,412 +2,362 @@ import React, { useState } from "react";
 import TopNav from "../components/site/TopNav";
 import QuickGuideNav from "../components/site/QuickGuideNav";
 import Footer from "../components/site/Footer";
+import {
+  GuideCard,
+  GuideHeading,
+  GuideLead,
+  GuideBody,
+  GuideStep,
+  GuideBullets,
+  GuideBullet,
+  GuideCallout,
+  GuideMeta,
+  K,
+} from "../components/site/GuideElements";
 
 export default function BoostersPage() {
-  const [boosterType, setBoosterType] = useState("vacuum");
-  const handleBoosterTypeChange = setBoosterType;
+  const [type, setType] = useState("vacuum");
+
   return (
     <div className="min-h-screen bg-black font-sans text-white overflow-x-hidden selection:bg-[#ff8a4a]/30 selection:text-white">
       <TopNav />
       <main className="pt-32 pb-24 px-5 md:px-10 lg:px-14 max-w-[1400px] mx-auto">
         <QuickGuideNav />
-        <div className="mb-12">
+
+        <div className="mb-8">
           <span className="font-mono-cap text-white/50">Quick Guide</span>
           <h1 className="mt-4 font-display text-white" style={{ fontSize: "clamp(40px, 5vw, 76px)", lineHeight: 0.96, letterSpacing: "-0.03em" }}>
             Brake Boosters <span className="italic-display" style={{ color: "#efe1d8" }}>Guide</span>
           </h1>
+          <p className="mt-4 max-w-[640px] text-[15px] text-white/60 leading-relaxed">
+            Diagnose and replace vacuum or hydroboost brake boosters with proper pushrod adjustment and a firm pedal on the first test.
+          </p>
         </div>
-        
+
+        <GuideMeta items={[
+          { label: "Difficulty", value: "Intermediate – Advanced" },
+          { label: "Time", value: "2 – 4 hours" },
+          { label: "Tools", value: "Wrenches, vacuum gauge or PS pressure gauge" },
+          { label: "Type", value: "Vacuum or Hydroboost" },
+        ]} />
+
+        {/* Type switcher */}
+        <div className="mb-10 flex gap-2 flex-wrap">
+          <button
+            onClick={() => setType("vacuum")}
+            className={`px-4 py-2 rounded-full text-[13px] font-mono-cap transition ${
+              type === "vacuum"
+                ? "bg-white text-black"
+                : "bg-white/5 text-white/70 hover:bg-white/10"
+            }`}
+          >
+            Vacuum Booster
+          </button>
+          <button
+            onClick={() => setType("hydro")}
+            className={`px-4 py-2 rounded-full text-[13px] font-mono-cap transition ${
+              type === "hydro"
+                ? "bg-white text-black"
+                : "bg-white/5 text-white/70 hover:bg-white/10"
+            }`}
+          >
+            Hydroboost
+          </button>
+        </div>
+
         <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
 
+          {/* CARD 01 — OVERVIEW (common) */}
+          <GuideCard tone="cream" eyebrow="01 · Overview">
+            <GuideHeading>How brake boosters multiply pedal force</GuideHeading>
+            <GuideLead>
+              A booster multiplies the force applied at the pedal so the driver doesn't need 100+ lb of leg strength to stop the vehicle. Two technologies dominate modern vehicles.
+            </GuideLead>
+            <GuideBody>
+              <p>
+                <K>Vacuum boosters</K> use engine vacuum (or an electric vacuum pump on direct-injection / turbo / EV engines) to create a pressure differential across a diaphragm. Most cars and light trucks use this.
+              </p>
+              <p>
+                <K>Hydroboost</K> uses hydraulic pressure from the power-steering pump instead of vacuum. Common on diesels, heavy-duty trucks, and many modern Ford / GM full-size vehicles.
+              </p>
+            </GuideBody>
+            <GuideCallout variant="critical">
+              Brakes are a primary safety system. If you are not confident with hydraulic or vacuum diagnosis, refer the job to a professional.
+            </GuideCallout>
+          </GuideCard>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-cream-2)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Brake Booster Overview</h3>
-                
-                <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">
-                  Brake boosters are essential components in modern vehicle braking systems, multiplying the force 
-                  applied to the brake pedal to reduce the effort required for effective braking. There are two main 
-                  types of brake boosters: vacuum boosters and hydro-boosters.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                  <div className="bg-transparent">
-                    <h4 className="font-medium text-lg mb-2">Vacuum Boosters</h4>
-                    <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">
-                      Vacuum boosters use engine vacuum (or a vacuum pump in some applications) to create a pressure 
-                      differential that multiplies braking force. These are the most common type found in cars and 
-                      light-duty trucks.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-transparent">
-                    <h4 className="font-medium text-lg mb-2">Hydro-Boosters</h4>
-                    <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">
-                      Hydro-boosters use hydraulic pressure from the power steering system to multiply braking force. 
-                      These are typically found in larger vehicles, diesel applications, or where high vacuum 
-                      is not readily available.
-                    </p>
-                  </div>
-                </div>
-                
-                <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">
-                  Proper installation of a brake booster is critical for brake system performance and safety. 
-                  This guide covers best practices for installing both vacuum boosters and hydro-boosters, 
-                  including preparation, installation steps, and verification procedures.
-                </p>
-                
-                <div className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-sm">
-                  <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">Important Safety Note:</p>
-                  <p className="text-[14.5px] text-[#0a0a0a]/70 mb-4 leading-relaxed">The brake system is a critical safety component. Always follow manufacturer procedures 
-                  and take extra precautions during booster replacement. Improper installation can lead to 
-                  reduced braking performance or brake failure. If you're unsure about any aspect of brake 
-                  booster replacement, consult a professional technician.</p>
-                </div>
-        </div>
-        </div>
-      
+          {/* VACUUM BOOSTER PATH */}
+          {type === "vacuum" && (
+            <>
+              <GuideCard tone="blush" eyebrow="02 · Preparation · Vacuum">
+                <GuideHeading>Verify vacuum supply first</GuideHeading>
+                <GuideLead>
+                  Most "bad booster" complaints on modern engines are actually low vacuum from a leak, a failed check valve, or a failed electric vacuum pump.
+                </GuideLead>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-blush)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <div className="flex gap-4 mb-6">
-                  <button
-                    onClick={() => handleBoosterTypeChange("vacuum")}
-                    className={`px-4 py-2 rounded ${
-                      boosterType === "vacuum"
-                        ? "bg-[#dc3545] text-[#0a0a0a]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }`}
-                  >
-                    Vacuum Boosters
-                  </button>
-                  <button
-                    onClick={() => handleBoosterTypeChange("hydro")}
-                    className={`px-4 py-2 rounded ${
-                      boosterType === "hydro"
-                        ? "bg-[#dc3545] text-[#0a0a0a]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }`}
-                  >
-                    Hydro-Boosters
-                  </button>
-                </div>
-                
-                {boosterType === "vacuum" ? (
-                  <div>
-                    <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Vacuum Booster Preparation</h3>
-                    
-                    <div className="space-y-4">
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Refer to vehicle service information for any special testing, removal, or installation procedures</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for any related technical service bulletins</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Refer to any warning tags or technical bulletins included in the box with the replacement vacuum booster</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify proper vacuum supply to brake booster with a vacuum gauge</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect vacuum supply hose for cracks, deterioration, or collapsed sections</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check vacuum check valve function and orientation</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Measure engine vacuum at idle to ensure adequate vacuum is available</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Check for evidence of brake fluid leakage at mating surface of master cylinder and brake booster</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">If master cylinder rear seal is leaking brake fluid, the master cylinder will require replacement as well</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect master cylinder mounting surface for damage or corrosion</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Obtain all vehicle info to ensure correct part application</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Make, year, model, engine, brake system details, etc.</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify replacement booster matches original in size, mounting configuration, and pushrod length</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Gather necessary tools and parts</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Master cylinder gasket (if applicable)</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Pushrod measurement tool</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Vacuum gauge</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Torque wrench</li>
-                      </ul></div>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Hydro-Booster Preparation</h3>
-                    
-                    <div className="space-y-4">
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Refer to vehicle service information for any special testing, removal, or installation procedures</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for any related technical service bulletins</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Refer to any warning tags or technical bulletins included in the box with the replacement hydroboost assembly</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Obtain all vehicle information to ensure correct part application</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Make, year, model, engine, brake system details, etc.</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify replacement hydroboost matches original in configuration and connection points</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Inspect and correct any problems with the power steering system</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect the power steering pump drive belt for wear, damage, and proper tension</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Replace any leaking or damaged power steering hoses</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Using a power steering pressure gauge verify correct power steering pump pressures</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check power steering fluid condition and level</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Gather necessary tools and parts</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Power steering fluid (correct type for vehicle)</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">New O-rings and seals</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Fluid catch pan</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Torque wrench</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Power steering pressure gauge</li>
-                      </ul></div>
-                    </div>
-                  </div>
-                )}
-        </div>
-        </div>
-      
+                <GuideStep number="01" title="Test engine vacuum at idle"
+                  summary="Most boosters need at least 17 – 21 inHg to function correctly.">
+                  <GuideBullets>
+                    <GuideBullet>Connect vacuum gauge to a manifold port</GuideBullet>
+                    <GuideBullet>Reading below <K>17 inHg</K> at idle — diagnose vacuum leak before condemning booster</GuideBullet>
+                    <GuideBullet>Electric vacuum pump–equipped vehicles: verify pump cycles and holds vacuum</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-cream-2)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <div className="flex gap-4 mb-6">
-                  <button
-                    onClick={() => handleBoosterTypeChange("vacuum")}
-                    className={`px-4 py-2 rounded ${
-                      boosterType === "vacuum"
-                        ? "bg-[#dc3545] text-[#0a0a0a]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }`}
-                  >
-                    Vacuum Boosters
-                  </button>
-                  <button
-                    onClick={() => handleBoosterTypeChange("hydro")}
-                    className={`px-4 py-2 rounded ${
-                      boosterType === "hydro"
-                        ? "bg-[#dc3545] text-[#0a0a0a]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }`}
-                  >
-                    Hydro-Boosters
-                  </button>
-                </div>
-                
-                {boosterType === "vacuum" ? (
-                  <div>
-                    <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Vacuum Booster Installation</h3>
-                    
-                    <div className="space-y-4">
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Remove master cylinder from brake booster</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Disconnect brake lines from master cylinder and cap to prevent fluid loss and contamination</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Remove master cylinder mounting nuts and carefully remove cylinder from booster</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Disconnect vacuum supply hose from booster</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Carefully remove vacuum hose to avoid damaging the check valve</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect check valve for proper function - should allow vacuum only in one direction</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Remove booster from firewall</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Disconnect brake pedal pushrod from inside vehicle (may require dashboard or underdash component removal)</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Remove mounting nuts securing booster to firewall</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Carefully remove booster from vehicle</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Transfer any mounting hardware, brackets, braces, spacers, sensors, switches from original booster to replacement booster if applicable</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Ensure all transferred components are in good condition</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Replace any damaged or worn components</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify correct pushrod adjustments – brake pedal pushrod and master cylinder push rod</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Refer to vehicle service information</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Compare pushrod length to the original unit</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Adjust as needed to match original specifications</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Install new booster</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Carefully position booster against firewall, aligning pushrod with brake pedal connection</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Install and tighten mounting nuts to specified torque</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Connect brake pedal to pushrod inside vehicle</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Install master cylinder</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Use new gasket between master cylinder and booster</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Install master cylinder mounting nuts and torque to specification</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Reconnect brake lines and torque to specification</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Connect vacuum supply</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Install vacuum check valve in correct orientation if removed</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Connect vacuum hose to booster check valve</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Secure with appropriate clamp if needed</li>
-                      </ul></div>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Hydro-Booster Installation</h3>
-                    
-                    <div className="space-y-4">
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Remove master cylinder from hydroboost</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Disconnect brake lines from master cylinder and cap to prevent fluid loss</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Remove master cylinder mounting nuts and carefully remove cylinder</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Disconnect power steering lines from hydroboost</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Place drain pan under connections to catch fluid</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Mark pressure and return lines for proper reconnection</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Disconnect and cap lines to prevent contamination</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Remove hydroboost from firewall</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Disconnect brake pedal from pushrod (may require interior access)</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Remove mounting nuts from firewall</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Carefully remove hydroboost unit</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Transfer any mounting hardware, brackets, braces, spacers, sensors, switches from the original hydroboost unit to the replacement booster if applicable</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Ensure all components are clean and in good condition</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Replace any damaged components</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify correct pushrod adjustments – brake pedal pushrod and master cylinder pushrod</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Refer to vehicle service information</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Compare pushrod length to the original unit</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Adjust as needed to match original specifications</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Install new hydroboost unit</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Position against firewall and align with mounting holes</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Install mounting nuts and torque to specification</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Connect brake pedal to pushrod</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Replace all seals, gaskets, and O-rings during installation to avoid leaks</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Use new O-rings at all hydraulic connections</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">All threaded power steering lines should be carefully started by hand before final tightening to prevent cross-threading and damage to the lines and/or the hydroboost assembly</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Torque all fittings to specification</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Install master cylinder to hydroboost</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Use new gasket if applicable</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Torque mounting nuts to specification</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Reconnect brake lines</li>
-                      </ul></div>
-                    </div>
-                  </div>
-                )}
-        </div>
-        </div>
-      
+                <GuideStep number="02" title="Inspect the vacuum supply line"
+                  summary="A collapsed or cracked hose creates symptoms identical to a failed booster.">
+                  <GuideBullets>
+                    <GuideBullet>Check hose for cracks, soft spots, or collapse under vacuum</GuideBullet>
+                    <GuideBullet>Test check valve — should allow flow toward engine only, hold vacuum on the booster side</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
 
-        <div className="rounded-3xl p-8 h-full break-inside-avoid mb-6 text-[#0a0a0a]" style={{ background: "var(--c-blush)", border: "1px solid rgba(10,10,10,0.07)" }}>
-          <div className="mb-8">
-                <div className="flex gap-4 mb-6">
-                  <button
-                    onClick={() => handleBoosterTypeChange("vacuum")}
-                    className={`px-4 py-2 rounded ${
-                      boosterType === "vacuum"
-                        ? "bg-[#dc3545] text-[#0a0a0a]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }`}
-                  >
-                    Vacuum Boosters
-                  </button>
-                  <button
-                    onClick={() => handleBoosterTypeChange("hydro")}
-                    className={`px-4 py-2 rounded ${
-                      boosterType === "hydro"
-                        ? "bg-[#dc3545] text-[#0a0a0a]"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }`}
-                  >
-                    Hydro-Boosters
-                  </button>
-                </div>
-                
-                {boosterType === "vacuum" ? (
-                  <div>
-                    <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Vacuum Booster Verification</h3>
-                    
-                    <div className="space-y-4">
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Bleed brake system</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Fill master cylinder with appropriate brake fluid</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Bleed brake system following manufacturer procedures</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for proper pedal feel and height</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Check for leaks</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect all brake line connections</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check master cylinder mounting surface for fluid seepage</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Ensure vacuum connections are secure</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify proper operation of brake lights</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Brake light switch may require adjustment after booster replacement</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Brake pedal position sensor may require calibration or relearn procedure after booster replacement</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Test brake lights in all conditions (running, braking, emergency)</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify power assist operation</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">With engine off, pump brake pedal until firm</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Hold pressure on pedal, start engine - pedal should drop slightly as vacuum assist engages</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify proper pedal feel and boost operation</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Road test vehicle – verify correct function and operation</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for proper brake function at various speeds</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify no warning lights are illuminated</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Confirm normal pedal travel and feel</li>
-                      </ul></div>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <h3 className="font-display text-[24px] mb-4 text-[#0a0a0a]">Hydro-Booster Verification</h3>
-                    
-                    <div className="space-y-4">
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Flush and bleed power steering system</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">The power steering system should be flushed to remove any dirt, debris, or deteriorated power steering fluid during hydroboost installation</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Refer to the vehicle service information for the correct power steering fluid type for the vehicle</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">The power steering filter should be replaced (if applicable)</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Bleed the power steering system to remove air</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Bleed brake system</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Fill master cylinder with appropriate brake fluid</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Bleed brake system following manufacturer procedures</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for proper pedal feel and height</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Check for leaks</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Inspect all brake line connections</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check all power steering connections at hydroboost</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Run engine and verify no fluid leaks at connections</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify proper operation of brake lights</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Brake light switch may require adjustment after hydroboost replacement</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Brake pedal position sensor may require calibration or relearn procedure after hydroboost replacement</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Test brake lights in all conditions</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Verify power assist operation</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">With engine off, pump brake pedal until firm</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Start engine and check for power assist</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify reserve system function (if equipped) by applying brakes with engine off</li>
-                      </ul></div>
-                      
-                      <div className="mb-4 p-5 rounded-2xl" style={{ background: "rgba(10,10,10,0.04)", border: "1px solid rgba(10,10,10,0.06)" }}><div className="font-display text-[16px] text-[#0a0a0a] mb-2">Road test vehicle – verify correct function and operation</div><ul>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Check for proper brake function at various speeds</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Verify smooth power steering operation</li>
-                        <li className="text-[14px] text-[#0a0a0a]/65 ml-4 list-disc mb-1">Confirm no unusual noises from power steering pump or hydroboost</li>
-                      </ul></div>
-                    </div>
-                  </div>
-                )}
-        </div>
-        </div>
-      
+                <GuideStep number="03" title="Inspect master cylinder mating surface"
+                  summary="Brake fluid leaking past the master cylinder rear seal contaminates the booster.">
+                  <GuideBullets>
+                    <GuideBullet>Pull master cylinder and inspect the mating surface for fluid</GuideBullet>
+                    <GuideBullet>Fluid present — replace the master cylinder along with the booster</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+              </GuideCard>
+
+              <GuideCard tone="cream" eyebrow="03 · Diagnosis · Vacuum">
+                <GuideHeading>Confirm the booster is actually failed</GuideHeading>
+                <GuideLead>
+                  Two simple tests isolate the booster from other brake-system causes.
+                </GuideLead>
+
+                <GuideStep number="01" title="The pump-down test"
+                  summary="Detects whether the booster holds vacuum.">
+                  <GuideBullets>
+                    <GuideBullet>Engine off, pump pedal <K>4 – 5 times</K> to deplete vacuum reserve</GuideBullet>
+                    <GuideBullet>Hold pedal pressure, start engine</GuideBullet>
+                    <GuideBullet>Pedal should drop slightly as vacuum assist engages — if not, booster or vacuum supply is failed</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="02" title="The hold-down test"
+                  summary="Detects whether the booster leaks vacuum.">
+                  <GuideBullets>
+                    <GuideBullet>Engine running, press and hold pedal at moderate pressure</GuideBullet>
+                    <GuideBullet>Shut off the engine, continue holding pedal</GuideBullet>
+                    <GuideBullet>Pedal should stay firm for <K>30+ seconds</K> — sinking pedal indicates internal leak</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+              </GuideCard>
+
+              <GuideCard tone="blush" eyebrow="04 · Installation · Vacuum">
+                <GuideHeading>Replace and adjust pushrod</GuideHeading>
+                <GuideLead>
+                  Wrong pushrod length causes the most common comeback — pedal too high, pedal too low, or brake drag.
+                </GuideLead>
+
+                <GuideStep number="01" title="Remove master cylinder from booster"
+                  summary="Cap brake lines to prevent fluid loss.">
+                  <GuideBullets>
+                    <GuideBullet>Disconnect brake lines, cap immediately</GuideBullet>
+                    <GuideBullet>Remove master cylinder, set aside without disturbing reservoir level</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="02" title="Remove booster from firewall"
+                  summary="Pedal pin from inside the cabin, then mounting nuts.">
+                  <GuideBullets>
+                    <GuideBullet>Disconnect pushrod clevis pin at the brake pedal</GuideBullet>
+                    <GuideBullet>Remove vacuum hose and mounting nuts</GuideBullet>
+                    <GuideBullet>Lift booster out, transferring any brackets to the new unit</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="03" title="Verify and set pushrod length"
+                  summary="Critical step. Both pedal-side and master-cylinder-side pushrods.">
+                  <GuideBullets>
+                    <GuideBullet>Compare new pushrod length to original</GuideBullet>
+                    <GuideBullet>Use manufacturer's gauge if specified — eyeballing causes pedal-feel complaints</GuideBullet>
+                    <GuideBullet>Adjust per OE procedure if pushrod is adjustable</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="04" title="Install and reconnect"
+                  summary="Reverse of removal, torque to spec.">
+                  <GuideBullets>
+                    <GuideBullet>Mount booster, torque firewall nuts to OE spec</GuideBullet>
+                    <GuideBullet>Reconnect pedal clevis pin and retaining clip</GuideBullet>
+                    <GuideBullet>Mount master cylinder with new gasket, torque to spec</GuideBullet>
+                    <GuideBullet>Reconnect vacuum hose with check valve oriented correctly</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+              </GuideCard>
+            </>
+          )}
+
+          {/* HYDROBOOST PATH */}
+          {type === "hydro" && (
+            <>
+              <GuideCard tone="blush" eyebrow="02 · Preparation · Hydroboost">
+                <GuideHeading>Service the power-steering system first</GuideHeading>
+                <GuideLead>
+                  Hydroboost shares fluid with power steering. Contamination, low pressure, or low fluid level will destroy a new hydroboost unit.
+                </GuideLead>
+
+                <GuideStep number="01" title="Test power-steering pressure"
+                  summary="Hydroboost needs full PS pump output to function.">
+                  <GuideBullets>
+                    <GuideBullet>Connect a power-steering pressure gauge</GuideBullet>
+                    <GuideBullet>Verify pump output meets OE spec at idle and at <K>1,500 rpm</K></GuideBullet>
+                    <GuideBullet>Low pressure — repair pump or pulley before installing new hydroboost</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="02" title="Inspect fluid and lines"
+                  summary="Burnt or contaminated fluid degrades hydroboost seals fast.">
+                  <GuideBullets>
+                    <GuideBullet>Fluid should be clear / amber — dark or burnt fluid means full system flush</GuideBullet>
+                    <GuideBullet>Inspect all PS hoses for cracks, leaks, ballooning</GuideBullet>
+                    <GuideBullet>Verify PS belt condition and tension</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="03" title="Confirm fluid type"
+                  summary="Mixing fluid types is a common cause of repeat hydroboost failure.">
+                  <GuideBullets>
+                    <GuideBullet>Verify OE fluid spec — typically <K>Dexron VI</K>, <K>Mercon V</K>, or dedicated PS fluid</GuideBullet>
+                    <GuideBullet>Flush entire system if fluid type is unknown or contaminated</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+              </GuideCard>
+
+              <GuideCard tone="cream" eyebrow="03 · Diagnosis · Hydroboost">
+                <GuideHeading>Distinguish hydroboost from PS failure</GuideHeading>
+                <GuideLead>
+                  Many "hard pedal" complaints on hydroboost vehicles are actually power-steering issues. Confirm which system is failed before opening anything.
+                </GuideLead>
+
+                <GuideStep number="01" title="The pedal-reserve test"
+                  summary="Hydroboost stores energy in an accumulator for one or two assisted stops with engine off.">
+                  <GuideBullets>
+                    <GuideBullet>Engine off, pump pedal until firm</GuideBullet>
+                    <GuideBullet>Start engine — pedal should drop and feel assisted</GuideBullet>
+                    <GuideBullet>If pedal stays hard with engine running, hydroboost or PS pressure is failed</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="02" title="Steering vs braking correlation"
+                  summary="Hydroboost and PS share fluid — symptoms often correlate.">
+                  <GuideBullets>
+                    <GuideBullet>Hard pedal AND hard steering — PS pump or fluid issue</GuideBullet>
+                    <GuideBullet>Hard pedal, normal steering — hydroboost unit is failed</GuideBullet>
+                    <GuideBullet>Pedal grunts or hisses — hydroboost seal failure</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+              </GuideCard>
+
+              <GuideCard tone="blush" eyebrow="04 · Installation · Hydroboost">
+                <GuideHeading>Replace with new O-rings and a fluid flush</GuideHeading>
+                <GuideLead>
+                  Hand-thread every PS line. Cross-threading the high-pressure connection is one of the most expensive mistakes possible on this job.
+                </GuideLead>
+
+                <GuideStep number="01" title="Drain power-steering system"
+                  summary="Place catch pan, disconnect return line, drain fully.">
+                  <GuideBullets>
+                    <GuideBullet>Mark PS pressure and return lines for proper reconnect</GuideBullet>
+                    <GuideBullet>Cap all lines and ports to prevent contamination</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="02" title="Remove master cylinder and hydroboost"
+                  summary="Master first, then hydroboost from firewall.">
+                  <GuideBullets>
+                    <GuideBullet>Disconnect brake lines, cap immediately</GuideBullet>
+                    <GuideBullet>Remove master cylinder mounting nuts</GuideBullet>
+                    <GuideBullet>Disconnect pushrod clevis at pedal, remove firewall nuts</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="03" title="Install new hydroboost"
+                  summary="Always with new O-rings on every hydraulic connection.">
+                  <GuideBullets>
+                    <GuideBullet>Transfer pushrod or set length per OE</GuideBullet>
+                    <GuideBullet>Mount unit, torque firewall nuts to spec</GuideBullet>
+                    <GuideBullet>Install all <K>new O-rings</K> on hydraulic fittings</GuideBullet>
+                    <GuideBullet>Hand-thread PS lines first, then torque to OE spec</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideStep number="04" title="Install master cylinder">
+                  <GuideBullets>
+                    <GuideBullet>Use new gasket between master and hydroboost</GuideBullet>
+                    <GuideBullet>Torque mounting nuts to spec</GuideBullet>
+                    <GuideBullet>Reconnect brake lines, hand-thread first</GuideBullet>
+                  </GuideBullets>
+                </GuideStep>
+
+                <GuideCallout variant="critical">
+                  Always use new O-rings on every hydraulic connection. Reusing old O-rings is the leading cause of leaks on hydroboost replacement.
+                </GuideCallout>
+              </GuideCard>
+            </>
+          )}
+
+          {/* CARD 05 — VERIFICATION (common, type-aware text) */}
+          <GuideCard tone="cream" eyebrow="05 · Verification">
+            <GuideHeading>Bleed, pressurize, and road-test</GuideHeading>
+            <GuideLead>
+              {type === "vacuum"
+                ? "Bleed the brake system and verify vacuum assist before any movement."
+                : "Bleed both the power-steering system and the brake system before any movement."}
+            </GuideLead>
+
+            {type === "hydro" && (
+              <GuideStep number="01" title="Bleed power-steering system"
+                summary="Air in the PS system means no assist.">
+                <GuideBullets>
+                  <GuideBullet>Fill reservoir with correct OE-spec fluid</GuideBullet>
+                  <GuideBullet>Cycle steering lock-to-lock with engine off, top off</GuideBullet>
+                  <GuideBullet>Start engine, cycle again until no air bubbles in reservoir</GuideBullet>
+                </GuideBullets>
+              </GuideStep>
+            )}
+
+            <GuideStep
+              number={type === "hydro" ? "02" : "01"}
+              title="Bleed the brake system"
+              summary="Furthest from master cylinder first, in OE sequence."
+            >
+              <GuideBullets>
+                <GuideBullet>Bleed until clean, bubble-free fluid runs at each corner</GuideBullet>
+                <GuideBullet>Keep master cylinder reservoir topped off throughout</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep
+              number={type === "hydro" ? "03" : "02"}
+              title="Test pedal feel before movement"
+            >
+              <GuideBullets>
+                <GuideBullet>Pedal should firm up within <K>2 – 3 strokes</K></GuideBullet>
+                <GuideBullet>Should not sink under steady pressure</GuideBullet>
+                <GuideBullet>{type === "vacuum"
+                  ? "Pedal drops slightly when engine starts — confirms vacuum assist"
+                  : "Pedal drops noticeably when engine starts — confirms hydroboost assist"}</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+
+            <GuideStep
+              number={type === "hydro" ? "04" : "03"}
+              title="Road test and verify"
+            >
+              <GuideBullets>
+                <GuideBullet>Inspect every fitting for leaks with the system pressurized</GuideBullet>
+                <GuideBullet>Verify no warning lights, no pull, normal pedal feel under all conditions</GuideBullet>
+                <GuideBullet>Adjust brake light switch if pedal height changed</GuideBullet>
+              </GuideBullets>
+            </GuideStep>
+          </GuideCard>
 
         </div>
-      
-</main>
+      </main>
       <Footer />
     </div>
   );
