@@ -13,19 +13,19 @@ const COL = [
   {
     title: "Shop",
     links: [
-      ["About", "#about"],
-      ["Customers", "#customers"],
-      ["Pricing", "#pricing"],
+      ["About (coming soon)", "#about"],
+      ["Customers (coming soon)", "#customers"],
+      ["Pricing (coming soon)", "#pricing"],
       ["Contact", "mailto:support@allaiautomotive.com"],
     ],
   },
   {
     title: "Follow",
     links: [
-      ["LinkedIn", "https://linkedin.com"],
-      ["YouTube", "https://youtube.com"],
-      ["Twitter / X", "https://x.com"],
-      ["Instagram", "https://instagram.com"],
+      ["LinkedIn (coming soon)", "https://linkedin.com"],
+      ["YouTube (coming soon)", "https://youtube.com"],
+      ["Twitter / X (coming soon)", "https://x.com"],
+      ["Instagram (coming soon)", "https://instagram.com"],
     ],
   },
 ];
