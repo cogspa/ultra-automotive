@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Fuse from "fuse.js";
 import { Search, AlertCircle } from "lucide-react";
 import TopNav from "../components/site/TopNav";
@@ -48,6 +48,13 @@ export default function SearchPage() {
   const [query, setQuery]           = useState("");
   const [makeFilter, setMakeFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [factoid, setFactoid] = useState(null);
+
+  useEffect(() => {
+    // Pick a random factoid on load
+    const randomEntry = KB.entries[Math.floor(Math.random() * KB.entries.length)];
+    setFactoid(randomEntry);
+  }, []);
 
   // Build unique makes list for the filter dropdown
   const makes = useMemo(() => {
@@ -151,13 +158,38 @@ export default function SearchPage() {
             <option value="installation_tip">Installation tips</option>
             <option value="appearance_only">Appearance variants</option>
           </FilterSelect>
-          <span className="ml-auto font-mono-cap text-white/55">
-            {results.length} result{results.length === 1 ? "" : "s"}
-          </span>
+          {!(query.trim() === "" && makeFilter === "all" && typeFilter === "all") && (
+            <span className="ml-auto font-mono-cap text-white/55">
+              {results.length} result{results.length === 1 ? "" : "s"}
+            </span>
+          )}
         </div>
 
         {/* Results */}
-        {results.length === 0 ? (
+        {query.trim() === "" && makeFilter === "all" && typeFilter === "all" ? (
+          factoid && (
+            <div
+              className="rounded-3xl p-8 md:p-10"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <h3 className="font-mono-cap mb-4" style={{ color: "#9be4d4" }}>
+                Did you know...
+              </h3>
+              <p className="text-[16px] md:text-[18px] text-white/85 leading-relaxed font-display">
+                {factoid.summary}
+              </p>
+              {factoid.fixes?.[0]?.action && (
+                <div className="mt-5 p-4 rounded-2xl" style={{ background: "rgba(255,255,255,0.04)" }}>
+                  <span className="font-mono-cap text-white/40 block mb-1">Advice</span>
+                  <p className="text-[14.5px] text-white/70">{factoid.fixes[0].action}</p>
+                </div>
+              )}
+            </div>
+          )
+        ) : results.length === 0 ? (
           <div
             className="rounded-3xl p-10 text-center"
             style={{
