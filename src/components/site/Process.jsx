@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import OBD_CODES from "../../data/obd2-codes.json";
 import { ALL_GUIDES, SYSTEM_DEFAULT_GUIDE } from "../../data/system-routes";
+import ObdCrtLookup from "./ObdCrtLookup";
 
 const SEVERITY_STYLES = {
   high:     { bg: "rgba(220,53,69,0.10)",  color: "#a02635",        label: "High" },
@@ -32,6 +33,8 @@ export default function Process() {
         style={{ borderColor: "rgba(10,10,10,0.08)" }}
       >
         <div className="col-span-12 md:col-span-4">
+          <ObdCrtLookup />
+
           <span
             className="font-mono-cap"
             style={{ color: "rgba(10,10,10,0.55)" }}
