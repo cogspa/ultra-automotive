@@ -34,9 +34,9 @@ export default function Process() {
         style={{ borderColor: "rgba(10,10,10,0.08)" }}
       >
         {/* Cell 1: CRT */}
-        <div className="flex items-center justify-center p-4">
+        <Card>
           <ObdCrtLookup typedCode={obdCode} />
-        </div>
+        </Card>
 
         {/* Cell 2: Identify (Step 1) */}
         <IdentifyCard
@@ -55,38 +55,40 @@ export default function Process() {
         />
 
         {/* Cell 4: Intro Text */}
-        <div className="flex flex-col justify-center p-4 md:p-8">
-          <span
-            className="font-mono-cap"
-            style={{ color: "rgba(10,10,10,0.55)" }}
-          >
-            Process · Live diagnostic
-          </span>
-          <h2
-            className="mt-4 font-display"
-            style={{
-              fontSize: "clamp(32px, 4vw, 56px)",
-              lineHeight: 0.96,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            From symptom to{" "}
-            <span className="italic-display">fixed,</span> every day.
-          </h2>
-          <p
-            className="mt-5 text-[14.5px] leading-relaxed font-normal"
-            style={{ color: "rgba(10,10,10,0.62)" }}
-          >
-            Enter a code, decode a VIN, surface the right repair guide,
-            then verify open recalls. Powered by the live NHTSA database.
-          </p>
-          <p
-            className="mt-6 text-[14px] font-mono-cap"
-            style={{ color: "rgba(10,10,10,0.55)" }}
-          >
-            Four steps · no signup
-          </p>
-        </div>
+        <Card>
+          <div className="flex flex-col justify-center h-full">
+            <span
+              className="font-mono-cap"
+              style={{ color: "rgba(10,10,10,0.55)" }}
+            >
+              Process · Live diagnostic
+            </span>
+            <h2
+              className="mt-4 font-display"
+              style={{
+                fontSize: "clamp(28px, 3vw, 42px)",
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              From symptom to{" "}
+              <span className="italic-display">fixed,</span> every day.
+            </h2>
+            <p
+              className="mt-4 text-[14px] leading-relaxed font-normal"
+              style={{ color: "rgba(10,10,10,0.62)" }}
+            >
+              Enter a code, decode a VIN, surface the right repair guide,
+              then verify open recalls. Powered by the live NHTSA database.
+            </p>
+            <p
+              className="mt-6 text-[13px] font-mono-cap"
+              style={{ color: "rgba(10,10,10,0.55)" }}
+            >
+              Four steps · no signup
+            </p>
+          </div>
+        </Card>
 
         {/* Cell 5: Execute (Step 3) */}
         <ExecuteCard obdResult={obdResult} />
