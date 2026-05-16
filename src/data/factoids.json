@@ -1,0 +1,117 @@
+[
+  {
+    "title": "Your replacement alternator may look different from the original, and that can be normal.",
+    "description": "Some vehicles were built with more than one alternator design. A Hitachi-style alternator may have a dummy spade terminal, while a Mitsubishi-style alternator may not.",
+    "clarification": "Hitachi and Mitsubishi are original equipment manufacturers. In this case, the dummy terminal is not used for the vehicle connection, so its presence or absence does not mean the part is wrong."
+  },
+  {
+    "title": "The replacement alternator may not be an exact visual match to the old one.",
+    "description": "Some vehicles used Bosch-style or Valeo-style alternators. Both designs can be correct when the part is matched to the vehicle application.",
+    "clarification": "Bosch and Valeo are different original equipment manufacturers. Their housings, plugs, or mounting details may look slightly different even when the part performs the same function."
+  },
+  {
+    "title": "Your replacement starter may look different from the original starter.",
+    "description": "Some applications used Hitachi-style or Mitsubishi-style starters. Either version may be correct depending on the vehicle.",
+    "clarification": "Hitachi and Mitsubishi are supplier names, not model names. The important thing is that the starter matches the vehicle fitment, mounting points, connector, and gear engagement."
+  },
+  {
+    "title": "There may be more than one starter size for your vehicle.",
+    "description": "Some applications use different starter case sizes, such as 80mm or 90mm, and another supplier-style version may also exist.",
+    "clarification": "The “case size” refers to the diameter of the starter motor body. If the starter looks larger or smaller than the original, confirm the correct application before installing."
+  },
+  {
+    "title": "Some starter designs use a rear support bracket, while others do not.",
+    "description": "If your original starter had a bracket on the back, check whether the replacement requires it to be transferred. Some shorter replacement designs may not use that bracket.",
+    "clarification": "The rear support bracket helps stabilize certain starter designs. A different-length starter may mount correctly without it, but always compare the installation instructions and the original unit."
+  },
+  {
+    "title": "Two starter versions may exist for the same vehicle.",
+    "description": "If the replacement starter looks different, it may still be correct. Confirm the mounting pattern, electrical connector, and fitment before assuming the part is wrong.",
+    "clarification": "Vehicle manufacturers sometimes used more than one approved starter design during production."
+  },
+  {
+    "title": "A no-start problem may not always mean the starter is bad.",
+    "description": "On some Nissan vehicles, a relay can cause symptoms that feel like starter failure.",
+    "clarification": "A relay is an electrical switch. If the inhibitor relay or starter relay fails, the starter may not receive the signal to crank, even if the starter itself is still good."
+  },
+  {
+    "title": "Only use the shim that comes with the replacement starter, if one is included.",
+    "description": "Some starters require a shim and some do not.",
+    "clarification": "A shim is a thin spacer used to adjust the starter’s position so the starter gear meshes correctly with the flywheel. Using the wrong shim can cause grinding, noise, or starter damage."
+  },
+  {
+    "title": "The replacement starter may have a different connector or harness style than the original.",
+    "description": "Some vehicles had early and late starter versions that look noticeably different.",
+    "clarification": "The harness is the wiring that connects to the starter. A different-looking connector area does not always mean the part is wrong, but it should match the vehicle’s required connection method."
+  },
+  {
+    "title": "Check the relay before replacing the starter on certain Nissan applications.",
+    "description": "A no-crank issue may be caused by the inhibitor relay or starter relay instead of the starter.",
+    "clarification": "A no-crank condition means the engine does not turn over when the key or start button is used."
+  },
+  {
+    "title": "Replace the drive-end bushing when installing the new starter, if the application requires it.",
+    "description": "Some starters are supported by a bushing inside the transmission case.",
+    "clarification": "A bushing is a small sleeve that supports the starter shaft. If it is worn, the starter may crank slowly, click without cranking, or fail prematurely."
+  },
+  {
+    "title": "Transfer the heat shield if your original starter had one.",
+    "description": "Some vehicles use a heat shield around the starter solenoid.",
+    "clarification": "The heat shield protects the starter from exhaust heat. If the old starter had one, the replacement starter may need it too."
+  },
+  {
+    "title": "A corroded ignition wire can cause a no-crank condition.",
+    "description": "On some Ford vehicles, corrosion near the S-terminal wire can prevent the starter from receiving the start signal.",
+    "clarification": "The S-terminal is the small starter terminal that receives the “start” command from the ignition switch. If that wire is damaged or corroded, the starter may not crank."
+  },
+  {
+    "title": "Transfer the wiring harness bracket from the old starter if the vehicle used one.",
+    "description": "The bracket helps hold the wiring in place and may also share a bolt with the starter case.",
+    "clarification": "If this bolt is over-tightened or installed incorrectly, it can damage the starter housing."
+  },
+  {
+    "title": "Make sure the start wire is connected to the correct terminal.",
+    "description": "The S terminal receives the signal that tells the starter to crank. The R terminal is only used on some vehicles.",
+    "clarification": "If the vehicle’s start wire is connected to the wrong terminal, the starter may not work even though the part is good."
+  },
+  {
+    "title": "Remove and reuse the harness adapter if your old starter has one.",
+    "description": "Before returning the old starter as a core, check whether there is an adapter attached to the wiring connection.",
+    "clarification": "A harness adapter is a small connector piece that allows the vehicle wiring to plug into the starter. The replacement may need that adapter to install correctly."
+  },
+  {
+    "title": "There may be several correct starter versions for the same vehicle.",
+    "description": "Some applications have as many as four approved starter designs.",
+    "clarification": "This is why matching by vehicle application, connector style, mounting points, and gear type is more important than matching appearance alone."
+  },
+  {
+    "title": "Some Ford applications use an upgraded starter design.",
+    "description": "An older large starter with a remote-mounted solenoid may be replaced by a newer compact HD starter.",
+    "clarification": "A remote-mounted solenoid means the electrical switch for the starter is mounted away from the starter motor. The upgraded design may require moving the starter cable and installing the included harness."
+  },
+  {
+    "title": "Repeated starter failure may be caused by another engine problem.",
+    "description": "On some GM vehicles, a faulty crankshaft position sensor can cause hard starting or kickback that damages the starter.",
+    "clarification": "The crankshaft position sensor tells the engine computer where the crankshaft is during starting. If the signal is wrong, the engine may fire at the wrong time and damage the starter or flywheel."
+  },
+  {
+    "title": "Starter shimming may be needed if the starter gear is noisy.",
+    "description": "Start by reusing the existing shims from the old starter. If the starter sounds noisy, the gear clearance may need adjustment.",
+    "clarification": "The starter gear must mesh correctly with the flywheel teeth. Too much or too little clearance can cause grinding, noise, or damage."
+  },
+  {
+    "title": "Cold-weather no-crank symptoms may point to an electrical module, not the starter.",
+    "description": "On some Nissan vehicles, the issue may happen only after the vehicle sits in very cold weather, is driven briefly, and then is shut off briefly.",
+    "clarification": "In that specific situation, the IPDM may need to be inspected. The IPDM is an electrical control module that helps distribute power to vehicle systems."
+  },
+  {
+    "title": "Match the starter pinion tooth count before buying or installing.",
+    "description": "Some applications have starters with different pinion gear tooth counts, such as 8-tooth or 11-tooth designs.",
+    "clarification": "The pinion is the small gear on the starter that engages the flywheel. If the tooth count does not match the flywheel, the starter may grind, fail to engage, or damage the ring gear."
+  },
+  {
+    "title": "Inspect the S-terminal wire before replacing the starter.",
+    "description": "On some Ford vehicles, corrosion in the last few inches of the ignition wire can cause a no-crank condition.",
+    "clarification": "Replacing the starter without repairing the damaged wire may not fix the problem."
+  }
+]

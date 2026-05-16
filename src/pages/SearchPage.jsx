@@ -4,6 +4,7 @@ import { Search, AlertCircle } from "lucide-react";
 import TopNav from "../components/site/TopNav";
 import Footer from "../components/site/Footer";
 import KB from "../data/tsb-knowledge-base.json";
+import FactoidsData from "../data/factoids.json";
 
 // Matches OBD-II / mfr DTC format (P0338, C0035, U0100, B1000)
 const DTC_REGEX = /^[PCBU]\d{4}$/i;
@@ -52,8 +53,8 @@ export default function SearchPage() {
 
   useEffect(() => {
     // Pick a random factoid on load
-    const randomEntry = KB.entries[Math.floor(Math.random() * KB.entries.length)];
-    setFactoid(randomEntry);
+    const randomFactoid = FactoidsData[Math.floor(Math.random() * FactoidsData.length)];
+    setFactoid(randomFactoid);
   }, []);
 
   // Build unique makes list for the filter dropdown
@@ -178,13 +179,16 @@ export default function SearchPage() {
               <h3 className="font-mono-cap mb-4" style={{ color: "#9be4d4" }}>
                 Did you know...
               </h3>
-              <p className="text-[16px] md:text-[18px] text-white/85 leading-relaxed font-display">
-                {factoid.summary}
+              <h4 className="text-[18px] md:text-[20px] text-white font-display mb-2">
+                {factoid.title}
+              </h4>
+              <p className="text-[15px] text-white/80 leading-relaxed">
+                {factoid.description}
               </p>
-              {factoid.fixes?.[0]?.action && (
+              {factoid.clarification && (
                 <div className="mt-5 p-4 rounded-2xl" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <span className="font-mono-cap text-white/40 block mb-1">Advice</span>
-                  <p className="text-[14.5px] text-white/70">{factoid.fixes[0].action}</p>
+                  <span className="font-mono-cap text-white/40 block mb-1">Why this matters</span>
+                  <p className="text-[14px] text-white/70 italic-display">{factoid.clarification}</p>
                 </div>
               )}
             </div>
