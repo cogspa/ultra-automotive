@@ -155,7 +155,7 @@ export default function HeroVideo() {
   return (
     <section ref={sectionRef} id="top" className="hero-wrap">
       <div className="hero-sticky">
-        <video ref={videoRef} className="hero-video" muted playsInline preload="auto" tabIndex={-1} aria-hidden="true">
+        <video ref={videoRef} className="hero-video" autoPlay muted playsInline preload="auto" tabIndex={-1} aria-hidden="true">
           <source src={VIDEO_SRC_WEBM} type="video/webm" />
           <source src={VIDEO_SRC_MP4} type="video/mp4" />
         </video>
