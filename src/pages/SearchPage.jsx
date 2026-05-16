@@ -345,13 +345,100 @@ function ResultCard({ entry }) {
           <span className="font-mono-cap text-white/40">Top fix:</span>
           <p className="mt-1 text-[13.5px] text-white/85">{fix.action}</p>
           {fix.part_number && (
-            <p className="mt-1 text-[12px] font-mono-cap text-white/55">
-              {fix.manufacturer} P/N {fix.part_number}
-              {fix.estimated_cost_usd && ` · $${fix.estimated_cost_usd}`}
-            </p>
+            <div className="mt-3 border-t border-white/10 pt-3">
+              <p className="text-[12px] font-mono-cap text-white/55 mb-2">
+                Requires: {fix.manufacturer} P/N {fix.part_number}
+              </p>
+              <LivePriceChecker manufacturer={fix.manufacturer} partNumber={fix.part_number} />
+            </div>
           )}
         </div>
       )}
     </article>
+  );
+}
+
+function LivePriceChecker({ manufacturer, partNumber }) {
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchPrices = async () => {
+    // We expect the user to provide this API key in their .env.local file
+    const apiKey = import.meta.env.VITE_SERPAPI_KEY;
+    if (!apiKey) {
+      setError("Please add VITE_SERPAPI_KEY to your .env.local file");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    try {
+      const q = encodeURIComponent(`${manufacturer} ${partNumber}`);
+      const serpUrl = `https://serpapi.com/search.json?engine=google_shopping&q=${q}&api_key=${apiKey}`;
+      // SerpAPI blocks frontend requests via CORS to protect API keys. 
+      // For this prototype, we route it through a free open CORS proxy.
+      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(serpUrl)}`;
+      
+      const res = await fetch(proxyUrl);
+      if (!res.ok) throw new Error("Network response failed");
+      
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      
+      setResults(data.shopping_results || []);
+    } catch (err) {
+      setError(err.message || "Failed to fetch live prices.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (results) {
+    if (results.length === 0) {
+      return <div className="text-[12.5px] text-white/50 italic">No live prices found online.</div>;
+    }
+    return (
+      <div className="space-y-2 mt-2">
+        {results.slice(0, 3).map((item, i) => (
+          <a
+            key={i}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between p-2.5 rounded-xl transition hover:bg-white/10"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <div className="flex flex-col truncate pr-3">
+              <span className="text-[13px] text-white/90 truncate font-medium">{item.source}</span>
+              <span className="text-[11px] text-white/45 truncate mt-0.5">{item.title}</span>
+            </div>
+            <span className="text-[14px] font-mono font-medium whitespace-nowrap" style={{ color: "#9be4d4" }}>
+              {item.extracted_price ? `$${item.extracted_price}` : item.price}
+            </span>
+          </a>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <button
+        onClick={fetchPrices}
+        disabled={loading}
+        className="text-[12px] font-mono-cap px-4 py-2 rounded-full transition disabled:opacity-50"
+        style={{
+          background: "rgba(255,255,255,0.1)",
+          color: "white",
+        }}
+      >
+        {loading ? "Searching..." : "Check Live Prices"}
+      </button>
+      {error && <p className="mt-2 text-[12.5px] text-[#ff5d5d]">{error}</p>}
+    </div>
   );
 }
