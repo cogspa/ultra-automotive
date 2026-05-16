@@ -160,7 +160,7 @@ body {
 
 .obd-crt-shell {
   width: 100%;
-  max-width: 655px;
+  max-width: 400px;
   margin-bottom: 1.75rem;
   container-type: inline-size;
 }
@@ -168,7 +168,7 @@ body {
 .obd-crt-canvas {
   position: relative;
   width: 100%;
-  aspect-ratio: 655 / 510;
+  aspect-ratio: 655 / 384;
 }
 
 .obd-crt-wrap {
@@ -176,7 +176,7 @@ body {
   top: 0;
   left: 0;
   width: 655px;
-  height: 510px;
+  height: 384px;
   transform-origin: top left;
   transform: scale(min(1, calc(100cqi / 655)));
   font-family: var(--font-mono);
@@ -213,7 +213,7 @@ body {
 .obd-crt-bezel {
   position: absolute;
   left: 0;
-  top: 70px;
+  top: 0;
   width: 655px;
   height: 384px;
   border: 4px solid #0a0a0a;

@@ -18,6 +18,7 @@ const SEVERITY_STYLES = {
 
 export default function Process() {
   // Shared state across the four cards.
+  const [obdCode, setObdCode] = useState("");
   const [obdResult, setObdResult] = useState(null);
   const [vinData, setVinData] = useState(null);
   const [recalls, setRecalls] = useState(null);
@@ -33,7 +34,7 @@ export default function Process() {
         style={{ borderColor: "rgba(10,10,10,0.08)" }}
       >
         <div className="col-span-12 md:col-span-4">
-          <ObdCrtLookup />
+          <ObdCrtLookup typedCode={obdCode} />
 
           <span
             className="font-mono-cap"
@@ -68,7 +69,12 @@ export default function Process() {
         </div>
 
         <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3">
-          <IdentifyCard onResult={setObdResult} result={obdResult} />
+          <IdentifyCard
+            code={obdCode}
+            onCodeChange={setObdCode}
+            onResult={setObdResult}
+            result={obdResult}
+          />
           <DiagnoseCard
             onVinResult={setVinData}
             onRecalls={setRecalls}
@@ -87,8 +93,7 @@ export default function Process() {
 /*  CARD 01 — IDENTIFY (OBD-II code lookup against local JSON dataset)        */
 /* -------------------------------------------------------------------------- */
 
-function IdentifyCard({ onResult, result }) {
-  const [code, setCode] = useState("");
+function IdentifyCard({ code, onCodeChange, onResult, result }) {
   const [error, setError] = useState("");
 
   const handleLookup = (e) => {
@@ -109,7 +114,7 @@ function IdentifyCard({ onResult, result }) {
   };
 
   const handleExample = (sample) => {
-    setCode(sample);
+    onCodeChange(sample);
     setError("");
     const match = OBD_CODES.find((c) => c.code === sample);
     if (match) onResult(match);
@@ -129,7 +134,7 @@ function IdentifyCard({ onResult, result }) {
         <input
           type="text"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={(e) => onCodeChange(e.target.value)}
           placeholder="P0420, C0035, U0100…"
           maxLength={5}
           className="flex-1 px-4 py-3 rounded-full text-[14px] outline-none focus:ring-2 focus:ring-black/20 transition"

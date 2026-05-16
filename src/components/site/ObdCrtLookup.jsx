@@ -11,9 +11,8 @@ const SEV_COLOR = {
   low: "rgba(10,10,10,0.65)",
 };
 
-export default function ObdCrtLookup() {
-  const [raw, setRaw] = useState("");
-  const query = raw.toUpperCase().replace(/\s+/g, "");
+export default function ObdCrtLookup({ typedCode = "" }) {
+  const query = typedCode.toUpperCase().replace(/\s+/g, "");
 
   const match = useMemo(() => {
     if (!OBD_PATTERN.test(query)) return null;
@@ -39,18 +38,6 @@ export default function ObdCrtLookup() {
     <div className="obd-crt-shell" role="region" aria-label="OBD-II fault code lookup">
       <div className="obd-crt-canvas">
         <div className="obd-crt-wrap">
-          <div className="obd-crt-search">
-            <input
-              type="text"
-              value={raw}
-              onChange={(e) => setRaw(e.target.value)}
-              placeholder="// enter fault code"
-              aria-label="OBD-II fault code"
-              autoComplete="off"
-              maxLength={6}
-            />
-          </div>
-
           <div className="obd-crt-bezel">
             <svg
               className="obd-crt-svg"
