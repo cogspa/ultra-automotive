@@ -89,9 +89,35 @@ export default function SearchPage() {
     }
 
     // Diagnostic results first, appearance-only last
-    return [...matches].sort(
+    const sorted = [...matches].sort(
       (a, b) => (TYPE_ORDER[a.type] ?? 9) - (TYPE_ORDER[b.type] ?? 9)
     );
+
+    // Remove duplicates and sanitize TSB/TBS mentions
+    const uniqueMatches = [];
+    const seen = new Set();
+
+    for (const item of sorted) {
+      // Strip any " (similar to TBS0054)" or "Same diagnostic content as TBS0054. "
+      const cleanTitle = item.title
+        .replace(/\s*\(similar to T[BS]B\d+\)/ig, "")
+        .trim();
+      const cleanSummary = item.summary
+        .replace(/Same diagnostic content as T[BS]B\d+\.\s*/ig, "")
+        .trim();
+
+      const key = `${cleanTitle}|${cleanSummary}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueMatches.push({
+          ...item,
+          title: cleanTitle,
+          summary: cleanSummary,
+        });
+      }
+    }
+
+    return uniqueMatches;
   }, [query, makeFilter, typeFilter]);
 
   return (
@@ -266,7 +292,6 @@ function ResultCard({ entry }) {
             {entry.dtcs.join(", ")}
           </span>
         )}
-        <span className="ml-auto font-mono-cap text-white/35">{entry.id}</span>
       </div>
 
       {/* Title + summary */}
