@@ -30,12 +30,32 @@ export default function Process() {
       style={{ background: "var(--c-cream-2)", color: "var(--c-ink)" }}
     >
       <div
-        className="grid grid-cols-12 gap-6 px-5 md:px-10 lg:px-14 py-24 md:py-32 border-t"
+        className="grid grid-cols-1 lg:grid-cols-3 gap-3 px-5 md:px-10 lg:px-14 py-24 md:py-32 border-t"
         style={{ borderColor: "rgba(10,10,10,0.08)" }}
       >
-        <div className="col-span-12 md:col-span-4">
+        {/* Cell 1: CRT */}
+        <div className="flex items-center justify-center p-4">
           <ObdCrtLookup typedCode={obdCode} />
+        </div>
 
+        {/* Cell 2: Identify (Step 1) */}
+        <IdentifyCard
+          code={obdCode}
+          onCodeChange={setObdCode}
+          onResult={setObdResult}
+          result={obdResult}
+        />
+
+        {/* Cell 3: Diagnose (Step 2) */}
+        <DiagnoseCard
+          onVinResult={setVinData}
+          onRecalls={setRecalls}
+          vinData={vinData}
+          recalls={recalls}
+        />
+
+        {/* Cell 4: Intro Text */}
+        <div className="flex flex-col justify-center p-4 md:p-8">
           <span
             className="font-mono-cap"
             style={{ color: "rgba(10,10,10,0.55)" }}
@@ -45,7 +65,7 @@ export default function Process() {
           <h2
             className="mt-4 font-display"
             style={{
-              fontSize: "clamp(40px, 5.2vw, 76px)",
+              fontSize: "clamp(32px, 4vw, 56px)",
               lineHeight: 0.96,
               letterSpacing: "-0.03em",
             }}
@@ -54,7 +74,7 @@ export default function Process() {
             <span className="italic-display">fixed,</span> every day.
           </h2>
           <p
-            className="mt-5 max-w-[420px] text-[14.5px] leading-relaxed font-normal"
+            className="mt-5 text-[14.5px] leading-relaxed font-normal"
             style={{ color: "rgba(10,10,10,0.62)" }}
           >
             Enter a code, decode a VIN, surface the right repair guide,
@@ -68,22 +88,11 @@ export default function Process() {
           </p>
         </div>
 
-        <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3">
-          <IdentifyCard
-            code={obdCode}
-            onCodeChange={setObdCode}
-            onResult={setObdResult}
-            result={obdResult}
-          />
-          <DiagnoseCard
-            onVinResult={setVinData}
-            onRecalls={setRecalls}
-            vinData={vinData}
-            recalls={recalls}
-          />
-          <ExecuteCard obdResult={obdResult} />
-          <VerifyCard recalls={recalls} vinData={vinData} />
-        </div>
+        {/* Cell 5: Execute (Step 3) */}
+        <ExecuteCard obdResult={obdResult} />
+
+        {/* Cell 6: Verify (Step 4) */}
+        <VerifyCard recalls={recalls} vinData={vinData} />
       </div>
     </section>
   );

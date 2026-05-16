@@ -160,8 +160,6 @@ body {
 
 .obd-crt-shell {
   width: 100%;
-  max-width: 400px;
-  margin-bottom: 1.75rem;
   container-type: inline-size;
 }
 
