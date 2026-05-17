@@ -220,7 +220,7 @@ export default function HeroVideo() {
                     <span className="font-mono-cap text-white/55">Knowledge Hub</span>
                     <span className="flex items-center gap-2 font-mono-cap text-white/85">
                       <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#ff8a4a", boxShadow: "0 0 12px #ff8a4a" }} />
-                      v2.0 live
+                      v2.0 live (beta)
                     </span>
                   </div>
                   <div className="mt-4 space-y-3">
