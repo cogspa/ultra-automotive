@@ -31,7 +31,7 @@
   },
   {
     "title": "A no-start problem may not always mean the starter is bad.",
-    "description": "On some Nissan vehicles, a relay can cause symptoms that feel like starter failure.",
+    "description": "For example, on some Nissan vehicles, a relay can cause symptoms that feel like starter failure.",
     "clarification": "A relay is an electrical switch. If the inhibitor relay or starter relay fails, the starter may not receive the signal to crank, even if the starter itself is still good."
   },
   {
@@ -61,7 +61,7 @@
   },
   {
     "title": "A corroded ignition wire can cause a no-crank condition.",
-    "description": "On some Ford vehicles, corrosion near the S-terminal wire can prevent the starter from receiving the start signal.",
+    "description": "For example, on some Ford vehicles, corrosion near the S-terminal wire can prevent the starter from receiving the start signal.",
     "clarification": "The S-terminal is the small starter terminal that receives the “start” command from the ignition switch. If that wire is damaged or corroded, the starter may not crank."
   },
   {
